@@ -11,6 +11,11 @@ export function organizationLd() {
     "@context": SCHEMA_CONTEXT,
     "@type": "Organization",
     name: SITE_NAME,
+    // Registered operator: individual entrepreneur (Georgia). Distinct from the
+    // LocalBusiness node, which represents the Almaty/Kazakhstan service area.
+    legalName: "Individual Entrepreneur ANDREI PUSTOVOI",
+    identifier: "305638389",
+    foundingDate: "2023-08-01",
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon.png`,
     sameAs: [

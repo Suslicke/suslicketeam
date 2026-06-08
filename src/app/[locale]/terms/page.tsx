@@ -17,6 +17,15 @@ const SECTION_KEYS = [
   "contact",
 ] as const;
 
+// Registered-entity requisites rendered as a definition list. Keys map to the
+// `terms.requisites` message group (label + value pairs).
+const REQUISITE_ROWS = [
+  { label: "legal_name_label", value: "legal_name" },
+  { label: "id_label", value: "id" },
+  { label: "reg_date_label", value: "reg_date" },
+  { label: "address_label", value: "address" },
+] as const;
+
 export async function generateMetadata({
   params,
 }: {
@@ -78,6 +87,33 @@ export default async function TermsPage({
               </p>
             </Reveal>
           ))}
+
+          <Reveal
+            delay={SECTION_KEYS.length * 0.04}
+            className="flex flex-col gap-3"
+          >
+            <h2 className="font-display text-xl font-bold tracking-tight">
+              {t("requisites.title")}
+            </h2>
+            <p className="text-pretty text-muted-foreground">
+              {t("requisites.intro")}
+            </p>
+            <dl className="mt-2 grid gap-x-6 gap-y-3 rounded-lg border border-border bg-muted/30 p-5 sm:grid-cols-[max-content_1fr]">
+              {REQUISITE_ROWS.map((row) => (
+                <div key={row.value} className="contents">
+                  <dt className="text-sm font-medium text-muted-foreground">
+                    {t(`requisites.${row.label}`)}
+                  </dt>
+                  <dd className="text-sm text-foreground">
+                    {t(`requisites.${row.value}`)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="text-pretty text-sm text-muted-foreground">
+              {t("requisites.note")}
+            </p>
+          </Reveal>
         </div>
       </section>
     </main>

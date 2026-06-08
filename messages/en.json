@@ -10,7 +10,8 @@
     "nda": "Under NDA",
     "legal": "Legal",
     "privacy": "Privacy Policy",
-    "terms": "Terms of Use"
+    "terms": "Terms of Use",
+    "legal_entity": "IE Andrei Pustovoi · ID 305638389"
   },
   "meta": {
     "site_name": "suslicketeam",
@@ -597,6 +598,19 @@
         "title": "Contact",
         "body": "For cooperation questions, reach us on WhatsApp or Telegram — we reply within an hour during working hours."
       }
+    },
+    "requisites": {
+      "title": "Legal details",
+      "intro": "The studio operates as a registered individual entrepreneur. Full registration details:",
+      "legal_name_label": "Legal name",
+      "legal_name": "Individual Entrepreneur ANDREI PUSTOVOI",
+      "id_label": "Identification number",
+      "id": "305638389",
+      "reg_date_label": "Registration date",
+      "reg_date": "1 August 2023",
+      "address_label": "Legal address",
+      "address": "Georgia, Tbilisi, Vake District, Levan Mikeladze Street 19, Floor 15, Apartment 26, Entrance \"P\"",
+      "note": "The entity is registered in Georgia; we work with clients in Kazakhstan and worldwide. Project-specific terms are recorded in a separate agreement."
     }
   },
   "errors": {

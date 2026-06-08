@@ -70,8 +70,14 @@ export function SiteFooter() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {meta("site_name")}
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>
+              © {year} {meta("site_name")}
+            </span>
+            <span aria-hidden className="opacity-40">
+              ·
+            </span>
+            <span>{t("legal_entity")}</span>
           </p>
           <nav aria-label={t("legal")} className="flex flex-wrap gap-x-4 gap-y-1">
             {LEGAL_ITEMS.map((item) => (

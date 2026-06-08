@@ -30,6 +30,13 @@ describe("structured-data builders", () => {
     expect(organizationLd()["@type"]).toBe("Organization");
   });
 
+  test("organizationLd declares the registered legal entity", () => {
+    const ld = organizationLd();
+    expect(ld.legalName).toBe("Individual Entrepreneur ANDREI PUSTOVOI");
+    expect(ld.identifier).toBe("305638389");
+    expect(ld.foundingDate).toBe("2023-08-01");
+  });
+
   test("localBusinessLd serves Almaty + Kazakhstan in ru/kk/en", () => {
     const ld = localBusinessLd();
     expect(ld["@type"]).toBe("LocalBusiness");
