@@ -4,7 +4,9 @@ import {
   Code2,
   Database,
   Palette,
+  Smartphone,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -18,15 +20,40 @@ import { siteConfig, type Locale } from "@/lib/config";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbLd, organizationLd, personLd } from "@/lib/structured-data";
 
-// Tech stack: presentational icon + label pairs (labels are brand/tech names,
-// rendered verbatim, so they live here rather than in messages).
-const STACK = [
-  { icon: Code2, label: "Next.js" },
-  { icon: Braces, label: "TypeScript" },
-  { icon: Boxes, label: "React" },
-  { icon: Palette, label: "Tailwind CSS" },
-  { icon: Database, label: "PostgreSQL" },
-  { icon: Sparkles, label: "AI / LLM" },
+// Tech stack: grouped by domain. Group titles are translated (aboutPage.stack_groups.*),
+// while tech labels are brand/tech names rendered verbatim, so they live here.
+const STACK_GROUPS = [
+  {
+    key: "web",
+    items: [
+      { icon: Code2, label: "Next.js" },
+      { icon: Boxes, label: "React" },
+      { icon: Braces, label: "TypeScript" },
+      { icon: Palette, label: "Tailwind" },
+    ],
+  },
+  {
+    key: "backend",
+    items: [
+      { icon: Database, label: "Python" },
+      { icon: Database, label: "Golang" },
+    ],
+  },
+  {
+    key: "mobile",
+    items: [
+      { icon: Smartphone, label: "Flutter" },
+      { icon: Smartphone, label: "React Native" },
+    ],
+  },
+  {
+    key: "ai",
+    items: [
+      { icon: Sparkles, label: "AI / LLM" },
+      { icon: Workflow, label: "N8N" },
+      { icon: Workflow, label: "AI-agent pipelines" },
+    ],
+  },
 ] as const;
 
 const FACT_KEYS = ["projects", "speed", "approach"] as const;
@@ -137,18 +164,30 @@ export default async function AboutPage({
           <p className="mt-3 max-w-2xl text-pretty text-muted-foreground">
             {t("stack_subtitle")}
           </p>
-          <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {STACK.map(({ icon: Icon, label }, i) => (
-              <Reveal as="li" key={label} delay={i * 0.04}>
-                <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-5 text-center">
-                  <span className="flex size-11 items-center justify-center rounded-lg bg-brand/10 text-brand">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="text-sm font-medium">{label}</span>
-                </div>
-              </Reveal>
+          <div className="mt-10 flex flex-col gap-10">
+            {STACK_GROUPS.map((group) => (
+              <div key={group.key}>
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t(`stack_groups.${group.key}`)}
+                </h3>
+                <ul className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                  {group.items.map(({ icon: Icon, label }, i) => (
+                    <Reveal as="li" key={label} delay={i * 0.04}>
+                      <div className="flex h-full flex-col items-center gap-3 rounded-xl border border-border/60 bg-card/40 p-5 text-center">
+                        <span className="flex size-11 items-center justify-center rounded-lg bg-brand/10 text-brand">
+                          <Icon className="size-5" />
+                        </span>
+                        <span className="text-sm font-medium">{label}</span>
+                      </div>
+                    </Reveal>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
+          <p className="mt-8 max-w-2xl text-pretty font-medium">
+            {t("stack_automation")}
+          </p>
         </div>
       </section>
 

@@ -1,4 +1,4 @@
-import { Gauge, Headset, Search, ShieldCheck } from "lucide-react";
+import { BarChart3, Gauge, Headset, Search, ShieldCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { Reveal } from "@/components/motion/reveal";
@@ -9,6 +9,7 @@ const BENEFITS = [
   { key: "seo", Icon: Search },
   { key: "support", Icon: Headset },
   { key: "transparency", Icon: ShieldCheck },
+  { key: "analytics", Icon: BarChart3 },
 ] as const;
 
 /**
@@ -26,7 +27,7 @@ export async function WhyUs() {
           subtitle={t("subtitle")}
         />
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map(({ key, Icon }, i) => (
             <Reveal as="li" key={key} delay={i * 0.06}>
               <div className="flex h-full flex-col gap-3 rounded-xl border border-border/60 bg-card/40 p-6">

@@ -90,6 +90,10 @@
         "transparency": {
           "title": "Transparency",
           "description": "Fixed timelines and price, clear reporting and direct communication with no middlemen."
+        },
+        "analytics": {
+          "title": "Analytics built in",
+          "description": "We build analytics into the project so you see the real value of the system in numbers — not just take our word for it. This very site is a live example."
         }
       }
     },
@@ -248,19 +252,19 @@
       },
       "support": {
         "question": "What happens after launch?",
-        "answer": "We don't disappear: we help with support, updates and growing the product. We can take the site on for maintenance or hand over everything you need to run it yourself."
+        "answer": "We don't disappear after launch. Basic support — we keep the site running reliably and available, plus minor fixes. Updates and growth — new features, redesigns, scaling — are a separate paid service. We can take the project on for ongoing maintenance or hand over everything you need to run it yourself."
       },
       "tech": {
         "question": "What technologies do you work with?",
-        "answer": "A modern stack: Next.js, React, TypeScript, Tailwind and AI/LLM integrations. We pick technology to fit the task, not the other way around — so the product is fast and scalable."
+        "answer": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable. Web: Next.js, React, TypeScript, Tailwind. Backend: Python, Golang. Mobile: Flutter, React Native. AI and automation: AI/LLM integrations, N8N and building pipelines of AI agents. Not just websites — we build process automation and AI-agent pipelines."
       },
       "rights": {
         "question": "Who owns the rights to the code and design?",
-        "answer": "Everything we build for your project belongs to you. On completion you get full access to the code and assets with no lock-in to us."
+        "answer": "Everything we build for your project belongs to you — on completion you get full access to the code and assets with no lock-in to us. By default we leave a small, unobtrusive credit in the footer, but we'll remove it if you'd like."
       },
       "remote": {
         "question": "Do you work remotely?",
-        "answer": "Yes, we work remotely across Kazakhstan and the CIS. We communicate via messengers and online meetings — wherever is convenient for you."
+        "answer": "We work remotely with clients worldwide. We're based in Kazakhstan and deliver projects across the CIS and abroad — for example, Exchange Bridge and xaid.ai are international products. We communicate via messengers and online meetings — wherever is convenient for you."
       }
     }
   },
@@ -352,7 +356,14 @@
     "intro": "I'm suslicke — founder and tech lead of the studio. Behind me are dozens of shipped interfaces and products: from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a crew of designers and developers who help us ship complex things fast and well.",
     "avatar_initials": "S",
     "stack_title": "Our stack",
-    "stack_subtitle": "We pick technology to fit the task, not the other way around — so the product stays fast and scalable.",
+    "stack_subtitle": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable.",
+    "stack_groups": {
+      "web": "Web",
+      "backend": "Backend",
+      "mobile": "Mobile",
+      "ai": "AI & automation"
+    },
+    "stack_automation": "Not just websites — we build process automation and AI-agent pipelines.",
     "facts_title": "What you can rely on",
     "facts": {
       "projects": {
