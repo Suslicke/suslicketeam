@@ -8,6 +8,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
+import type { Locale } from "@/lib/config";
+import { buildMetadata } from "@/lib/seo";
 
 import "../globals.css";
 
@@ -35,9 +37,19 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
 
-  return {
+  const base = buildMetadata({
+    locale: locale as Locale,
+    path: "",
     title: t("default_title"),
     description: t("default_description"),
+  });
+
+  return {
+    ...base,
+    title: {
+      default: t("default_title"),
+      template: "%s — suslicketeam",
+    },
   };
 }
 
