@@ -94,10 +94,12 @@ export function QrWelcome() {
 
   function submit() {
     if (!answer) return;
+    // Only the "other" option has a free-text field, so detail is carried only
+    // for "other" — this avoids a stale value leaking onto another answer.
     const trimmed = detail.trim().slice(0, 500);
     const payload = {
       answer,
-      detail: answer === "other" || trimmed ? trimmed : undefined,
+      detail: answer === "other" ? trimmed || undefined : undefined,
       source: utm.utm_source,
       campaign: utm.utm_campaign,
       page: pathname,
