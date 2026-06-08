@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
+import { AuroraMount } from "@/components/hero/aurora-mount";
 import { ConstellationMount } from "@/components/hero/constellation-mount";
 import { MessengerCTA } from "@/components/messenger-cta";
 
@@ -18,7 +19,9 @@ export async function Hero() {
 
   return (
     <section className="relative isolate overflow-hidden border-b border-border/60">
-      {/* Soft brand glow + animated constellation, both behind content. */}
+      {/* Layered background, all behind content (text sits at z-0+):
+          aurora (-z-30) ← static brand glow (-z-20) ← constellation (-z-10). */}
+      <AuroraMount />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklch,var(--brand)_18%,transparent),transparent_70%)]"

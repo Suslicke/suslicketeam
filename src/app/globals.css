@@ -142,3 +142,79 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/*
+ * Decorative motion. All keyframes animate only `transform`/`opacity` (GPU,
+ * no layout, no CLS). Every consumer is wrapped in `motion-safe:` so they go
+ * static under `prefers-reduced-motion`.
+ */
+
+/* Hero aurora: a slow, barely-perceptible drift + breathe of the blurred blobs. */
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.45;
+  }
+  33% {
+    transform: translate3d(2%, -1.5%, 0) scale(1.06);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate3d(-1.5%, 1%, 0) scale(1.03);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.45;
+  }
+}
+
+/* Live-projects marquee: a single continuous leftward scroll. The track holds
+ * two identical sequences, so -50% loops seamlessly. */
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Primary CTA: a slow brand-tinted glow that gently breathes — not flashing. */
+@keyframes cta-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.02);
+  }
+}
+
+/* Cursor spotlight overlay for cards. `--mx`/`--my` are updated on pointermove;
+ * the glow only appears (opacity) while the pointer is over the card. Brand-
+ * tinted, very subtle, sits above the card bg but below its content. */
+@utility cursor-glow {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: radial-gradient(
+      18rem 18rem at var(--mx, 50%) var(--my, 50%),
+      color-mix(in oklch, var(--brand) 16%, transparent),
+      transparent 60%
+    );
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
