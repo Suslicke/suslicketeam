@@ -1,9 +1,24 @@
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 // Always run server-side (never prerendered): the webhook fan-out and the
 // in-memory rate-limit must execute per request.
 export const dynamic = "force-dynamic";
+
+// On Cloudflare/OpenNext, runtime env vars & secrets are exposed via the Worker
+// env (getCloudflareContext) — NOT reliably via process.env. Read from there
+// first, falling back to process.env for local `next start`/dev (.env.local).
+function readEnv(key: string): string | undefined {
+  try {
+    const v = (getCloudflareContext().env as Record<string, unknown>)[key];
+    if (typeof v === "string" && v.length > 0) return v;
+  } catch {
+    // Not inside a Cloudflare request context (e.g. local node server).
+  }
+  const pv = process.env[key];
+  return pv && pv.length > 0 ? pv : undefined;
+}
 
 // Stable answer keys mirror `qrWelcome.options.*` in the messages.
 const ANSWERS = ["met", "event", "friend", "passing", "other"] as const;
@@ -78,7 +93,7 @@ function deformula(value: string | undefined): string | undefined {
 }
 
 async function sendToSheet(payload: SurveyInput): Promise<boolean> {
-  const url = process.env.QR_SURVEY_WEBHOOK_URL;
+  const url = readEnv("QR_SURVEY_WEBHOOK_URL");
   if (!url) return false;
 
   const controller = new AbortController();
@@ -93,7 +108,7 @@ async function sendToSheet(payload: SurveyInput): Promise<boolean> {
       body: JSON.stringify({
         // Shared secret the Apps Script verifies, so knowing the /exec URL
         // alone isn't enough to write to the Sheet.
-        token: process.env.QR_SURVEY_TOKEN ?? "",
+        token: readEnv("QR_SURVEY_TOKEN") ?? "",
         answer: payload.answer,
         detail: deformula(payload.detail),
         source: deformula(payload.source),
@@ -136,7 +151,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const url = process.env.QR_SURVEY_WEBHOOK_URL;
+  const url = readEnv("QR_SURVEY_WEBHOOK_URL");
   if (!url) {
     // Dev / not configured: don't fail the user, but make the drop observable.
     console.warn("[qr-survey] no webhook configured, dropping response", {
