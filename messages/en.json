@@ -5,7 +5,8 @@
     "about": "About",
     "contact": "Contact",
     "cta_whatsapp": "Message on WhatsApp",
-    "cta_telegram": "Message on Telegram"
+    "cta_telegram": "Message on Telegram",
+    "breadcrumb_home": "Home"
   },
   "meta": {
     "site_name": "suslicketeam",
@@ -147,7 +148,8 @@
       "metrics": {
         "performance": "High Lighthouse",
         "seo": "Clean indexing"
-      }
+      },
+      "technologies": "Next.js, TypeScript, Tailwind CSS"
     },
     "animeenigma": {
       "title": "AnimeEnigma",
@@ -158,7 +160,8 @@
       "metrics": {
         "retention": "High retention",
         "load": "Fast loading"
-      }
+      },
+      "technologies": "Next.js, PostgreSQL, TypeScript"
     },
     "xaid": {
       "title": "xaid.ai",
@@ -169,7 +172,8 @@
       "metrics": {
         "automation": "Routine automated",
         "ttm": "On-time launch"
-      }
+      },
+      "technologies": "Next.js, LLM API, TypeScript"
     },
     "python-guide": {
       "title": "Python Guide",
@@ -180,7 +184,8 @@
       "metrics": {
         "traffic": "Traffic growth",
         "seo": "Top rankings"
-      }
+      },
+      "technologies": "Next.js, MDX, TypeScript"
     },
     "web-interview": {
       "title": "Web Interview",
@@ -191,7 +196,8 @@
       "metrics": {
         "engagement": "High engagement",
         "content": "Large question base"
-      }
+      },
+      "technologies": "React, TypeScript"
     },
     "loyrush": {
       "title": "LoyRush",
@@ -202,7 +208,8 @@
       "metrics": {
         "conversion": "Conversion growth",
         "retention": "Client retention"
-      }
+      },
+      "technologies": "Next.js, Stripe, PostgreSQL, TypeScript"
     },
     "exchange-bridge": {
       "title": "Exchange Bridge",
@@ -213,7 +220,8 @@
       "metrics": {
         "uptime": "High availability",
         "volume": "Stable operations"
-      }
+      },
+      "technologies": "Next.js, REST API, TypeScript"
     },
     "ai-diagnostic": {
       "title": "AI Diagnostic",
@@ -224,7 +232,8 @@
       "metrics": {
         "accuracy": "Accurate results",
         "speed": "Fast response"
-      }
+      },
+      "technologies": "Next.js, AI model, TypeScript"
     }
   },
   "testimonials": {
@@ -273,5 +282,125 @@
         "answer": "Yes, we work remotely across Kazakhstan and the CIS. We communicate via messengers and online meetings — wherever is convenient for you."
       }
     }
+  },
+  "servicesPage": {
+    "meta_title": "Services — web development, web apps and AI",
+    "meta_description": "Full-cycle digital services: landing pages, web apps, AI solutions, mobile apps and SEO. From idea to launch, end to end.",
+    "eyebrow": "Services",
+    "title": "What we do",
+    "subtitle": "Full cycle — from idea and design to launch and support. Pick a direction to learn more.",
+    "card_cta": "Learn more",
+    "cta_title": "Not sure what fits your case?",
+    "cta_subtitle": "Describe your project in a couple of lines — we'll suggest the best approach, timeline and price."
+  },
+  "serviceDetail": {
+    "breadcrumb_label": "Services",
+    "included_title": "What's included",
+    "process_title": "How the work goes",
+    "cases_title": "Relevant cases",
+    "cta_title": "Let's talk about your project?",
+    "cta_subtitle": "Tell us about your task — we'll propose a solution, timeline and price, no fluff, no obligations.",
+    "intro": {
+      "landing": "We build landing pages and corporate sites that don't just look good — they bring leads. We design structure for conversion, bake in technical SEO and ship instant load times on every device.",
+      "web-apps": "We build web apps, account dashboards and SaaS products end to end. Reliable architecture, a clean UX and a scalable codebase that keeps up as your product grows.",
+      "ai": "We bring AI in to solve concrete business problems: chatbots, assistants, routine automation and LLM integrations. We wrap complex technology in a simple, clear interface.",
+      "mobile": "We build cross-platform mobile apps with a native feel and a single codebase. Fast launch on the App Store and Google Play, a clean UX and post-release support.",
+      "seo": "We push sites to the top of search through technical SEO, speed optimization and content strategy. We lay the foundation for organic traffic that grows steadily over time."
+    },
+    "benefits": {
+      "landing": {
+        "one": "Design built for conversion — structure that leads to a lead",
+        "two": "Instant load and responsiveness on every device",
+        "three": "Technical SEO baked in from day one",
+        "four": "Fixed price and timeline before we start"
+      },
+      "web-apps": {
+        "one": "Reliable, scalable architecture",
+        "two": "Account dashboards and complex interfaces",
+        "three": "Payment, API and third-party integrations",
+        "four": "Clean code that's easy to grow"
+      },
+      "ai": {
+        "one": "LLM-powered chatbots and assistants",
+        "two": "Automation of routine processes",
+        "three": "AI integrated into your existing product",
+        "four": "A clear interface over complex technology"
+      },
+      "mobile": {
+        "one": "One codebase for iOS and Android",
+        "two": "Native feel and smooth UX",
+        "three": "Help shipping to the app stores",
+        "four": "Support and updates after launch"
+      },
+      "seo": {
+        "one": "Technical audit and issue fixes",
+        "two": "Speed and Core Web Vitals optimization",
+        "three": "Content strategy around search intent",
+        "four": "Organic traffic growth without tricks"
+      }
+    }
+  },
+  "casesPage": {
+    "meta_title": "Cases — real projects in production",
+    "meta_description": "suslicketeam portfolio: landing pages, SaaS, AI services and fintech products shipped to production.",
+    "eyebrow": "Portfolio",
+    "title": "Cases that speak for us",
+    "subtitle": "Real products in production — from landing pages to AI services and fintech.",
+    "live": "Open site",
+    "details": "Details",
+    "cta_title": "Want the same result?",
+    "cta_subtitle": "Tell us about your task — let's discuss how to build a product you'll be proud of."
+  },
+  "caseDetail": {
+    "breadcrumb_label": "Cases",
+    "live_button": "Open site",
+    "task_title": "Task",
+    "solution_title": "Solution",
+    "result_title": "Result",
+    "tech_title": "Technologies",
+    "more_title": "More cases",
+    "cta_title": "Want one like this?",
+    "cta_subtitle": "Describe your project — we'll propose a solution, timeline and price, no fluff, no obligations."
+  },
+  "aboutPage": {
+    "meta_title": "About — the suslicketeam crew",
+    "meta_description": "Meet suslicketeam: a founder and a crew that have shipped 8+ digital products to production.",
+    "eyebrow": "About",
+    "title": "A team you can trust with your product",
+    "intro_title": "About me and the team",
+    "intro": "I'm suslicke — founder and tech lead of the studio. Behind me are dozens of shipped interfaces and products: from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a crew of designers and developers who help us ship complex things fast and well.",
+    "avatar_initials": "S",
+    "stack_title": "Our stack",
+    "stack_subtitle": "We pick technology to fit the task, not the other way around — so the product stays fast and scalable.",
+    "facts_title": "What you can rely on",
+    "facts": {
+      "projects": {
+        "value": "8+",
+        "label": "products shipped to production"
+      },
+      "speed": {
+        "value": "Weeks",
+        "label": "not months — from idea to launch"
+      },
+      "approach": {
+        "value": "Fixed",
+        "label": "price and timeline before we start"
+      }
+    },
+    "team_title": "Founder plus a team",
+    "team": "You talk to me directly — no middle managers, no broken telephone. At the same time, every project is backed by a proven crew: design, frontend, backend and AI integrations. That gives you the speed of a small studio with the reliability of a full team.",
+    "cta_title": "Tell us about your project",
+    "cta_subtitle": "Message me directly — I reply within an hour and can point you to the best way to solve it."
+  },
+  "contactPage": {
+    "meta_title": "Contact — get in touch",
+    "meta_description": "Reach suslicketeam on WhatsApp or Telegram. We reply within an hour and work across Kazakhstan and the CIS.",
+    "eyebrow": "Contact",
+    "title": "Let's talk about your project",
+    "subtitle": "The fastest way is a message. We reply within an hour during working hours.",
+    "hours_title": "Response time",
+    "hours": "Mon–Fri, 10:00–20:00 (GMT+5). We usually reply within an hour; weekends are a little slower.",
+    "form_placeholder_title": "A lead form is coming soon",
+    "form_placeholder_text": "For now the fastest way to reach us is the messenger above. Soon you'll be able to send a request right here on the site."
   }
 }
