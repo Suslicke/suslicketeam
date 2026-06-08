@@ -58,7 +58,7 @@ const STACK_GROUPS = [
   },
 ] as const;
 
-const FACT_KEYS = ["projects", "speed", "approach"] as const;
+const FACT_KEYS = ["experience", "projects", "speed", "approach"] as const;
 
 export async function generateMetadata({
   params,
@@ -143,7 +143,7 @@ export default async function AboutPage({
           <h2 className="font-display text-2xl font-bold tracking-tight">
             {t("facts_title")}
           </h2>
-          <ul className="mt-10 grid gap-5 sm:grid-cols-3">
+          <ul className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
             {FACT_KEYS.map((key, i) => (
               <Reveal as="li" key={key} delay={i * 0.06}>
                 <div className="flex h-full flex-col gap-2 rounded-xl border border-border/60 bg-card/40 p-6">
