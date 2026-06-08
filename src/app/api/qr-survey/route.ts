@@ -23,6 +23,24 @@ const RATE_LIMIT_MAX = 8;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const buckets = new Map<string, { count: number; resetAt: number }>();
 
+// Reject POSTs that don't originate from our own site (a same-origin browser
+// fetch always sends Origin on POST; Referer is the fallback). Not a strong
+// control on its own — a crafted request can forge these — but it cheaply
+// blocks other websites' browsers and header-less bots. The Apps Script shared
+// token (below, forwarded as `token`) is what actually protects the Sheet.
+function isSameOrigin(request: Request): boolean {
+  const host = request.headers.get("host");
+  if (!host) return false;
+  const origin =
+    request.headers.get("origin") ?? request.headers.get("referer");
+  if (!origin) return false;
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
 function getClientIp(request: Request): string {
   // Trust only proxy-set headers (Cloudflare sets cf-connecting-ip on every
   // request). X-Forwarded-For is client-controllable, so a spoofed value would
@@ -71,6 +89,9 @@ async function sendToSheet(payload: SurveyInput): Promise<boolean> {
       // request could block for the full platform timeout).
       signal: controller.signal,
       body: JSON.stringify({
+        // Shared secret the Apps Script verifies, so knowing the /exec URL
+        // alone isn't enough to write to the Sheet.
+        token: process.env.QR_SURVEY_TOKEN ?? "",
         answer: payload.answer,
         detail: deformula(payload.detail),
         source: deformula(payload.source),
@@ -86,6 +107,13 @@ async function sendToSheet(payload: SurveyInput): Promise<boolean> {
 }
 
 export async function POST(request: Request) {
+  if (!isSameOrigin(request)) {
+    return NextResponse.json(
+      { ok: false, error: "forbidden" },
+      { status: 403 },
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
