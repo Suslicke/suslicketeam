@@ -739,7 +739,7 @@
       "friend": "A friend showed me",
       "other": "Something else"
     },
-    "other_placeholder": "Tell me where (optional)",
+    "other_placeholder": "Tell me where",
     "submit": "Send",
     "skip": "Skip",
     "done_title": "Thank you! 🙌",

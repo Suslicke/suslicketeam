@@ -92,8 +92,11 @@ export function QrWelcome() {
     setOpen(false);
   }
 
+  // "other" requires the free-text field to be filled before submitting.
+  const canSubmit = answer !== null && (answer !== "other" || detail.trim().length > 0);
+
   function submit() {
-    if (!answer) return;
+    if (!canSubmit || !answer) return;
     // Only the "other" option has a free-text field, so detail is carried only
     // for "other" — this avoids a stale value leaking onto another answer.
     const trimmed = detail.trim().slice(0, 500);
@@ -212,7 +215,7 @@ export function QrWelcome() {
               <div className="mt-1 flex items-center gap-3">
                 <Button
                   onClick={submit}
-                  disabled={!answer}
+                  disabled={!canSubmit}
                   className="h-11 flex-1 bg-brand text-base font-medium text-brand-foreground hover:bg-brand/90"
                 >
                   {t("submit")}

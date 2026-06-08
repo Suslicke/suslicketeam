@@ -64,7 +64,9 @@ function isRateLimited(ip: string): boolean {
 }
 
 // --- Google Sheet sink ---------------------------------------------------
-const SINK_TIMEOUT_MS = 5000;
+// Apps Script runs doPost (the actual append) before returning its redirect, so
+// a cold call can take several seconds — give it generous headroom.
+const SINK_TIMEOUT_MS = 10000;
 
 // Neutralise spreadsheet formula injection: a value a Sheet would interpret as
 // a formula (leading = + - @ or a control char) is prefixed with an apostrophe
