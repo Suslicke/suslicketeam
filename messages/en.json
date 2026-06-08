@@ -109,9 +109,12 @@
       "subtitle": "Didn't find your answer? Message us and we'll reply within an hour."
     },
     "final_cta": {
-      "title": "Tell us about your project — first chat is free",
-      "subtitle": "Describe your task in a couple of lines. We'll propose a solution, timeline and price — no fluff, no obligations.",
-      "note": "A request form is coming here soon. For now, message us directly — it's faster."
+      "title": "Ready to talk about your project?",
+      "subtitle": "Describe your task in a couple of lines — we'll come back with a solution, timeline and fixed price. Free, no obligations.",
+      "note": "Prefer a form? Fill it in below — we reply within one business day.",
+      "proof_fast": "Reply within a day",
+      "proof_fix": "Fixed price and timeline",
+      "proof_free": "First consultation is free"
     },
     "sticky_cta": "Message on WhatsApp"
   },

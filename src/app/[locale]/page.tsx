@@ -8,6 +8,7 @@ import { Hero } from "@/components/sections/hero";
 import { LiveProjects } from "@/components/sections/live-projects";
 import { Logos } from "@/components/sections/logos";
 import { Process } from "@/components/sections/process";
+import { SectionGlow } from "@/components/sections/section-glow";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { WhyUs } from "@/components/sections/why-us";
 import type { Locale } from "@/lib/config";
@@ -39,12 +40,14 @@ export default async function Home({
   setRequestLocale(locale);
 
   return (
-    <main>
+    <main className="relative isolate overflow-x-clip">
       <Hero />
       <Logos />
       <ServicesOverview />
+      <SectionGlow position="left" />
       <CasesPreview />
       <Process />
+      <SectionGlow position="right" />
       <WhyUs />
       <LiveProjects />
       <Faq />
