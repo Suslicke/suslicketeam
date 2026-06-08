@@ -141,6 +141,11 @@ export function QrWelcome() {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in motion-reduce:animate-none" />
         <Dialog.Content
+          // Close only via the ✕ or "Skip" — not on outside click (the cookie
+          // banner sits outside the dialog) or Escape, so accepting cookies
+          // doesn't dismiss the survey by accident.
+          onInteractOutside={(e) => e.preventDefault()}
+          onEscapeKeyDown={(e) => e.preventDefault()}
           className={cn(
             "fixed left-1/2 top-1/2 z-50 flex max-h-[85dvh] w-[calc(100vw-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto",
             "rounded-2xl border border-border bg-card p-6 shadow-2xl outline-none",
