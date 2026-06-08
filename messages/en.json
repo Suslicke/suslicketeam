@@ -733,10 +733,10 @@
     "subtitle": "Awesome — you found me through my shirt. One quick question so I know what's working:",
     "question": "Where did you find me?",
     "options": {
-      "shirt": "Saw the shirt / card",
       "met": "We met in person",
       "event": "At an event / networking",
       "friend": "A friend showed me",
+      "passing": "Just spotted it (street, café…)",
       "other": "Something else"
     },
     "other_placeholder": "Tell me where",

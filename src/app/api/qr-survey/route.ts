@@ -6,7 +6,7 @@ import { z } from "zod";
 export const dynamic = "force-dynamic";
 
 // Stable answer keys mirror `qrWelcome.options.*` in the messages.
-const ANSWERS = ["shirt", "met", "event", "friend", "other"] as const;
+const ANSWERS = ["met", "event", "friend", "passing", "other"] as const;
 
 const surveySchema = z.object({
   answer: z.enum(ANSWERS),

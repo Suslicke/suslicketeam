@@ -7,12 +7,13 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { getStoredUtm, persistUtm, type UtmParams } from "@/lib/utm";
 
 // Stable answer keys — mirror `qrWelcome.options.*` and the API route's enum.
-const ANSWERS = ["shirt", "met", "event", "friend", "other"] as const;
+const ANSWERS = ["met", "event", "friend", "passing", "other"] as const;
 type Answer = (typeof ANSWERS)[number];
 
 // Only people who arrived via the shirt QR (`/card` sets this) ever see this.
@@ -141,17 +142,21 @@ export function QrWelcome() {
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in motion-reduce:animate-none" />
         <Dialog.Content
           className={cn(
-            "fixed left-1/2 top-1/2 z-50 w-[calc(100vw-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2",
+            "fixed left-1/2 top-1/2 z-50 flex max-h-[85dvh] w-[calc(100vw-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col overflow-y-auto",
             "rounded-2xl border border-border bg-card p-6 shadow-2xl outline-none",
             "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-95 motion-reduce:animate-none",
           )}
         >
-          <Dialog.Close
-            aria-label={t("close")}
-            className="absolute right-4 top-4 rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <X className="size-5" />
-          </Dialog.Close>
+          <div className="mb-4 flex items-center gap-3">
+            {/* Language fallback, in case auto-detection picked the wrong one. */}
+            {!done && <LanguageSwitcher />}
+            <Dialog.Close
+              aria-label={t("close")}
+              className="ml-auto rounded-md p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <X className="size-5" />
+            </Dialog.Close>
+          </div>
 
           {done ? (
             <div className="flex flex-col gap-3">
@@ -170,7 +175,7 @@ export function QrWelcome() {
             </div>
           ) : (
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2 pr-6">
+              <div className="flex flex-col gap-2">
                 <Dialog.Title className="font-display text-xl font-bold tracking-tight">
                   {t("title")}
                 </Dialog.Title>
