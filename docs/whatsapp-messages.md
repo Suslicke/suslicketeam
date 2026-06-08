@@ -1,14 +1,18 @@
-# WhatsApp Business — greeting, away message, quick replies
+# Messenger automations — WhatsApp & Telegram
 
-Ready-to-paste content for the WhatsApp Business app, in three languages:
-**Russian** (primary — most KZ/CIS clients), **English** (international leads),
-**Kazakh** (state-language / local positioning).
+Ready-to-paste content for **WhatsApp Business** and **Telegram Business**, in three
+languages: **Russian** (primary — most KZ/CIS clients), **English** (international
+leads), **Kazakh** (state-language / local positioning).
 
-Set in: WhatsApp Business → Settings → Business tools.
-Business hours used across all messages: **Mon–Fri, 08:00–21:00 (GMT+5)**.
+- WhatsApp: Settings → Business tools → Greeting / Away message / Quick replies.
+- Telegram: Settings → **Telegram Business** → Greeting / Away messages, Quick
+  replies, Business hours (requires Telegram Premium).
 
-> Note: the website Contact page currently shows 10:00–20:00 — keep these in
-> sync (update the site to 08:00–21:00 or vice versa).
+Business hours used across all messages: **Mon–Sat, 09:00–21:00 (GMT+5)** — kept in
+sync with the website Contact page.
+
+The Telegram section (at the bottom) is a minimal set; the full RU/EN/KK quick
+replies below work the same in Telegram.
 
 ---
 
@@ -23,11 +27,11 @@ Business hours used across all messages: **Mon–Fri, 08:00–21:00 (GMT+5)**.
 > • есть пример или ТЗ?
 > • ориентир по срокам?
 >
-> Отвечаем в течение часа в рабочее время (Пн–Пт, 08:00–21:00, GMT+5). 🚀
+> Отвечаем в течение часа в рабочее время (Пн–Сб, 09:00–21:00, GMT+5). 🚀
 
 ## Away message (RU)
 
-> Спасибо за сообщение! 🙌 Сейчас вне рабочего времени (Пн–Пт, 08:00–21:00, GMT+5), поэтому ответим чуть позже — обычно в течение следующего рабочего часа.
+> Спасибо за сообщение! 🙌 Сейчас вне рабочего времени (Пн–Сб, 09:00–21:00, GMT+5), поэтому ответим чуть позже — обычно в течение следующего рабочего часа.
 >
 > Чтобы не терять время, опишите задачу: что нужно, пример или ТЗ и желаемые сроки — и мы вернёмся с конкретикой. 💬
 
@@ -59,11 +63,11 @@ Business hours used across all messages: **Mon–Fri, 08:00–21:00 (GMT+5)**.
 > • do you have an example or a brief?
 > • any timeline in mind?
 >
-> We reply within an hour during business hours (Mon–Fri, 08:00–21:00, GMT+5). 🚀
+> We reply within an hour during business hours (Mon–Sat, 09:00–21:00, GMT+5). 🚀
 
 ## Away message (EN)
 
-> Thanks for your message! 🙌 We're currently outside business hours (Mon–Fri, 08:00–21:00, GMT+5), so we'll get back a little later — usually within the next working hour.
+> Thanks for your message! 🙌 We're currently outside business hours (Mon–Sat, 09:00–21:00, GMT+5), so we'll get back a little later — usually within the next working hour.
 >
 > To save time, describe your task: what you need, an example or brief, and your timeline — and we'll come back with specifics. 💬
 
@@ -95,11 +99,11 @@ Business hours used across all messages: **Mon–Fri, 08:00–21:00 (GMT+5)**.
 > • мысал немесе ТЗ бар ма?
 > • мерзім бойынша бағдар?
 >
-> Жұмыс уақытында бір сағат ішінде жауап береміз (Дс–Жм, 08:00–21:00, GMT+5). 🚀
+> Жұмыс уақытында бір сағат ішінде жауап береміз (Дс–Сб, 09:00–21:00, GMT+5). 🚀
 
 ## Away message (KK)
 
-> Хабарламаңызға рахмет! 🙌 Қазір жұмыс уақытынан тыс (Дс–Жм, 08:00–21:00, GMT+5), сондықтан сәл кейінірек — әдетте келесі жұмыс сағаты ішінде жауап береміз.
+> Хабарламаңызға рахмет! 🙌 Қазір жұмыс уақытынан тыс (Дс–Сб, 09:00–21:00, GMT+5), сондықтан сәл кейінірек — әдетте келесі жұмыс сағаты ішінде жауап береміз.
 >
 > Уақыт жоғалтпау үшін тапсырманы сипаттаңыз: не қажет, мысал немесе ТЗ және қалаған мерзім — біз нақтысымен ораламыз. 💬
 
@@ -125,3 +129,32 @@ Business hours used across all messages: **Mon–Fri, 08:00–21:00 (GMT+5)**.
 - Keep greeting/away short on mobile — the first 2 lines matter most.
 - Quick replies support one attachment each (e.g. a PDF portfolio one-pager) — consider attaching it to `/кейсы`.
 - WhatsApp Business allows up to 50 quick replies, 1024 chars each.
+
+---
+
+# 📨 Telegram (minimal)
+
+Telegram Business (Premium) → Settings → Telegram Business. Same concepts as
+WhatsApp. Keep it short — below is a minimal RU set; reuse the EN/KK greetings and
+the quick replies above as needed.
+
+## Greeting message (RU)
+
+> Здравствуйте! 👋 Это suslicketeam — разрабатываем сайты, веб-приложения и AI-решения под ключ.
+> Расскажите в паре строк о задаче — что нужно, пример или ТЗ и сроки. Отвечаем в рабочее время (Пн–Сб, 09:00–21:00, GMT+5). 🚀
+
+## Away message (RU)
+
+> Спасибо за сообщение! 🙌 Сейчас вне рабочего времени (Пн–Сб, 09:00–21:00, GMT+5) — ответим в ближайший рабочий час. Опишите задачу, и мы вернёмся с конкретикой.
+
+## Quick replies (RU, minimal)
+
+| Shortcut | Message |
+|----------|---------|
+| `/услуги` | Делаем под ключ: сайты, веб-приложения и SaaS, AI-интеграции и автоматизацию, мобильные приложения и SEO. Что ближе к вашей задаче? |
+| `/кейсы` | Наши проекты: suslicketeam.com/ru/cases. Какой ближе по духу к вашему? |
+| `/бриф` | Чтобы предложить решение: 1) что за проект? 2) пример или ТЗ? 3) сроки? 4) бюджет? |
+| `/контакты` | suslicketeam — Andrei Pustovoi · suslicketeam.com · @suslicketeam. Ответим в рабочее время. |
+
+**Tip:** Telegram Business also supports Business hours, a greeting for new chats,
+and an away message outside hours — mirror the same 09:00–21:00 (Mon–Sat) schedule.
