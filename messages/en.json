@@ -415,7 +415,7 @@
     "error_text": "Something went wrong. Please try again or message us directly.",
     "retry": "Try again",
     "projectTypes": {
-      "landing": "Landing page",
+      "landing": "Landing / one-pager",
       "web-apps": "Web app",
       "ai": "AI solution",
       "mobile": "Mobile app",
