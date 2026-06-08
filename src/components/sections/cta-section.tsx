@@ -1,7 +1,6 @@
 import { Check } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { LeadForm } from "@/components/lead-form";
 import { MessengerCTA } from "@/components/messenger-cta";
 import { CtaGlow } from "@/components/motion/cta-glow";
 import { Reveal } from "@/components/motion/reveal";
@@ -60,10 +59,6 @@ export async function CtaSection() {
           </div>
 
           <p className="max-w-md text-sm text-muted-foreground/80">{t("note")}</p>
-        </Reveal>
-
-        <Reveal className="mt-12 w-full max-w-xl text-left">
-          <LeadForm />
         </Reveal>
       </div>
     </section>

@@ -4,7 +4,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Breadcrumbs } from "@/components/sections/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
-import { LeadForm } from "@/components/lead-form";
 import { MessengerCTA } from "@/components/messenger-cta";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/sections/section-heading";
@@ -98,11 +97,6 @@ export default async function ContactPage({
               </h2>
               <p className="text-sm text-muted-foreground">{t("hours")}</p>
             </div>
-          </Reveal>
-
-          {/* Lead form (Phase 6) */}
-          <Reveal className="mt-8">
-            <LeadForm />
           </Reveal>
         </div>
       </section>
