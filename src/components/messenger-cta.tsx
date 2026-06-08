@@ -73,7 +73,11 @@ export function MessengerCTA({
         utm: resolvedUtm,
       });
     }
-    return buildTelegramUrl({ username: siteConfig.telegram });
+    return buildTelegramUrl({
+      username: siteConfig.telegram,
+      page,
+      utm: resolvedUtm,
+    });
   }
 
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {

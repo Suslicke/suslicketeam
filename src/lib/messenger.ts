@@ -63,14 +63,16 @@ export function buildWhatsappUrl(opts: {
 }
 
 /**
- * Build a Telegram deep link from a username (leading `@` is stripped).
- *
- * Note: t.me does not reliably support prefilled message text via URL, so an
- * optional `text` is intentionally ignored — we just link to the profile.
+ * Build a Telegram link from a username (leading `@` is stripped). Appends a
+ * prefilled `?text=` (same default greeting as WhatsApp, with page + UTM) so the
+ * chat opens with the message ready. If a Telegram client ignores the param it
+ * harmlessly degrades to just opening the chat.
  */
 export function buildTelegramUrl(opts: {
   username: string;
   text?: string;
+  page?: string;
+  utm?: UtmParams;
 }): string {
   // Telegram usernames are alphanumeric + underscore only; strip a leading `@`
   // and any other characters so a dynamic source can't inject path traversal.
@@ -80,5 +82,6 @@ export function buildTelegramUrl(opts: {
       `buildTelegramUrl: username resolved to empty from "${opts.username}"`,
     );
   }
-  return `https://t.me/${username}`;
+  const text = opts.text ?? defaultGreeting(opts.page, opts.utm);
+  return `https://t.me/${username}?text=${encodeURIComponent(text)}`;
 }

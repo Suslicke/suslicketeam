@@ -58,28 +58,38 @@ describe("buildWhatsappUrl", () => {
 });
 
 describe("buildTelegramUrl", () => {
-  test("builds url from username", () => {
-    expect(buildTelegramUrl({ username: "suslicketeam" })).toBe(
-      "https://t.me/suslicketeam",
+  test("builds url from username with a prefilled default greeting", () => {
+    const url = buildTelegramUrl({ username: "suslicketeam" });
+    expect(url.startsWith("https://t.me/suslicketeam?text=")).toBe(true);
+    expect(decodeURIComponent(url.split("?text=")[1])).toContain(
+      "suslicketeam.com",
     );
   });
 
   test("strips leading @ from username", () => {
-    expect(buildTelegramUrl({ username: "@suslicketeam" })).toBe(
-      "https://t.me/suslicketeam",
-    );
+    const url = buildTelegramUrl({ username: "@suslicketeam" });
+    expect(url.startsWith("https://t.me/suslicketeam?text=")).toBe(true);
   });
 
-  test("ignores text (t.me does not support prefilled text)", () => {
-    expect(buildTelegramUrl({ username: "suslicketeam", text: "hi" })).toBe(
-      "https://t.me/suslicketeam",
-    );
+  test("explicit text overrides the greeting and is encoded", () => {
+    const url = buildTelegramUrl({ username: "suslicketeam", text: "custom" });
+    expect(url).toBe("https://t.me/suslicketeam?text=custom");
   });
 
-  test("sanitizes path-traversal / invalid characters", () => {
-    expect(buildTelegramUrl({ username: "suslicketeam/../evil" })).toBe(
-      "https://t.me/suslicketeamevil",
-    );
+  test("default greeting embeds page and utm summary", () => {
+    const url = buildTelegramUrl({
+      username: "suslicketeam",
+      page: "/ru/services/ai",
+      utm: { utm_source: "instagram" },
+    });
+    const decoded = decodeURIComponent(url.split("?text=")[1]);
+    expect(decoded).toContain("/ru/services/ai");
+    expect(decoded).toContain("instagram");
+  });
+
+  test("sanitizes path-traversal / invalid characters in username", () => {
+    const url = buildTelegramUrl({ username: "suslicketeam/../evil" });
+    expect(url.startsWith("https://t.me/suslicketeamevil?text=")).toBe(true);
     expect(() => buildTelegramUrl({ username: "@@@" })).toThrow();
   });
 });
