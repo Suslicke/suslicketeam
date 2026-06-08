@@ -50,7 +50,7 @@ const STACK_GROUPS = [
     key: "ai",
     items: [
       { icon: Sparkles, label: "AI / LLM" },
-      { icon: Workflow, label: "N8N" },
+      { icon: Workflow, label: "n8n" },
       { icon: Workflow, label: "AI-agent pipelines" },
     ],
   },

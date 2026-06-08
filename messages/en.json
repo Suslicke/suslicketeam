@@ -85,7 +85,7 @@
         },
         "support": {
           "title": "Support",
-          "description": "We don't vanish after launch: we maintain, update and keep growing the product."
+          "description": "We stay in touch after launch: we maintain, update and keep growing the product."
         },
         "transparency": {
           "title": "Transparency",
@@ -252,11 +252,11 @@
       },
       "support": {
         "question": "What happens after launch?",
-        "answer": "We don't disappear after launch. Basic support — we keep the site running reliably and available, plus minor fixes. Updates and growth — new features, redesigns, scaling — are a separate paid service. We can take the project on for ongoing maintenance or hand over everything you need to run it yourself."
+        "answer": "We stay in touch after launch. Basic support — we keep the site running reliably and available, plus minor fixes. Updates and growth — new features, redesigns, scaling — are a separate paid service. We can take the project on for ongoing maintenance or hand over everything you need to run it yourself."
       },
       "tech": {
         "question": "What technologies do you work with?",
-        "answer": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable. Web: Next.js, React, TypeScript, Tailwind. Backend: Python, Golang. Mobile: Flutter, React Native. AI and automation: AI/LLM integrations, N8N and building pipelines of AI agents. Not just websites — we build process automation and AI-agent pipelines."
+        "answer": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable. Web: Next.js, React, TypeScript, Tailwind. Backend: Python, Golang. Mobile: Flutter, React Native. AI and automation: AI/LLM integrations, n8n and building pipelines of AI agents. Not just websites — we build process automation and AI-agent pipelines."
       },
       "rights": {
         "question": "Who owns the rights to the code and design?",
