@@ -18,5 +18,260 @@
     "text": "We use analytics cookies to understand how you use the site and make it better. You can accept or decline them.",
     "accept": "Accept",
     "decline": "Decline"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Web development studio",
+      "headline": "Websites and web apps that bring you clients",
+      "headline_alt": "We turn ideas into digital products that sell",
+      "subhead": "We design, build and ship websites, web apps and AI solutions end to end — fast, transparent and focused on results.",
+      "cta_primary": "Discuss your project on WhatsApp",
+      "cta_secondary": "Message on Telegram",
+      "trust": "We reply within an hour · Working across Kazakhstan and CIS · Fixed price and timeline before we start"
+    },
+    "logos": {
+      "title": "Projects we're proud of"
+    },
+    "services": {
+      "eyebrow": "What we do",
+      "title": "End-to-end services — from idea to launch",
+      "subtitle": "Full cycle: design, development, launch and support. Pick a direction — we handle the rest.",
+      "cta": "All services"
+    },
+    "cases": {
+      "eyebrow": "Portfolio",
+      "title": "Cases that speak for us",
+      "subtitle": "Real products in production — from landing pages to AI services.",
+      "cta": "View all cases",
+      "live": "Open site",
+      "details": "Details"
+    },
+    "process": {
+      "eyebrow": "How we work",
+      "title": "A transparent process with no surprises",
+      "subtitle": "Clear stages, fixed timelines and constant communication at every step.",
+      "steps": {
+        "discovery": {
+          "title": "Brief and analysis",
+          "description": "We dig into the task, goals and audience. We lock scope, timeline and price before we start."
+        },
+        "design": {
+          "title": "Design and prototype",
+          "description": "We design the structure and interface and align on mockups — you see the result before any code."
+        },
+        "build": {
+          "title": "Development",
+          "description": "We write clean code, show progress regularly and keep you in the loop at every stage."
+        },
+        "launch": {
+          "title": "Launch and support",
+          "description": "We test, ship to production and stay in touch — growing the product together with you."
+        }
+      }
+    },
+    "why": {
+      "eyebrow": "Why us",
+      "title": "A team you can trust with your product",
+      "subtitle": "We don't build a 'site for the sake of a site' — we build a tool that works for your business.",
+      "items": {
+        "speed": {
+          "title": "Speed",
+          "description": "We ship MVPs in weeks, not months — without sacrificing quality or attention to detail."
+        },
+        "seo": {
+          "title": "SEO at the core",
+          "description": "We bake in technical SEO and performance from day one so people can find you."
+        },
+        "support": {
+          "title": "Support",
+          "description": "We don't vanish after launch: we maintain, update and keep growing the product."
+        },
+        "transparency": {
+          "title": "Transparency",
+          "description": "Fixed timelines and price, clear reporting and direct communication with no middlemen."
+        }
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Testimonials",
+      "title": "What clients say",
+      "subtitle": "Examples of feedback about working with the team.",
+      "disclaimer": "Sample testimonials — to be replaced with real ones."
+    },
+    "faq": {
+      "eyebrow": "Q&A",
+      "title": "Frequently asked questions",
+      "subtitle": "Didn't find your answer? Message us and we'll reply within an hour."
+    },
+    "final_cta": {
+      "title": "Tell us about your project — first chat is free",
+      "subtitle": "Describe your task in a couple of lines. We'll propose a solution, timeline and price — no fluff, no obligations.",
+      "note": "A request form is coming here soon. For now, message us directly — it's faster."
+    },
+    "sticky_cta": "Message on WhatsApp"
+  },
+  "services": {
+    "landing": {
+      "title": "Landing pages & sites",
+      "tagline": "Selling pages that convert",
+      "description": "Fast, responsive landing pages and corporate sites focused on conversion, load speed and SEO. From idea to launch, end to end."
+    },
+    "web-apps": {
+      "title": "Web applications",
+      "tagline": "Complex interfaces and SaaS, end to end",
+      "description": "We build web apps, account dashboards and SaaS products on a modern stack. Reliable architecture and a clean UX."
+    },
+    "ai": {
+      "title": "AI solutions",
+      "tagline": "Bringing AI into your product",
+      "description": "Chatbots, assistants, automation and LLM integrations. We help businesses save time and ship AI features that actually work."
+    },
+    "mobile": {
+      "title": "Mobile apps",
+      "tagline": "Apps for iOS and Android",
+      "description": "Cross-platform mobile apps with a native feel. One codebase, fast store launch and ongoing support."
+    },
+    "seo": {
+      "title": "SEO & growth",
+      "tagline": "So people find you in search",
+      "description": "Technical SEO, speed optimization and content strategy. We push sites to the top of search and bring organic traffic."
+    }
+  },
+  "cases": {
+    "suslicke": {
+      "title": "suslicke.com",
+      "summary": "A personal portfolio site with a premium look and flawless performance.",
+      "task": "Build a personal site that stands out from template portfolios and loads instantly.",
+      "solution": "We designed and built the site on Next.js with a dark premium aesthetic, optimizing images and fonts.",
+      "result": "The site loads almost instantly and scores high on Lighthouse.",
+      "metrics": {
+        "performance": "High Lighthouse",
+        "seo": "Clean indexing"
+      }
+    },
+    "animeenigma": {
+      "title": "AnimeEnigma",
+      "summary": "A guessing-game platform for anime fans with a large content base.",
+      "task": "Launch an interactive game with fast loading and strong retention.",
+      "solution": "We built the game engine, optimized database queries and crafted a smooth mobile UX.",
+      "result": "Stable performance under load and growing player engagement.",
+      "metrics": {
+        "retention": "High retention",
+        "load": "Fast loading"
+      }
+    },
+    "xaid": {
+      "title": "xaid.ai",
+      "summary": "An AI platform that automates routine tasks via LLM integration.",
+      "task": "Ship an AI product on a tight timeline and wrap complex tech in a simple interface.",
+      "solution": "We built the product on Next.js with LLM integration, a clear UX and a scalable API.",
+      "result": "Launched on time, automated manual processes and simplified work for users.",
+      "metrics": {
+        "automation": "Routine automated",
+        "ttm": "On-time launch"
+      }
+    },
+    "python-guide": {
+      "title": "Python Guide",
+      "summary": "An educational Python portal with a large body of structured content.",
+      "task": "Build a handy reference that ranks well in search.",
+      "solution": "We built the site on Next.js + MDX with thoughtful content structure and technical SEO.",
+      "result": "Growing organic traffic and stable search positions.",
+      "metrics": {
+        "traffic": "Traffic growth",
+        "seo": "Top rankings"
+      }
+    },
+    "web-interview": {
+      "title": "Web Interview",
+      "summary": "A trainer for preparing for web development interviews.",
+      "task": "Create an interactive platform with questions and quizzes for developers.",
+      "solution": "We built a React interface with a question system, progress tracking and easy navigation.",
+      "result": "High engagement and a regularly growing question base.",
+      "metrics": {
+        "engagement": "High engagement",
+        "content": "Large question base"
+      }
+    },
+    "loyrush": {
+      "title": "LoyRush",
+      "summary": "A loyalty SaaS platform with subscriptions, a dashboard and payments.",
+      "task": "Build a sales-ready SaaS with billing, analytics and a convenient panel.",
+      "solution": "We built a multi-tenant platform on Next.js with subscriptions, a dashboard and payment integration.",
+      "result": "Shipped a working product with a subscription model and clear analytics for clients.",
+      "metrics": {
+        "conversion": "Conversion growth",
+        "retention": "Client retention"
+      }
+    },
+    "exchange-bridge": {
+      "title": "Exchange Bridge",
+      "summary": "A fintech service for exchange and transfers focused on reliability.",
+      "task": "Build a stable fintech product with secure transactions and high availability.",
+      "solution": "We designed a fault-tolerant architecture with a reliable API and well-thought-out operation safeguards.",
+      "result": "Stable service operation and smooth transaction processing.",
+      "metrics": {
+        "uptime": "High availability",
+        "volume": "Stable operations"
+      }
+    },
+    "ai-diagnostic": {
+      "title": "AI Diagnostic",
+      "summary": "An AI service for preliminary diagnostics in the health space.",
+      "task": "Wrap an AI model in a simple, fast interface for end users.",
+      "solution": "We built a web service on Next.js with AI-model integration and a fast, clear diagnostic flow.",
+      "result": "Fast results and a simple user path from request to answer.",
+      "metrics": {
+        "accuracy": "Accurate results",
+        "speed": "Fast response"
+      }
+    }
+  },
+  "testimonials": {
+    "items": {
+      "one": {
+        "quote": "They did everything fast and headache-free. The site loads instantly and leads came in from the first week.",
+        "author": "Startup founder",
+        "role": "Almaty"
+      },
+      "two": {
+        "quote": "Clear timelines, clean communication and a strong result. We got a product we're proud to show investors.",
+        "author": "Product manager",
+        "role": "SaaS project"
+      },
+      "three": {
+        "quote": "They shipped AI features we'd only dreamed of. The team understood the task better than we did.",
+        "author": "CEO",
+        "role": "Fintech service"
+      }
+    }
+  },
+  "faq": {
+    "items": {
+      "cost": {
+        "question": "How much does it cost to build a site or app?",
+        "answer": "The price depends on the task and scope. After a short brief we lock the price and timeline before we start — no hidden add-ons. Landing pages cost less, complex web apps more."
+      },
+      "time": {
+        "question": "How long does development take?",
+        "answer": "A landing page — from a few days to a couple of weeks. A web app or SaaS — from several weeks. We give exact timelines after analyzing the task and lock them in our agreement."
+      },
+      "support": {
+        "question": "What happens after launch?",
+        "answer": "We don't disappear: we help with support, updates and growing the product. We can take the site on for maintenance or hand over everything you need to run it yourself."
+      },
+      "tech": {
+        "question": "What technologies do you work with?",
+        "answer": "A modern stack: Next.js, React, TypeScript, Tailwind and AI/LLM integrations. We pick technology to fit the task, not the other way around — so the product is fast and scalable."
+      },
+      "rights": {
+        "question": "Who owns the rights to the code and design?",
+        "answer": "Everything we build for your project belongs to you. On completion you get full access to the code and assets with no lock-in to us."
+      },
+      "remote": {
+        "question": "Do you work remotely?",
+        "answer": "Yes, we work remotely across Kazakhstan and the CIS. We communicate via messengers and online meetings — wherever is convenient for you."
+      }
+    }
   }
 }

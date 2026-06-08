@@ -1,27 +1,26 @@
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/lib/config";
+import { getCases, getServices } from "@/lib/content";
 
 /**
- * Locale-less route paths known to the site. Home is the empty string.
- * TODO Phase 5: add case detail slugs (see `caseSlugs` below).
+ * Locale-less route paths known to the site. Home is the empty string. Service
+ * detail paths are derived from the content model below.
  */
-const ROUTES = [
+const STATIC_ROUTES = [
   "",
   "/services",
-  "/services/landing",
-  "/services/web-apps",
-  "/services/ai",
-  "/services/mobile",
-  "/services/seo",
   "/cases",
   "/about",
   "/contact",
 ] as const;
 
-// TODO Phase 5: populate from the cases data source and append
-// `/cases/${slug}` for each. Kept as a helper so wiring is a one-liner.
-const caseSlugs: readonly string[] = [];
+const ROUTES = [
+  ...STATIC_ROUTES,
+  ...getServices().map((s) => `/services/${s.slug}`),
+] as const;
+
+const caseSlugs: readonly string[] = getCases().map((c) => c.slug);
 
 /** Absolute URL for a locale + locale-less path. */
 function abs(locale: string, path: string): string {
