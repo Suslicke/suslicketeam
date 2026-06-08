@@ -29,7 +29,10 @@ function ensurePosthog(): boolean {
       // SDK's automatic capture which would otherwise only fire once on load.
       capture_pageview: false,
       capture_pageleave: true,
-      person_profiles: "identified_only",
+      // "always" → build a person profile for every (consented) visitor, so the
+      // same person is recognised across sessions and described with auto-captured
+      // properties (geo, device, $initial_utm_*, first/last seen).
+      person_profiles: "always",
       // GDPR: do not transmit any $pageview/event until the user accepts via the
       // consent banner (which calls posthog.opt_in_capturing()). On decline the
       // banner calls opt_out_capturing(), keeping the SDK silent.
