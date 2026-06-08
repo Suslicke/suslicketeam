@@ -10,6 +10,7 @@ import { GaScripts } from "@/components/analytics/ga-scripts";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { UtmCapture } from "@/components/analytics/utm-capture";
 import { JsonLd } from "@/components/json-ld";
+import { QrWelcome } from "@/components/qr-welcome";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { StickyMessenger } from "@/components/sticky-messenger";
@@ -96,6 +97,7 @@ export default async function LocaleLayout({
           <ThemeProvider>
             <PostHogProvider>
               <UtmCapture />
+              <QrWelcome />
               <div className="flex min-h-screen flex-col">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>

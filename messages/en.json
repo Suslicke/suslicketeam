@@ -727,5 +727,23 @@
         "body": "Questions about payments or refunds? Reach us on WhatsApp or Telegram — the contacts are in the site header and footer."
       }
     }
+  },
+  "qrWelcome": {
+    "title": "🎉 Thanks for scanning!",
+    "subtitle": "Awesome — you found me through my shirt. One quick question so I know what's working:",
+    "question": "Where did you find me?",
+    "options": {
+      "shirt": "Saw the shirt / card",
+      "met": "We met in person",
+      "event": "At an event / networking",
+      "friend": "A friend showed me",
+      "other": "Something else"
+    },
+    "other_placeholder": "Tell me where (optional)",
+    "submit": "Send",
+    "skip": "Skip",
+    "done_title": "Thank you! 🙌",
+    "done_text": "Really appreciate it. Take a look around — and message me if you have a project in mind.",
+    "close": "Close"
   }
 }

@@ -22,6 +22,8 @@
   //   wrangler secret put TELEGRAM_BOT_TOKEN
   //   wrangler secret put TELEGRAM_CHAT_ID
   //   wrangler secret put LEADS_SHEET_WEBHOOK_URL
+  //   wrangler secret put QR_SURVEY_WEBHOOK_URL   # Google Apps Script /exec URL
+  //       (receives shirt-QR survey answers; see /api/qr-survey)
   // Or via the Cloudflare dashboard → Workers → Settings → Variables.
   //
   // ── ISR / on-demand revalidation (optional, currently unused) ────────────────
