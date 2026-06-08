@@ -1,4 +1,8 @@
+import { siteConfig } from "./config";
 import type { UtmParams } from "./utm";
+
+/** Bare host for the greeting, e.g. "suslicketeam.com" (no protocol / trailing slash). */
+const SITE_HOST = siteConfig.url.replace(/^https?:\/\//, "").replace(/\/+$/, "");
 
 /**
  * Compose a short, human-readable UTM summary for the default greeting,
@@ -30,15 +34,11 @@ function summarizeUtm(utm: UtmParams): string {
  * UTM summary when available.
  */
 function defaultGreeting(page?: string, utm?: UtmParams): string {
-  const details: string[] = [];
-  if (page) details.push(`страница: ${page}`);
-  if (utm) {
-    const summary = summarizeUtm(utm);
-    if (summary) details.push(summary);
-  }
-
-  const suffix = details.length > 0 ? ` (${details.join(", ")})` : "";
-  return `Здравствуйте! Пишу с сайта${suffix}.`;
+  // Combine host + path into a single readable URL, e.g. "suslicketeam.com/ru/contact".
+  const url = page ? `${SITE_HOST}${page}` : SITE_HOST;
+  const utmSummary = utm ? summarizeUtm(utm) : "";
+  const suffix = utmSummary ? ` (${utmSummary})` : "";
+  return `Здравствуйте! Пишу с сайта ${url}${suffix}.`;
 }
 
 /**

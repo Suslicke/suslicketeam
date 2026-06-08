@@ -34,6 +34,13 @@ describe("buildWhatsappUrl", () => {
     expect(url.startsWith("https://wa.me/77066998879?text=")).toBe(true);
   });
 
+  test("default greeting names the site host", () => {
+    const url = buildWhatsappUrl({ number: "77066998879", page: "/ru/contact" });
+    const decoded = decodeURIComponent(url.split("?text=")[1]);
+    expect(decoded).toContain("suslicketeam.com");
+    expect(decoded).toContain("/ru/contact");
+  });
+
   test("explicit text overrides default greeting", () => {
     const url = buildWhatsappUrl({
       number: "77066998879",
