@@ -4,6 +4,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -86,11 +87,13 @@ export default async function LocaleLayout({
         <JsonLd data={localBusinessLd()} />
         <NextIntlClientProvider>
           <ThemeProvider>
-            <div className="flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">{children}</div>
-              <SiteFooter />
-            </div>
+            <PostHogProvider>
+              <div className="flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+                <SiteFooter />
+              </div>
+            </PostHogProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
