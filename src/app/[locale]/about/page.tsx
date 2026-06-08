@@ -29,7 +29,9 @@ const STACK_GROUPS = [
     key: "web",
     items: [
       { icon: Code2, label: "Next.js" },
+      { icon: Code2, label: "Nuxt" },
       { icon: Boxes, label: "React" },
+      { icon: Boxes, label: "Vue" },
       { icon: Braces, label: "TypeScript" },
       { icon: Palette, label: "Tailwind" },
     ],

@@ -320,7 +320,7 @@
       },
       "tech": {
         "question": "What technologies do you work with?",
-        "answer": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable. Web: Next.js, React, TypeScript, Tailwind. Backend: Python, Golang. Mobile: Flutter, React Native. AI and automation: AI/LLM integrations, n8n and building pipelines of AI agents. Not just websites — we build process automation and AI-agent pipelines."
+        "answer": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable. Web: Next.js, Nuxt, React, Vue, TypeScript, Tailwind. Backend: Python, Golang. Mobile: Flutter, React Native. AI and automation: AI/LLM integrations, n8n and building pipelines of AI agents. Not just websites — we build process automation and AI-agent pipelines."
       },
       "rights": {
         "question": "Who owns the rights to the code and design?",
