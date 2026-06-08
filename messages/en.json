@@ -62,8 +62,8 @@
           "description": "We dig into the task, goals and audience. We lock scope, timeline and price before we start."
         },
         "design": {
-          "title": "Design and prototype",
-          "description": "We design the structure and interface and align on mockups — you see the result before any code."
+          "title": "Prototype in code",
+          "description": "We're code-first: instead of static mockups, we build a working clickable prototype right away. You test the real interface in the browser from day one — not a picture."
         },
         "build": {
           "title": "Development",
@@ -428,8 +428,8 @@
         "description": "We work out the structure, user scenarios and architecture, and choose technologies that fit the task."
       },
       "design": {
-        "title": "Design & prototype",
-        "description": "We prepare mockups and agree on the look before development starts."
+        "title": "Prototype in code",
+        "description": "We build a working prototype directly in code and align the interface on a live version — not on static mockups."
       },
       "build": {
         "title": "Development",
