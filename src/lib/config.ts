@@ -3,7 +3,7 @@ export const siteConfig = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "77066998879",
   telegram: process.env.NEXT_PUBLIC_TELEGRAM_USERNAME ?? "suslicketeam",
   locales: ["ru", "kk", "en"] as const,
-  defaultLocale: "ru" as const,
+  defaultLocale: "en" as const,
 } as const;
 
 export type Locale = (typeof siteConfig.locales)[number];
