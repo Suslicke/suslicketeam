@@ -11,7 +11,8 @@
     "legal": "Legal",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "legal_entity": "IE Andrei Pustovoi · ID 305638389"
+    "legal_entity": "IE Andrei Pustovoi · ID 305638389",
+    "refund": "Refund Policy"
   },
   "meta": {
     "site_name": "suslicketeam",
@@ -540,28 +541,56 @@
     "meta_description": "How suslicketeam collects and uses data: analytics only after consent, no data selling, deletion on request.",
     "eyebrow": "Legal",
     "title": "Privacy Policy",
-    "intro": "This policy explains what data we collect on this site, why, and how you can manage it. We aim to collect only what we need to improve the site and to treat your data with care.",
+    "intro": "This policy explains what data this website collects, why, and how you can manage it. We collect as little as we can and treat it with care.",
     "updated": "Updated: June 2026",
     "sections": {
+      "controller": {
+        "title": "Who we are",
+        "body": "This site is operated by suslicketeam — registered as Individual Entrepreneur ANDREI PUSTOVOI (ID 305638389). We decide how and why the limited data described here is processed. You can reach us via the WhatsApp and Telegram contacts in the site header and footer."
+      },
       "data": {
         "title": "What data we collect",
-        "body": "We collect anonymised usage statistics: page views, referral sources and campaign UTM tags, and general device and browser information. We do not request or store personal data through forms — the main way to reach us is via messengers."
+        "body": "We collect anonymised usage statistics: page views, referral sources and campaign UTM tags, and general device and browser information (such as browser type, language and approximate region). We do not run lead forms and do not ask for or store personal data such as your name, email or phone through this site — the main way to reach us is via messengers."
       },
       "analytics": {
         "title": "Analytics and cookies",
-        "body": "Google Analytics 4 and PostHog load only after you consent in the cookie banner — before that they are not loaded. In parallel we use Cloudflare Web Analytics, which is cookieless and does not track individual visitors. You can decline consent, in which case cookie-based analytics stays off."
+        "body": "Google Analytics 4 and PostHog load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies. We also use Cloudflare Web Analytics, which is cookieless and does not profile individual visitors. You can decline, and cookie-based analytics stays off."
       },
       "use": {
-        "title": "Why we use this data",
-        "body": "The data helps us understand how the site is used, which content is useful, and how to improve navigation and speed. We do not sell your data or share it with third parties for advertising."
+        "title": "Why we use this data (legal basis)",
+        "body": "We use this data to understand how the site is used, which content is helpful, and how to improve navigation and speed. Where consent is required, our legal basis is your consent given in the cookie banner, which you can withdraw at any time. We do not sell your data or use it for third-party advertising."
+      },
+      "sharing": {
+        "title": "Service providers we use",
+        "body": "We rely on a few trusted processors that handle data on our behalf: Google (Analytics 4), PostHog (product analytics, EU hosting) and Cloudflare (hosting and privacy-friendly web analytics). They process data only to provide their service to us, under their own privacy terms. We do not share your data with anyone for their own marketing."
+      },
+      "retention": {
+        "title": "How long we keep data",
+        "body": "Anonymised analytics are kept only as long as needed for statistics and trend analysis, after which they are aggregated or deleted in line with the providers' retention settings. If you contact us via messengers, we keep that correspondence only as long as needed to answer you and for our records."
+      },
+      "transfers": {
+        "title": "International data transfers",
+        "body": "Because we use international providers, anonymised analytics data may be processed outside your country, including the EU and the United States. Where required, these providers rely on appropriate safeguards (such as standard contractual clauses) for such transfers."
+      },
+      "security": {
+        "title": "Security",
+        "body": "We use reasonable technical and organisational measures to protect the limited data we handle, including HTTPS across the site and consent-gated analytics. However, no method of transmission or storage is completely secure, and we cannot guarantee absolute security."
       },
       "rights": {
-        "title": "Your rights and data deletion",
-        "body": "You can request deletion of data related to you — message us on WhatsApp or Telegram and we will handle the request. You can manage analytics consent at any time via the cookie banner."
+        "title": "Your rights",
+        "body": "Depending on your location, you may have rights to access, correct, delete or restrict processing of data relating to you, and to withdraw consent. To exercise them, message us on WhatsApp or Telegram and we will handle the request. You can also change analytics consent at any time via the cookie banner."
+      },
+      "children": {
+        "title": "Children",
+        "body": "This site and our services are intended for businesses and adults. We do not knowingly collect data from children. If you believe a child has provided data, contact us and we will delete it."
+      },
+      "changes": {
+        "title": "Changes to this policy",
+        "body": "We may update this policy from time to time. The current version, with its update date, is always published on this page. Significant changes will be reflected here."
       },
       "contact": {
         "title": "Contact",
-        "body": "For privacy questions, reach us on WhatsApp or Telegram — the contacts are in the site header and footer."
+        "body": "For any privacy question or request, reach us on WhatsApp or Telegram — the contacts are in the site header and footer."
       },
       "law": {
         "title": "Governing law",
@@ -571,7 +600,7 @@
   },
   "terms": {
     "meta_title": "Terms of Use",
-    "meta_description": "suslicketeam terms: fixed price and timeline, all code rights transfer to the client; project-specific terms set in a separate agreement.",
+    "meta_description": "suslicketeam Terms of Use: scope of work, price and timeline fixed upfront, code rights transfer to the client, plus warranties and limitation of liability.",
     "eyebrow": "Legal",
     "title": "Terms of Use",
     "intro": "These terms describe how we work on projects and the principles our cooperation is built on. The specific agreements for your project are recorded separately before we start.",
@@ -579,27 +608,47 @@
     "sections": {
       "scope": {
         "title": "What we do",
-        "body": "We provide custom development of websites, web and mobile apps, AI solutions and related services. The scope of each project is agreed before we begin."
+        "body": "We provide custom development services — websites, web and mobile apps, AI solutions, automation and related work. The exact scope, deliverables, price and timeline of each project are agreed individually and recorded in a separate written agreement before we start."
+      },
+      "offer": {
+        "title": "Not a public offer",
+        "body": "The information on this website is for general reference only and is not a public offer or a binding proposal. A binding relationship arises only from a separate agreement signed for your specific project."
       },
       "pricing": {
         "title": "Price and timeline",
-        "body": "We fix the price and timeline before the project starts — with no hidden charges. If the task changes along the way, we discuss the impact on price and timeline in advance."
+        "body": "We fix the price and timeline before a project starts, with no hidden charges. If the scope changes during the work, we agree any impact on price and timeline in advance and in writing. Payment terms, including any deposit, are set out in the project agreement."
       },
       "rights": {
         "title": "Rights to code and materials",
-        "body": "On completion, all rights to the code and materials transfer to you — with no lock-in to us. By default we leave a small, unobtrusive credit in the footer, but we remove it on request."
+        "body": "On full payment and completion, all rights to the code and materials created specifically for your project transfer to you, with no lock-in to us. Until then, we retain those rights. By default we leave a small, unobtrusive credit in the footer and remove it on request. Third-party components keep their own licenses."
       },
-      "content": {
-        "title": "Site content",
-        "body": "The information on this site is for reference only and is not a public offer. The final terms of a project are set out in a separate agreement."
+      "clientDuties": {
+        "title": "Your responsibilities",
+        "body": "You agree to provide accurate information, the materials and access we need, and timely feedback. You confirm you hold the rights to any content you give us and that it does not break the law or infringe third-party rights. Delays in materials or feedback may affect the timeline."
+      },
+      "warranty": {
+        "title": "Warranties and disclaimers",
+        "body": "We perform our work professionally and with care. Except as expressly agreed in the project agreement, our services and this website are provided “as is”, without further warranties of any kind. We do not guarantee specific business outcomes such as particular traffic, rankings, sales or revenue, as these depend on factors beyond our control."
+      },
+      "liability": {
+        "title": "Limitation of liability",
+        "body": "To the maximum extent permitted by applicable law, we are not liable for indirect, incidental or consequential losses, lost profit, data or goodwill. Our total liability in connection with a project is limited to the amount you paid us for that project. Nothing here limits liability that cannot be limited by law."
+      },
+      "thirdParty": {
+        "title": "Third-party services",
+        "body": "Projects and this website may rely on third-party services (such as hosting, analytics, payment or AI providers). Their own terms and availability apply, and we are not responsible for their acts, outages or changes beyond our reasonable control."
       },
       "law": {
-        "title": "Governing law",
-        "body": "The applicable law and the way any disputes are resolved are set out in the separate agreement we sign before each project."
+        "title": "Governing law and disputes",
+        "body": "The law applicable to our cooperation and the way any disputes are resolved are set out in the separate agreement we sign before each project. We always aim to resolve any issue through direct, good-faith discussion first."
+      },
+      "changes": {
+        "title": "Changes to these terms",
+        "body": "We may update these terms from time to time; the current version is always published on this page with its update date. The terms of an ongoing project are governed by the agreement in force for that project."
       },
       "contact": {
         "title": "Contact",
-        "body": "For cooperation questions, reach us on WhatsApp or Telegram — we reply within an hour during working hours."
+        "body": "For any questions about these terms or cooperation, reach us on WhatsApp or Telegram — we reply within an hour during working hours."
       }
     },
     "requisites": {
@@ -624,5 +673,47 @@
     "error_title": "Something went wrong",
     "error_message": "An error occurred. We have been notified — try reloading the page.",
     "retry": "Try again"
+  },
+  "refund": {
+    "meta_title": "Refund & Cancellation Policy",
+    "meta_description": "How refunds and cancellations work for suslicketeam custom development: payment terms set per project, deposits and completed work, and your statutory rights.",
+    "eyebrow": "Legal",
+    "title": "Refund & Cancellation Policy",
+    "intro": "This policy explains how payments, cancellations and refunds work for our custom development services. Because every project is individual, the binding terms for your project are set out in the separate agreement we sign before we start.",
+    "updated": "Updated: June 2026",
+    "sections": {
+      "scope": {
+        "title": "What this covers",
+        "body": "This policy covers paid custom development services — websites, apps, AI and related work. It does not cover third-party costs (such as hosting, domains, paid APIs or licences), which are billed by those providers under their own terms and are generally non-refundable once incurred."
+      },
+      "noSales": {
+        "title": "No purchases on this website",
+        "body": "This website does not sell any product or process payments directly. Nothing here is a public offer. Any payment happens only under a separate, individually agreed project contract."
+      },
+      "deposits": {
+        "title": "Deposits and prepayments",
+        "body": "We typically start work after a deposit or prepayment, which reserves our time and covers initial work. Once we have begun work, deposits are non-refundable, except where required by law or expressly agreed otherwise in the project contract."
+      },
+      "completed": {
+        "title": "Work already performed",
+        "body": "Completed and delivered work — including agreed milestones — is payable in full and is non-refundable, as it reflects time and effort already spent. On full payment, rights to that work transfer to you as described in the Terms of Use."
+      },
+      "cancellation": {
+        "title": "Cancelling a project",
+        "body": "Either side may cancel a project with written notice via the agreed channel. On cancellation, you pay for all work done and costs incurred up to that point; any amount prepaid beyond that is refunded to you. We hand over the work completed so far."
+      },
+      "requesting": {
+        "title": "How to request a refund",
+        "body": "To request a refund or cancel, message us on WhatsApp or Telegram with your project details. We aim to respond within one working day and to resolve any question fairly and in good faith."
+      },
+      "statutory": {
+        "title": "Your statutory rights",
+        "body": "Nothing in this policy limits any mandatory rights you may have under the consumer-protection or other laws that apply to you. Where such rights apply, they prevail over this policy."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "Questions about payments or refunds? Reach us on WhatsApp or Telegram — the contacts are in the site header and footer."
+      }
+    }
   }
 }

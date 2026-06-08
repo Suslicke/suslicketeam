@@ -10,10 +10,15 @@ import { buildMetadata } from "@/lib/seo";
 
 const SECTION_KEYS = [
   "scope",
+  "offer",
   "pricing",
   "rights",
-  "content",
+  "clientDuties",
+  "warranty",
+  "liability",
+  "thirdParty",
   "law",
+  "changes",
   "contact",
 ] as const;
 

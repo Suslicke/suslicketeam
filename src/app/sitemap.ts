@@ -15,6 +15,7 @@ const STATIC_ROUTES = [
   "/contact",
   "/privacy",
   "/terms",
+  "/refund",
 ] as const;
 
 const ROUTES = [
@@ -41,7 +42,7 @@ function languagesFor(path: string): Record<string, string> {
 
 function priorityFor(path: string): number {
   if (path === "") return 1;
-  if (path === "/privacy" || path === "/terms") return 0.3;
+  if (path === "/privacy" || path === "/terms" || path === "/refund") return 0.3;
   if (path === "/services" || path === "/cases" || path === "/contact") return 0.8;
   return 0.6;
 }

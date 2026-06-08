@@ -9,19 +9,14 @@ import { type Locale } from "@/lib/config";
 import { buildMetadata } from "@/lib/seo";
 
 const SECTION_KEYS = [
-  "controller",
-  "data",
-  "analytics",
-  "use",
-  "sharing",
-  "retention",
-  "transfers",
-  "security",
-  "rights",
-  "children",
-  "changes",
+  "scope",
+  "noSales",
+  "deposits",
+  "completed",
+  "cancellation",
+  "requesting",
+  "statutory",
   "contact",
-  "law",
 ] as const;
 
 export async function generateMetadata({
@@ -30,17 +25,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "privacy" });
+  const t = await getTranslations({ locale, namespace: "refund" });
 
   return buildMetadata({
     locale: locale as Locale,
-    path: "/privacy",
+    path: "/refund",
     title: t("meta_title"),
     description: t("meta_description"),
   });
 }
 
-export default async function PrivacyPage({
+export default async function RefundPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -48,7 +43,7 @@ export default async function PrivacyPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("privacy");
+  const t = await getTranslations("refund");
   const tc = await getTranslations("common");
 
   return (

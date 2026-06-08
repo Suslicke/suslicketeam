@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 const LEGAL_ITEMS = [
   { href: "/privacy", key: "privacy" },
   { href: "/terms", key: "terms" },
+  { href: "/refund", key: "refund" },
 ] as const;
 
 export function SiteFooter() {
