@@ -123,7 +123,8 @@ export default async function AboutPage({
                 alt={t("photo_alt")}
                 fill
                 sizes="(min-width: 640px) 176px, 128px"
-                className="object-cover object-[center_22%]"
+                quality={90}
+                className="object-cover object-[center_30%]"
                 priority
               />
             </div>
