@@ -4,134 +4,87 @@ Technical context for AI assistants working in this repository. Read this before
 
 ## Project
 
-**suslicketeam** — a multilingual (RU / KK / EN) marketing & portfolio website for a small web-development studio led by **Andrei Pustovoi** (founder & tech lead), targeting businesses in Kazakhstan, the CIS, and international clients.
+**suslicketeam** — a multilingual (RU / KK / EN) marketing & portfolio website for a small web-development studio led by **Andrei Pustovoi** (founder & tech lead). **LIVE in production at https://suslicketeam.com** (Cloudflare). Target: businesses in Kazakhstan (Almaty), CIS, and international.
 
-**Primary goal:** convert visitors into a messenger conversation. The main CTA is a WhatsApp / Telegram click (tracked as a conversion). A lead form is the secondary channel.
-
-Positioning: hybrid — the studio brand `suslicketeam` is the face, the founder is the personal point of contact. Team = developers only (no designers).
+**Primary goal:** convert visitors into a messenger conversation. The CTA is a WhatsApp / Telegram click (tracked as a conversion). **There is no lead form** (removed — see Conversion). Team = developers only (no designers).
 
 ## Tech stack
 
 - **Next.js 15.5.19** (App Router, Turbopack) + **React 19** + **TypeScript** (strict)
-- **Tailwind CSS v4** (CSS-first config in `src/app/globals.css` via `@theme`; there is no `tailwind.config.js`)
-- **next-intl** — i18n, `localePrefix: 'always'`, locales `['ru','kk','en']`, default `ru`
+- **Tailwind CSS v4** (CSS-first config in `src/app/globals.css`; no `tailwind.config.js`)
+- **next-intl** — i18n, `localePrefix: 'always'`, locales `['ru','kk','en']`, **default `en`**
 - **next-themes** — dark default + toggle, FOUC-free
-- **motion** v12 (the successor to framer-motion; import from `motion/react`)
-- **shadcn/ui** primitives (`src/components/ui/`) + `cn` helper (`src/lib/utils.ts`)
-- **react-hook-form** + **zod** (+ `@hookform/resolvers`) for the lead form
-- **lucide-react** icons
-- Analytics: **GA4** (gtag) + **PostHog** (`posthog-js`, EU) + **Cloudflare Web Analytics**
-- **pnpm** (v11, via corepack) — package manager. Node ≥ 20.
-- Deployment target: **Cloudflare Workers** via **`@opennextjs/cloudflare`** (`open-next.config.ts`, `wrangler.jsonc`)
+- **motion** v12 (`motion/react`) — animations
+- **shadcn/ui** primitives (`src/components/ui/`) + `cn` (`src/lib/utils.ts`)
+- **zod** (validation, used by the dormant lead form), **react-hook-form** (dormant)
+- Analytics: **GA4** + **PostHog** (EU) + **Cloudflare Web Analytics** (auto on prod)
+- **pnpm 11.5.2** (pinned via `packageManager`; needs **Node ≥ 22.13**). Corepack.
+- Deploy: **Cloudflare Workers** via **`@opennextjs/cloudflare`** (`open-next.config.ts`, `wrangler.jsonc`)
+- Stack the studio advertises (About page `STACK_GROUPS` + FAQ): Web (Next.js, Nuxt, React, Vue, TypeScript, Tailwind), Backend (Python, Golang), Mobile (Flutter, React Native, Swift), AI/automation (AI/LLM, n8n, AI-agent pipelines).
 
 ## Commands
 
 ```bash
 pnpm dev          # next dev --turbopack (http://localhost:3000)
-pnpm build        # next build --turbopack  (must pass before committing)
+pnpm build        # next build --turbopack (must pass before committing)
 pnpm start        # production server (use to test /api routes reliably)
-pnpm lint         # eslint
-pnpm typecheck    # tsc --noEmit  (must pass)
-pnpm test         # vitest run (unit)
-pnpm test:e2e     # playwright (needs a dev/prod server; see note below)
-pnpm preview      # opennextjs-cloudflare build + local Workers preview
-pnpm deploy       # opennextjs-cloudflare build + deploy (needs CF creds)
+pnpm lint / typecheck / test          # eslint / tsc --noEmit / vitest run
+pnpm test:e2e     # playwright (see note)
+pnpm preview / deploy                 # opennextjs-cloudflare build + preview/deploy
 ```
 
-**Gate before any commit:** `pnpm typecheck && pnpm test && pnpm build` must all be green.
+**Gate before any commit:** `pnpm typecheck && pnpm test && pnpm build` green.
 
-### Dev-server gotcha (important)
-The Turbopack dev server **wedges** after a series of file edits (returns HTTP 500 on all routes, logs `ENOENT _buildManifest.js.tmp`). This is NOT a code bug — production builds stay green. Fix: kill the dev process, `rm -rf .next`, restart `pnpm dev`. Always verify route behavior against `pnpm build` (or `pnpm start`) when in doubt — not the dev server.
+### Dev-server gotcha (IMPORTANT)
+The Turbopack dev server **wedges** after a series of file edits (HTTP 500 on all routes, `ENOENT _buildManifest.js.tmp` in the log). NOT a code bug — prod builds stay green. Fix: kill `next dev`, `rm -rf .next`, restart. Verify behavior against `pnpm build`/`pnpm start`, not the dev server.
 
 ### Playwright note
-`playwright.config.ts` uses `reuseExistingServer`. A stale `pnpm dev` on :3000 can serve old content / 500s to the test run. Set `PLAYWRIGHT_BASE_URL` to point e2e at a fresh `pnpm start` on a spare port when a dev server is already holding :3000. Run with `--workers=1` locally for stability.
+`playwright.config.ts` honors `PLAYWRIGHT_BASE_URL`. If a stale dev server holds :3000, run e2e against a fresh `pnpm start` on a spare port via that env var, `--workers=1`.
 
-## Directory map
+## Deployment (Cloudflare, already live)
 
-```
-src/
-  app/
-    [locale]/
-      layout.tsx                 # renders <html>, providers, header/footer, JSON-LD, analytics, sticky CTA
-      page.tsx                   # home: hero → marquee(logos) → services → cases → process → why-us → live-projects → faq → final CTA
-      about/page.tsx             # founder photo, intro, stack groups, trust facts (count-up), team
-      contact/page.tsx           # messenger CTAs + <LeadForm/>
-      services/page.tsx          # services overview + "any technical project" block
-      services/[slug]/page.tsx   # service detail; RELEVANT_CASES map drives "related cases"
-      cases/page.tsx             # full case grid (all cases incl. NDA)
-      cases/[slug]/page.tsx      # case detail; process + approach sections; NDA → no live link
-    api/lead/route.ts            # POST lead webhook (force-dynamic)
-    sitemap.ts robots.ts manifest.ts opengraph-image lives under [locale]/
-  components/
-    analytics/                   # posthog-provider, ga-scripts, cloudflare-analytics, consent-banner, utm-capture
-    hero/                        # constellation (Canvas 2D) + aurora (CSS gradient), both lazy ssr:false
-    motion/                      # reveal, stagger, count-up, cursor-glow, cta-glow
-    sections/                    # all home/detail sections + section-heading, service-card, case-card, marquee, page-cta
-    ui/                          # shadcn primitives
-    messenger-cta.tsx            # THE conversion component (wa.me/t.me + lead_messenger_click)
-    site-header.tsx site-footer.tsx language-switcher.tsx theme-toggle.tsx json-ld.tsx
-  content/
-    services.ts                  # 5 services (structural: slug, icon, order, featured)
-    cases.ts                     # 12 cases (structural) + CASE_DISPLAY_NAMES + nda flag
-  i18n/ routing.ts request.ts    # next-intl setup
-  lib/
-    config.ts                    # siteConfig (url, whatsapp, telegram, locales) + Locale type
-    utm.ts messenger.ts analytics.ts lead-schema.ts lead-format.ts   # pure logic, unit-tested (TDD)
-    content.ts seo.ts structured-data.ts utils.ts
-    __tests__/                   # vitest specs for the lib/ logic
-  middleware.ts                  # next-intl middleware
-messages/{ru,kk,en}.json         # ALL user-facing copy
-e2e/                             # playwright specs
-```
+- GitHub remote: `origin` → `github.com/Suslicke/suslicketeam`. Cloudflare **Workers Builds** auto-deploys on push to `main`.
+- **Cloudflare build settings (correct values):** Build command `npx @opennextjs/cloudflare build`; Deploy command `npx @opennextjs/cloudflare deploy`. (NOT `pnpm run build` / `wrangler deploy`.)
+- `package.json` has `packageManager: "pnpm@11.5.2"`; `pnpm-workspace.yaml` includes `packages: []` (pnpm 10 compat) + `allowBuilds`. GitHub Actions CI uses **Node 22**.
+- **Prod env vars must be set in Cloudflare** (build-time, since `NEXT_PUBLIC_*` are inlined): `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`, `NEXT_PUBLIC_SITE_URL`. Local values live in `.env.local` (gitignored).
+- `next.config.ts`: **`images.unoptimized: true`** — the Cloudflare/OpenNext runtime has no `/_next/image` optimizer (it 400s). Serve pre-sized images as-is.
 
 ## Conventions (follow these)
 
-- **No hardcoded user-facing strings in TSX.** All copy lives in `messages/{ru,kk,en}.json` and is read via `useTranslations` / `getTranslations`. Tech/brand names in structural data (tags, stack labels) are the exception (rendered verbatim).
-- **i18n parity is mandatory.** `ru.json`, `kk.json`, `en.json` must have an identical key set. After editing messages, verify parity (flatten keys of all three and diff). A missing key in one locale renders a raw key or throws. RU is the authoritative copy; KK and EN are real translations (not machine-stiff).
-- **Server Components by default.** Use `"use client"` only where needed (theme toggle, language switcher, motion wrappers, canvas/aurora, forms, analytics providers, MessengerCTA). Server pages use `setRequestLocale(locale)` + `getTranslations`.
-- **Commits:** Conventional Commits (`feat:`, `fix:`, `content:`, `chore:`, `docs:`). End every commit message with:
-  `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>`
-- **Honesty in portfolio copy:** never fabricate metrics, uptime, user counts, or client quotes. Case copy is grounded in the real live sites (fetch them if unsure). NDA cases stay intentionally vague.
-- Keep Lighthouse ≥ 95 (perf/a11y/best-practices/seo). Animate only `transform`/`opacity`; respect `prefers-reduced-motion`; lazy-mount heavy/animated layers so hero text stays the server-rendered LCP.
+- **No hardcoded user-facing strings in TSX.** All copy in `messages/{ru,kk,en}.json` via `useTranslations`/`getTranslations`. Tech/brand labels in structural data are the exception.
+- **i18n parity is mandatory.** ru/kk/en must have an identical flattened key set; verify after editing messages. RU is authoritative; KK/EN are real translations.
+- **Server Components by default;** `"use client"` only where needed.
+- **Commits:** Conventional Commits. **Plain `git commit`** — author is `Andrei Pustovoi <suslicketeam@gmail.com>` (git config). **Do NOT add a `Co-Authored-By` trailer** (history was rewritten to remove all Claude trailers; keep it clean).
+- **Honesty in copy:** never fabricate metrics/quotes. Case copy is grounded in the real live sites (fetch them if unsure). NDA cases stay vague.
+- Keep Lighthouse ≥ 95. Animate only transform/opacity; respect `prefers-reduced-motion`; lazy-mount heavy layers so hero text stays the server-rendered LCP.
 
 ## Key subsystems
 
-### i18n
-`localePrefix: 'always'` → every URL is prefixed (`/ru`, `/kk`, `/en`); `/` redirects by `Accept-Language`. Navigation helpers (`Link`, `useRouter`, `usePathname`, `redirect`) are exported from `@/i18n/routing` — use those, not `next/link`/`next/navigation`, for locale-aware routing.
+### i18n (default locale = en)
+`localePrefix:'always'` → every URL prefixed (`/en`, `/ru`, `/kk`). Root `/` redirects by cookie (`NEXT_LOCALE` from the switcher) → `Accept-Language` → **`en`** default. `x-default` hreflang → `/en`. RU/KK visitors still get their language by detection. Nav helpers from `@/i18n/routing`. `siteConfig.defaultLocale` (in `src/lib/config.ts`) is the single source — changing it propagates to routing, sitemap, seo, not-found.
 
 ### SEO
-`buildMetadata({locale, path, title, description})` in `src/lib/seo.ts` → canonical + full `hreflang` (`alternates.languages` incl. `x-default`) + OG/Twitter. Every page has its own `generateMetadata`. `sitemap.ts` enumerates all routes × locales (case slugs derived from `content.ts`) with `x-default`. JSON-LD builders in `src/lib/structured-data.ts` (Organization, LocalBusiness KZ, Person=Andrei Pustovoi, WebSite, BreadcrumbList, Service, CreativeWork, FAQPage) rendered via `<JsonLd>` (escapes `<` to avoid `</script>` breakout). Dynamic OG images via `next/og` (verified to work under the Cloudflare Workers runtime).
+`buildMetadata({locale,path,title,description})` in `@/lib/seo` → canonical + hreflang (incl `x-default`) + OG/Twitter. Every page has `generateMetadata`. `sitemap.ts` enumerates all routes × locales. JSON-LD in `@/lib/structured-data.ts` (Organization, **LocalBusiness with `addressLocality:"Алматы"`, areaServed Almaty+Kazakhstan**, Person=Andrei Pustovoi, WebSite, BreadcrumbList, Service, CreativeWork, FAQPage) via `<JsonLd>` (escapes `<`). Dynamic OG images via `next/og` (work on Workers). **Geo keywords** (Almaty/Kazakhstan) are in home/services/contact titles+meta+hero eyebrow (not in H1s). `/privacy` and `/terms` pages exist (indexable, in footer + sitemap). Favicon/icons are the custom suslicketeam circular logo (`src/app/{favicon.ico,icon.png,apple-icon.png}` + `public/icon.png`, transparent round mask).
 
-### Analytics & conversion tracking
-- `src/lib/analytics.ts` → `trackEvent(name, params)` dispatches to BOTH `window.gtag` and `window.posthog.capture`, defensively (never throws; SSR-safe). Use it for all events.
-- Providers in `src/components/analytics/`. All are **gated on their env var** and no-op gracefully when unset. **Consent-gated:** GA uses Consent Mode v2 (denied by default, inline `consent default` runs before the gtag lib); PostHog inits with `opt_out_capturing_by_default: true` and only opts in after the user accepts the cookie banner. Cloudflare beacon is cookieless.
-- PostHog SPA pageviews: `capture_pageview:false` + a manual `$pageview` fired on `usePathname`/`useSearchParams` change (inside `<Suspense>`).
-- **UTM:** `utm.ts` (`parseUtm`/`persistUtm` first-touch in sessionStorage `sl_utm`/`getStoredUtm`). `utm-capture.tsx` persists on mount and dispatches a `sl:utm` window event. `MessengerCTA` reads stored UTM reactively (state + `sl:utm` listener) AND rebuilds the URL at click-time so the messenger link always carries UTM + page; conversion event is `lead_messenger_click` (with `transport_type:'beacon'`). The WhatsApp greeting (`messenger.ts`) embeds `suslicketeam.com/<path>` + UTM summary.
-
-### Lead form & webhook
-`src/components/lead-form.tsx` (RHF + `zodResolver(leadSchema)`, honeypot field `company`) → POST `/api/lead`. `src/app/api/lead/route.ts`: honeypot check before schema validation (bot → silent 200), then `leadSchema.safeParse` (invalid → 400 `{error:'invalid'}`, no internals echoed), in-memory per-IP rate limit (best-effort; move to KV for prod), then best-effort fan-out via `Promise.allSettled` with 5s timeouts:
-- Telegram bot (`TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID`) — `formatTelegramMessage` (plain text, injection-safe).
-- Spreadsheet webhook (`LEADS_SHEET_WEBHOOK_URL`).
-With no sinks configured it returns `{ok:true, delivered:false}` (success UI shows, but `lead_form_submit` only fires when `delivered !== false`). **Until a sink is configured, leads are NOT delivered anywhere.**
+### Analytics & conversion
+- `src/lib/analytics.ts` `trackEvent(name, params)` → both `window.gtag` and `window.posthog.capture`, defensive/SSR-safe.
+- Providers in `src/components/analytics/`, gated on env vars, **consent-gated**: GA Consent Mode v2 (denied default, inline before gtag lib); PostHog inits `opt_out_capturing_by_default:true` + **`person_profiles:'always'`** (a persona profile per consented visitor — use PostHog Persons/Cohorts/session replay). PostHog SPA `$pageview` fired manually on route change.
+- **UTM:** `utm.ts` (first-touch in sessionStorage `sl_utm`); `utm-capture.tsx` persists + dispatches `sl:utm`. `MessengerCTA` (`src/components/messenger-cta.tsx`) reads UTM reactively and rebuilds the URL at click time; event `lead_messenger_click` (channel + page + UTM). **Both WhatsApp AND Telegram CTAs prefill text** (`wa.me/<num>?text=` and `t.me/<user>?text=`) with the greeting (`suslicketeam.com/<path>` + UTM) from `messenger.ts`.
+- **No lead form / no /api lead delivery.** The form was removed from the UI (messenger-only); `lead-form.tsx`, `src/app/api/lead/route.ts`, `lead-schema.ts`, `lead-format.ts` remain dormant (re-enable by mounting `<LeadForm/>` + configuring a sink). No Telegram bot.
 
 ### Content model
-`src/content/cases.ts` — `CaseItem { slug, url, tags, featured, metrics, year, nda? }`. NDA cases have `url:""`, `nda:true`, render a "Под NDA" badge instead of a live link, and are **excluded from the live-projects grid + marquee** (which are about "open and verify") via `getPublicCases()`. `getCases()` returns all. Per-case copy (title/summary/task/solution/result/approach/metrics/technologies) lives in `messages.*.cases.<slug>`. Service detail "related cases" use the explicit `RELEVANT_CASES` slug map in `services/[slug]/page.tsx` (not tag overlap).
+`src/content/cases.ts` — **12 cases** (`slug,url,tags,featured,metrics,year,nda?`): suslicke, animeenigma, xaid, python-guide, web-interview, loyrush, exchange-bridge, ai-diagnostic, **nda-furniture** (NDA), **scioffice**, **nda-school** (NDA), **admp**. NDA cases: `url:""`, `nda:true`, "Под NDA" badge instead of live link, excluded from live-projects grid + marquee (`getPublicCases()`). Per-case copy in `messages.*.cases.<slug>` (incl. an `approach` paragraph + a shared `caseDetail.process` section on detail pages). `src/content/services.ts` — 5 services. Service-detail "related cases" use the explicit `RELEVANT_CASES` slug map in `services/[slug]/page.tsx`. Founder photo: `public/founder.jpg` (cropped head-and-shoulders) on `/about`.
 
-## Environment variables
-
-Public (inlined at build/dev start — restart dev after changing) — defaults exist in `config.ts`:
-`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER` (77066998879), `NEXT_PUBLIC_TELEGRAM_USERNAME` (suslicketeam), `NEXT_PUBLIC_GA_ID`, `NEXT_PUBLIC_POSTHOG_KEY` (the `phc_` project token — NOT `..._PROJECT_TOKEN`), `NEXT_PUBLIC_POSTHOG_HOST`, `NEXT_PUBLIC_CF_BEACON_TOKEN`.
-
-Server-only (never `NEXT_PUBLIC_`): `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `LEADS_SHEET_WEBHOOK_URL`.
-
-`.env.local` is gitignored. `.env.example` documents the keys. For production these must be set in Cloudflare (public vars in project env; secrets via `wrangler secret put`). See `docs/launch-checklist.md`.
+## Business facts (kept consistent across site + messengers)
+- Founder: Andrei Pustovoi (Андрей Пустовой), 5+ years in development. WhatsApp `+77066998879`, Telegram `@suslicketeam`.
+- Hours: **Mon–Sat 09:00–21:00 (GMT+5)**. Reply within an hour in hours; in-person meetings possible in Almaty.
+- Code ownership transfers to client on completion; small removable footer credit. Fixed price/timeline before start.
 
 ## Docs
+- `docs/plans/2026-06-08-suslicketeam-website-{design,implementation}.md` — design + build plan.
+- `docs/launch-checklist.md` — go-live steps.
+- `docs/whatsapp-messages.md` — WhatsApp + Telegram greeting/away/quick-replies (RU/EN/KK).
+- `docs/utm-links.md` — ready UTM links (Instagram, LinkedIn, DM, templates).
 
-- `docs/plans/2026-06-08-suslicketeam-website-design.md` — the design/decisions.
-- `docs/plans/2026-06-08-suslicketeam-website-implementation.md` — the build plan.
-- `docs/launch-checklist.md` — everything required to go live (DNS, secrets, GA4 conversions, PostHog, Search Console, etc.).
-
-## Current status
-
-MVP is built and on `main`. 12 portfolio cases (incl. 2 NDA), all pages in RU/KK/EN, analytics wired (GA4 + PostHog live in local env). Tests green. **Not deployed yet** (needs Cloudflare creds). **Lead delivery not configured yet** (needs the Telegram bot token) — this is the last blocker before a real launch.
+## Current status (2026-06)
+LIVE on Cloudflare. 12 cases (2 NDA), pages in RU/KK/EN, English default. Analytics live (GA4 `G-0GNRGF8369` + PostHog EU; ensure keys are set in Cloudflare prod env). Custom logo favicon. Owner has set up Google Search Console; Google Business Profile in progress. **Open / non-code TODOs:** enable Cloudflare "Always Use HTTPS", configure `www` redirect, finish GBP, verify real Core Web Vitals via PageSpeed Insights, have a lawyer review `/privacy` + `/terms`, add real testimonials if desired.
