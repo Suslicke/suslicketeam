@@ -4,12 +4,18 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/config";
 import { buildMetadata } from "@/lib/seo";
+import {
+  localBusinessLd,
+  organizationLd,
+  websiteLd,
+} from "@/lib/structured-data";
 
 import "../globals.css";
 
@@ -75,6 +81,9 @@ export default async function LocaleLayout({
       className={`${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="antialiased">
+        <JsonLd data={organizationLd()} />
+        <JsonLd data={websiteLd()} />
+        <JsonLd data={localBusinessLd()} />
         <NextIntlClientProvider>
           <ThemeProvider>
             <div className="flex min-h-screen flex-col">
