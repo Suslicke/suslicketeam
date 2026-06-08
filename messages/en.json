@@ -78,7 +78,7 @@
       "items": {
         "speed": {
           "title": "Speed",
-          "description": "We ship MVPs in weeks, not months — without sacrificing quality or attention to detail."
+          "description": "We launch in days and weeks, not months — without sacrificing quality or attention to detail."
         },
         "seo": {
           "title": "SEO at the core",
@@ -469,8 +469,8 @@
         "label": "products shipped to production"
       },
       "speed": {
-        "value": "Weeks",
-        "label": "not months — from idea to launch"
+        "value": "Days",
+        "label": "to launch — not weeks"
       },
       "approach": {
         "value": "Fixed",
