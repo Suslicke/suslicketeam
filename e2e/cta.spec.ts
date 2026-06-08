@@ -33,14 +33,21 @@ test.describe("messenger cta", () => {
 
     // The header WhatsApp CTA (first one).
     const cta = page.locator('a[data-channel="whatsapp"]').first();
-    const href = await cta.getAttribute("href");
-    expect(href).toBeTruthy();
 
+    // Web-first, auto-retrying assertions: the href starts as a best-effort
+    // value and refreshes once UtmCapture persists the UTM (sl:utm event). These
+    // poll until the href reflects the wa.me number and the captured UTM,
+    // removing the render-ordering race while still proving UTM lands in the URL.
+    await expect(cta).toHaveAttribute("href", /wa\.me\/77066998879/);
+    // The prefilled `text` is URL-encoded; the captured source + page survive.
+    await expect(cta).toHaveAttribute("href", /instagram/);
+    await expect(cta).toHaveAttribute("href", /%2Fru/);
+
+    // Sanity-check the decoded URL shape once it has settled.
+    const href = await cta.getAttribute("href");
     const url = new URL(href!);
     expect(url.host).toBe("wa.me");
     expect(url.pathname).toBe("/77066998879");
-
-    // Decoded prefilled text must contain the captured UTM source and page.
     const text = url.searchParams.get("text") ?? "";
     expect(text).toContain("instagram");
     expect(text).toContain("/ru");

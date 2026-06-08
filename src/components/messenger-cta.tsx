@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 
 import { Button, type buttonVariants } from "@/components/ui/button";
 import { trackEvent } from "@/lib/analytics";
@@ -34,47 +34,72 @@ export function MessengerCTA({
   label,
 }: MessengerCTAProps) {
   // Full path including locale prefix (e.g. "/ru/contact"), used for the
-  // prefilled greeting and the tracked `page` property.
-  const pathname = usePathname();
-  const [utm, setUtm] = useState<UtmParams>({});
+  // prefilled greeting and the tracked `page` property. Kept in state so a
+  // late-arriving UTM (see below) re-renders the href reactively, and so the
+  // pathname snapshot at the time UTM resolves stays consistent.
+  const routerPathname = usePathname();
+  const [pathname, setPathname] = useState<string>(routerPathname);
+  const [utm, setUtm] = useState<UtmParams>(() => getStoredUtm());
 
   // Read stored UTM after mount (sessionStorage is client-only). We also call
   // persistUtm here so the CTA never depends on <UtmCapture>'s effect ordering:
-  // first-touch is idempotent, so re-running it is safe. This re-renders with
-  // the resolved UTM so the href reflects the captured campaign on landing.
+  // first-touch is idempotent, so re-running it is safe. Beyond that we listen
+  // for the `sl:utm` event UtmCapture dispatches after persisting, so the href
+  // refreshes deterministically even if our effect ran before persistence.
   useEffect(() => {
-    persistUtm(window.location.search);
-    setUtm(getStoredUtm());
+    function refresh() {
+      persistUtm(window.location.search);
+      setUtm(getStoredUtm());
+      setPathname(window.location.pathname);
+    }
+
+    refresh();
+    window.addEventListener("sl:utm", refresh);
+    return () => window.removeEventListener("sl:utm", refresh);
   }, []);
 
-  function buildHref(): string {
+  // Keep the tracked/rendered pathname in sync with client navigations.
+  useEffect(() => {
+    setPathname(routerPathname);
+  }, [routerPathname]);
+
+  // Build a fresh URL from the latest stored UTM + current path. Used both for
+  // the rendered (best-effort) href and, at click time, as the source of truth.
+  function buildHref(resolvedUtm: UtmParams, page: string): string {
     if (channel === "whatsapp") {
       return buildWhatsappUrl({
         number: siteConfig.whatsapp,
-        page: pathname,
-        utm,
+        page,
+        utm: resolvedUtm,
       });
     }
     return buildTelegramUrl({ username: siteConfig.telegram });
   }
 
-  function handleClick() {
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    // Click-time is the source of truth: re-read UTM + path fresh so the opened
+    // link always carries the latest captured campaign even if a re-render was
+    // missed. Rewrite the anchor's href before the browser follows it.
+    const liveUtm = getStoredUtm();
+    const livePage = window.location.pathname;
+    event.currentTarget.href = buildHref(liveUtm, livePage);
+
     // `transport_type: "beacon"` makes gtag send the hit via navigator.sendBeacon,
     // which survives the tab being backgrounded/suspended (common on mobile when
     // the messenger app takes focus) — a normal fetch can be dropped mid-flight.
     // It's a no-op extra property for posthog.capture.
     trackEvent("lead_messenger_click", {
       channel,
-      page: pathname,
+      page: livePage,
       transport_type: "beacon",
-      ...utm,
+      ...liveUtm,
     });
   }
 
   return (
     <Button asChild variant={variant} size={size} className={className}>
       <a
-        href={buildHref()}
+        href={buildHref(utm, pathname)}
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}

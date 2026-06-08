@@ -12,7 +12,11 @@ import { persistUtm } from "@/lib/utm";
  */
 export function UtmCapture() {
   useEffect(() => {
+    if (typeof window === "undefined") return;
     persistUtm(window.location.search);
+    // Notify listeners (e.g. <MessengerCTA>) that first-touch UTM is now stored
+    // so they can refresh their hrefs regardless of effect ordering.
+    window.dispatchEvent(new Event("sl:utm"));
   }, []);
 
   return null;
