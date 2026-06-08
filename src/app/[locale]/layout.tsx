@@ -8,6 +8,7 @@ import { CloudflareAnalytics } from "@/components/analytics/cloudflare-analytics
 import { ConsentBanner } from "@/components/analytics/consent-banner";
 import { GaScripts } from "@/components/analytics/ga-scripts";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
+import { UtmCapture } from "@/components/analytics/utm-capture";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -93,6 +94,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <ThemeProvider>
             <PostHogProvider>
+              <UtmCapture />
               <div className="flex min-h-screen flex-col">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>

@@ -3,9 +3,8 @@
 import { useTranslations } from "next-intl";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { MessengerCTA } from "@/components/messenger-cta";
 import { Link } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
-import { buildTelegramUrl, buildWhatsappUrl } from "@/lib/messenger";
 
 const NAV_ITEMS = [
   { href: "/services", key: "services" },
@@ -17,9 +16,6 @@ const NAV_ITEMS = [
 export function SiteFooter() {
   const t = useTranslations("common");
   const meta = useTranslations("meta");
-
-  const whatsappUrl = buildWhatsappUrl({ number: siteConfig.whatsapp });
-  const telegramUrl = buildTelegramUrl({ username: siteConfig.telegram });
 
   const year = new Date().getFullYear();
 
@@ -47,23 +43,19 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <div className="flex flex-col gap-2">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {t("cta_whatsapp")}
-          </a>
-          <a
-            href={telegramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {t("cta_telegram")}
-          </a>
+        <div className="flex flex-col items-start gap-2">
+          <MessengerCTA
+            channel="whatsapp"
+            variant="link"
+            className="h-auto p-0 text-sm font-normal text-muted-foreground transition-colors hover:text-foreground hover:no-underline"
+            label={t("cta_whatsapp")}
+          />
+          <MessengerCTA
+            channel="telegram"
+            variant="link"
+            className="h-auto p-0 text-sm font-normal text-muted-foreground transition-colors hover:text-foreground hover:no-underline"
+            label={t("cta_telegram")}
+          />
         </div>
 
         <div className="flex flex-col gap-3">

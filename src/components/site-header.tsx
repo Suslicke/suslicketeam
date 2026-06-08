@@ -4,6 +4,7 @@ import { Menu } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { MessengerCTA } from "@/components/messenger-cta";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +16,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Link } from "@/i18n/routing";
-import { siteConfig } from "@/lib/config";
-import { buildWhatsappUrl } from "@/lib/messenger";
 
 const NAV_ITEMS = [
   { href: "/services", key: "services" },
@@ -29,8 +28,6 @@ export function SiteHeader() {
   const t = useTranslations("common");
   const meta = useTranslations("meta");
   const locale = useLocale();
-
-  const whatsappUrl = buildWhatsappUrl({ number: siteConfig.whatsapp });
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -57,15 +54,12 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <LanguageSwitcher className="hidden sm:inline-flex" />
           <ThemeToggle />
-          <Button
-            asChild
-            className="hidden bg-brand text-brand-foreground hover:bg-brand/90 sm:inline-flex"
+          <MessengerCTA
+            channel="whatsapp"
             size="lg"
-          >
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              {t("cta_whatsapp")}
-            </a>
-          </Button>
+            className="hidden bg-brand text-brand-foreground hover:bg-brand/90 sm:inline-flex"
+            label={t("cta_whatsapp")}
+          />
 
           {/* Mobile menu */}
           <Sheet>
@@ -98,18 +92,11 @@ export function SiteHeader() {
               <div className="mt-4 flex flex-col gap-4 px-4">
                 <LanguageSwitcher />
                 <SheetClose asChild>
-                  <Button
-                    asChild
+                  <MessengerCTA
+                    channel="whatsapp"
                     className="bg-brand text-brand-foreground hover:bg-brand/90"
-                  >
-                    <a
-                      href={whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {t("cta_whatsapp")}
-                    </a>
-                  </Button>
+                    label={t("cta_whatsapp")}
+                  />
                 </SheetClose>
               </div>
             </SheetContent>
