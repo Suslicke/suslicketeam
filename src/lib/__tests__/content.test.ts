@@ -4,6 +4,7 @@ import {
   getCaseBySlug,
   getCases,
   getFeaturedCases,
+  getPublicCases,
   getServiceBySlug,
   getServices,
 } from "../content";
@@ -28,8 +29,21 @@ describe("services content", () => {
 });
 
 describe("cases content", () => {
-  test("returns all 8 cases", () => {
-    expect(getCases()).toHaveLength(8);
+  test("returns all 9 cases", () => {
+    expect(getCases()).toHaveLength(9);
+  });
+
+  test("the NDA case is confidential with no public url", () => {
+    const nda = getCaseBySlug("nda-furniture");
+    expect(nda?.nda).toBe(true);
+    expect(nda?.url).toBe("");
+  });
+
+  test("getPublicCases excludes the NDA case", () => {
+    const publicCases = getPublicCases();
+    expect(publicCases).toHaveLength(8);
+    expect(publicCases.some((c) => c.slug === "nda-furniture")).toBe(false);
+    expect(publicCases.every((c) => c.url)).toBe(true);
   });
 
   test("returns exactly 4 featured cases", () => {

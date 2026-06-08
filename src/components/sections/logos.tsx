@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Marquee } from "@/components/sections/marquee";
 import { Reveal } from "@/components/motion/reveal";
 import { CASE_DISPLAY_NAMES } from "@/content/cases";
-import { getCases } from "@/lib/content";
+import { getPublicCases } from "@/lib/content";
 
 /**
  * Trust strip — a subtle, continuously-scrolling marquee of every live project
@@ -13,7 +13,7 @@ import { getCases } from "@/lib/content";
  */
 export async function Logos() {
   const t = await getTranslations("home.logos");
-  const projects = getCases();
+  const projects = getPublicCases();
   const names = projects.map((c) => CASE_DISPLAY_NAMES[c.slug]);
 
   return (

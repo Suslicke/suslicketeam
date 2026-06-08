@@ -20,14 +20,14 @@ test.describe("inner pages", () => {
     ).toBeVisible();
   });
 
-  test("cases grid shows all 8 cases and a detail page renders a live link", async ({
+  test("cases grid shows all 9 cases and a detail page renders a live link", async ({
     page,
   }) => {
     await page.goto("/ru/cases");
 
-    // Eight case cards, each linking to /ru/cases/<slug>.
+    // Nine case cards, each linking to /ru/cases/<slug>.
     const caseLinks = page.locator('a[href^="/ru/cases/"]');
-    await expect(caseLinks).toHaveCount(8);
+    await expect(caseLinks).toHaveCount(9);
 
     // LoyRush detail page.
     await page.goto("/ru/cases/loyrush");
@@ -40,6 +40,20 @@ test.describe("inner pages", () => {
     await expect(live).toBeVisible();
     await expect(live).toHaveAttribute("href", "https://loyrush.com");
     await expect(live).toHaveAttribute("rel", /noopener/);
+  });
+
+  test("NDA case detail renders an 'Под NDA' note and no live link", async ({
+    page,
+  }) => {
+    await page.goto("/ru/cases/nda-furniture");
+    await expect(
+      page.getByRole("heading", { name: "Магазин мебели (под NDA)", level: 1 }),
+    ).toBeVisible();
+
+    // No external live-link button on a confidential case.
+    await expect(page.locator("a[data-live-link]")).toHaveCount(0);
+    // A muted "Под NDA" note is shown instead.
+    await expect(page.getByText("Под NDA").first()).toBeVisible();
   });
 
   test("about page renders its sections", async ({ page }) => {

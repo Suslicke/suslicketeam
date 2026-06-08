@@ -6,7 +6,8 @@
     "contact": "Contact",
     "cta_whatsapp": "Message on WhatsApp",
     "cta_telegram": "Message on Telegram",
-    "breadcrumb_home": "Home"
+    "breadcrumb_home": "Home",
+    "nda": "Under NDA"
   },
   "meta": {
     "site_name": "suslicketeam",
@@ -241,6 +242,18 @@
         "pathologies": "20+ pathologies"
       },
       "technologies": "AI, PACS, Radiology"
+    },
+    "nda-furniture": {
+      "title": "Furniture shop (under NDA)",
+      "summary": "An online store selling home furniture. Project details under NDA.",
+      "task": "Build a convenient online store for selling home furniture.",
+      "solution": "As lead developer I owned the whole store: catalog, product pages, cart and checkout.",
+      "result": "A working online store. Its name and details are under NDA.",
+      "metrics": {
+        "role": "Lead developer",
+        "confidential": "Under NDA"
+      },
+      "technologies": "E-commerce"
     }
   },
   "faq": {

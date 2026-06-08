@@ -15,7 +15,8 @@ export type CaseSlug =
   | "web-interview"
   | "loyrush"
   | "exchange-bridge"
-  | "ai-diagnostic";
+  | "ai-diagnostic"
+  | "nda-furniture";
 
 export interface CaseItem {
   slug: CaseSlug;
@@ -27,6 +28,11 @@ export interface CaseItem {
   /** Structural metric keys; labels live in messages under cases.<slug>.metrics. */
   metrics: readonly string[];
   year: number;
+  /**
+   * Confidential case — no public URL. Render a "Под NDA" badge instead of a
+   * live link, and exclude it from the live-projects grid and the home marquee.
+   */
+  nda?: boolean;
 }
 
 /**
@@ -43,6 +49,7 @@ export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
   loyrush: "LoyRush",
   "exchange-bridge": "Exchange Bridge",
   "ai-diagnostic": "AI Diagnostic",
+  "nda-furniture": "Магазин мебели (NDA)",
 };
 
 export const cases: readonly CaseItem[] = [
@@ -108,6 +115,15 @@ export const cases: readonly CaseItem[] = [
     tags: ["HealthTech", "AI", "PACS", "Рентгенология"],
     metrics: ["pacs", "pathologies"],
     featured: true,
+    year: 2025,
+  },
+  {
+    slug: "nda-furniture",
+    url: "",
+    nda: true,
+    tags: ["E-commerce", "NDA"],
+    metrics: ["role", "confidential"],
+    featured: false,
     year: 2025,
   },
 ] as const;

@@ -1,4 +1,4 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Lock } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -68,11 +68,14 @@ export default async function CaseDetailPage({
     { name: tcase(`${slug}.title`), url },
   ]);
 
+  const isConfidential = item.nda || !item.url;
+
   const creativeWork = creativeWorkLd({
     name: tcase(`${slug}.title`),
     description: tcase(`${slug}.summary`),
     url,
-    about: item.url,
+    // Confidential cases have no public URL — omit `about`/`sameAs`.
+    about: isConfidential ? undefined : item.url,
     keywords: item.tags,
     year: item.year,
   });
@@ -121,20 +124,27 @@ export default async function CaseDetailPage({
             </ul>
 
             <div>
-              <Button
-                asChild
-                className="h-11 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
-              >
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-live-link
+              {isConfidential ? (
+                <span className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-card/40 px-4 py-2 text-sm text-muted-foreground">
+                  <Lock className="size-4" />
+                  {tc("nda")}
+                </span>
+              ) : (
+                <Button
+                  asChild
+                  className="h-11 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
                 >
-                  {td("live_button")}
-                  <ExternalLink className="size-4" />
-                </a>
-              </Button>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-live-link
+                  >
+                    {td("live_button")}
+                    <ExternalLink className="size-4" />
+                  </a>
+                </Button>
+              )}
             </div>
           </Reveal>
         </div>
@@ -200,6 +210,8 @@ export default async function CaseDetailPage({
                     url={c.url}
                     detailsLabel={tcp("details")}
                     liveLabel={tcp("live")}
+                    nda={c.nda}
+                    ndaLabel={tc("nda")}
                   />
                 </Reveal>
               ))}

@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, ExternalLink, Lock } from "lucide-react";
 
 import { CursorGlow } from "@/components/motion/cursor-glow";
 import { Card } from "@/components/ui/card";
@@ -13,6 +13,10 @@ export interface CaseCardProps {
   url: string;
   detailsLabel: string;
   liveLabel: string;
+  /** Confidential case — renders an "Под NDA" badge instead of a live link. */
+  nda?: boolean;
+  /** Localized label for the NDA badge (e.g. "Под NDA"). */
+  ndaLabel?: string;
 }
 
 /**
@@ -29,7 +33,10 @@ export function CaseCard({
   url,
   detailsLabel,
   liveLabel,
+  nda,
+  ndaLabel,
 }: CaseCardProps) {
+  const isConfidential = nda || !url;
   return (
     <Card className="h-full gap-4 p-6 transition-all hover:-translate-y-1 hover:ring-brand/40">
       <CursorGlow className="flex flex-col gap-4">
@@ -59,15 +66,22 @@ export function CaseCard({
             {detailsLabel}
             <ArrowRight className="size-4" />
           </Link>
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
-          >
-            {liveLabel}
-            <ExternalLink className="size-3.5" />
-          </a>
+          {isConfidential ? (
+            <span className="inline-flex items-center gap-1 text-muted-foreground">
+              <Lock className="size-3.5" />
+              {ndaLabel}
+            </span>
+          ) : (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
+            >
+              {liveLabel}
+              <ExternalLink className="size-3.5" />
+            </a>
+          )}
         </div>
       </CursorGlow>
     </Card>

@@ -80,6 +80,8 @@ export default async function CasesPage({
                   url={c.url}
                   detailsLabel={t("details")}
                   liveLabel={t("live")}
+                  nda={c.nda}
+                  ndaLabel={tc("nda")}
                 />
               </Reveal>
             ))}

@@ -15,6 +15,7 @@ import { getFeaturedCases } from "@/lib/content";
 export async function CasesPreview() {
   const t = await getTranslations("home.cases");
   const tc = await getTranslations("cases");
+  const tcommon = await getTranslations("common");
   const featured = getFeaturedCases();
 
   return (
@@ -38,6 +39,8 @@ export async function CasesPreview() {
                 url={c.url}
                 detailsLabel={t("details")}
                 liveLabel={t("live")}
+                nda={c.nda}
+                ndaLabel={tcommon("nda")}
               />
             </StaggerItem>
           ))}

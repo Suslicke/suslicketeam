@@ -6,7 +6,8 @@
     "contact": "Контакты",
     "cta_whatsapp": "Написать в WhatsApp",
     "cta_telegram": "Написать в Telegram",
-    "breadcrumb_home": "Главная"
+    "breadcrumb_home": "Главная",
+    "nda": "Под NDA"
   },
   "meta": {
     "site_name": "suslicketeam",
@@ -241,6 +242,18 @@
         "pathologies": "20+ патологий"
       },
       "technologies": "AI, PACS, Рентгенология"
+    },
+    "nda-furniture": {
+      "title": "Магазин мебели (под NDA)",
+      "summary": "Интернет-магазин домашней мебели. Детали проекта под NDA.",
+      "task": "Создать удобный интернет-магазин для продажи домашней мебели.",
+      "solution": "Как главный разработчик отвечал за магазин целиком: каталог, карточки товаров, корзину и оформление заказа.",
+      "result": "Работающий интернет-магазин. Название и подробности — под NDA.",
+      "metrics": {
+        "role": "Главный разработчик",
+        "confidential": "Под NDA"
+      },
+      "technologies": "E-commerce"
     }
   },
   "faq": {

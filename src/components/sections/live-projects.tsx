@@ -5,7 +5,7 @@ import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { Card } from "@/components/ui/card";
 import { CASE_DISPLAY_NAMES } from "@/content/cases";
-import { getCases } from "@/lib/content";
+import { getPublicCases } from "@/lib/content";
 
 /**
  * Honest social proof: a dense grid of every live project the visitor can open
@@ -15,7 +15,7 @@ import { getCases } from "@/lib/content";
  */
 export async function LiveProjects() {
   const t = await getTranslations("home.liveProjects");
-  const projects = getCases();
+  const projects = getPublicCases();
 
   return (
     <section className="border-t border-border/60 py-20 sm:py-28">

@@ -119,8 +119,8 @@ export interface CreativeWorkLdArgs {
   description: string;
   /** Canonical URL of the case detail page. */
   url: string;
-  /** Live production URL the project is about. */
-  about: string;
+  /** Live production URL the project is about; omitted for confidential cases. */
+  about?: string;
   /** Tech/stack keywords. */
   keywords: readonly string[];
   /** Year the project shipped. */
@@ -145,7 +145,8 @@ export function creativeWorkLd({
     name,
     description,
     url,
-    sameAs: about,
+    // Only emit `about`/`sameAs` when there's a public production URL.
+    ...(about ? { about, sameAs: about } : {}),
     keywords: [...keywords].join(", "),
     datePublished: String(year),
     creator: {

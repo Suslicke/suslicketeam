@@ -21,6 +21,14 @@ export function getFeaturedCases(): CaseItem[] {
   return getCases().filter((c) => c.featured);
 }
 
+/**
+ * Public, verifiable cases only — excludes confidential (NDA) cases that have no
+ * live URL. Used by the "open and verify" live-projects grid and the marquee.
+ */
+export function getPublicCases(): CaseItem[] {
+  return getCases().filter((c) => !c.nda && c.url);
+}
+
 /** Look up a single case by slug; `undefined` if unknown. */
 export function getCaseBySlug(slug: string): CaseItem | undefined {
   return cases.find((c) => c.slug === (slug as CaseSlug));
