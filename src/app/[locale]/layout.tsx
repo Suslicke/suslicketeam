@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -7,6 +8,18 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -42,7 +55,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
+    >
       <body className="antialiased">
         <NextIntlClientProvider>
           <ThemeProvider>{children}</ThemeProvider>
