@@ -13,6 +13,11 @@ const NAV_ITEMS = [
   { href: "/contact", key: "contact" },
 ] as const;
 
+const LEGAL_ITEMS = [
+  { href: "/privacy", key: "privacy" },
+  { href: "/terms", key: "terms" },
+] as const;
+
 export function SiteFooter() {
   const t = useTranslations("common");
   const meta = useTranslations("meta");
@@ -64,10 +69,21 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-muted-foreground">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {meta("site_name")}
           </p>
+          <nav aria-label={t("legal")} className="flex flex-wrap gap-x-4 gap-y-1">
+            {LEGAL_ITEMS.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                className="transition-colors hover:text-foreground"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

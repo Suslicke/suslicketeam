@@ -30,10 +30,14 @@ describe("structured-data builders", () => {
     expect(organizationLd()["@type"]).toBe("Organization");
   });
 
-  test("localBusinessLd serves Kazakhstan in ru/kk/en", () => {
+  test("localBusinessLd serves Almaty + Kazakhstan in ru/kk/en", () => {
     const ld = localBusinessLd();
     expect(ld["@type"]).toBe("LocalBusiness");
-    expect(ld.areaServed.name).toBe("Kazakhstan");
+    const served = ld.areaServed.map((a) => a.name);
+    expect(served).toContain("Almaty");
+    expect(served).toContain("Kazakhstan");
+    expect(ld.address.addressLocality).toBe("Алматы");
+    expect(ld.address.addressCountry).toBe("KZ");
     expect(ld.inLanguage).toEqual(["ru", "kk", "en"]);
   });
 

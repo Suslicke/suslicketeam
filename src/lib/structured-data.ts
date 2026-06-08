@@ -28,12 +28,13 @@ export function localBusinessLd() {
     name: SITE_NAME,
     url: siteConfig.url,
     image: `${siteConfig.url}/icon.png`,
-    areaServed: {
-      "@type": "Country",
-      name: "Kazakhstan",
-    },
+    areaServed: [
+      { "@type": "City", name: "Almaty" },
+      { "@type": "Country", name: "Kazakhstan" },
+    ],
     address: {
       "@type": "PostalAddress",
+      addressLocality: "Алматы",
       addressCountry: "KZ",
     },
     inLanguage: [...LANGUAGES],

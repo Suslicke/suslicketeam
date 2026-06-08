@@ -7,12 +7,15 @@
     "cta_whatsapp": "Message on WhatsApp",
     "cta_telegram": "Message on Telegram",
     "breadcrumb_home": "Home",
-    "nda": "Under NDA"
+    "nda": "Under NDA",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   },
   "meta": {
     "site_name": "suslicketeam",
-    "default_title": "suslicketeam — web development and digital solutions",
-    "default_description": "The suslicketeam crew builds websites, web apps and digital products end to end.",
+    "default_title": "suslicketeam — web & app development in Kazakhstan",
+    "default_description": "The suslicketeam crew in Kazakhstan builds websites, web apps and digital products end to end. Based in Almaty, working remotely worldwide.",
     "og_tagline": "Web development and digital solutions, end to end"
   },
   "consent": {
@@ -23,7 +26,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Web development studio",
+      "eyebrow": "Web development studio · Kazakhstan & worldwide",
       "headline": "Websites and web apps that bring you clients",
       "headline_alt": "We turn ideas into digital products that sell",
       "subhead": "We design, build and ship websites, web apps and AI solutions end to end — fast, transparent and focused on results.",
@@ -333,8 +336,8 @@
     }
   },
   "servicesPage": {
-    "meta_title": "Services — web development, web apps and AI",
-    "meta_description": "Full-cycle digital services: landing pages, web apps, AI solutions, mobile apps and SEO. From idea to launch, end to end.",
+    "meta_title": "Services — web development, web apps and AI in Kazakhstan",
+    "meta_description": "Full-cycle digital services in Kazakhstan: landing pages, web apps, AI solutions, mobile apps and SEO. From idea to launch, end to end.",
     "eyebrow": "Services",
     "title": "What we do",
     "subtitle": "Full cycle — from idea and design to launch and support. Pick a direction to learn more.",
@@ -484,8 +487,8 @@
     "photo_alt": "Andrei Pustovoi — founder of suslicketeam"
   },
   "contactPage": {
-    "meta_title": "Contact — get in touch",
-    "meta_description": "Reach suslicketeam on WhatsApp or Telegram. We reply within an hour and work remotely with clients worldwide.",
+    "meta_title": "Contact — Almaty and worldwide",
+    "meta_description": "Reach suslicketeam on WhatsApp or Telegram. Based in Almaty, we reply within an hour and work remotely with clients worldwide.",
     "eyebrow": "Contact",
     "title": "Let's talk about your project",
     "subtitle": "The fastest way is a message. We reply within an hour during working hours.",
@@ -526,6 +529,74 @@
       "contact": "Provide a way to reach you",
       "projectType": "Choose a project type",
       "generic": "Please check this field"
+    }
+  },
+  "privacy": {
+    "meta_title": "Privacy Policy",
+    "meta_description": "How suslicketeam collects and uses data: analytics only after consent, no data selling, deletion on request.",
+    "eyebrow": "Legal",
+    "title": "Privacy Policy",
+    "intro": "This policy explains what data we collect on this site, why, and how you can manage it. We aim to collect only what we need to improve the site and to treat your data with care.",
+    "updated": "Updated: June 2026",
+    "sections": {
+      "data": {
+        "title": "What data we collect",
+        "body": "We collect anonymised usage statistics: page views, referral sources and campaign UTM tags, and general device and browser information. We do not request or store personal data through forms — the main way to reach us is via messengers."
+      },
+      "analytics": {
+        "title": "Analytics and cookies",
+        "body": "Google Analytics 4 and PostHog load only after you consent in the cookie banner — before that they are not loaded. In parallel we use Cloudflare Web Analytics, which is cookieless and does not track individual visitors. You can decline consent, in which case cookie-based analytics stays off."
+      },
+      "use": {
+        "title": "Why we use this data",
+        "body": "The data helps us understand how the site is used, which content is useful, and how to improve navigation and speed. We do not sell your data or share it with third parties for advertising."
+      },
+      "rights": {
+        "title": "Your rights and data deletion",
+        "body": "You can request deletion of data related to you — message us on WhatsApp or Telegram and we will handle the request. You can manage analytics consent at any time via the cookie banner."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "For privacy questions, reach us on WhatsApp or Telegram — the contacts are in the site header and footer."
+      },
+      "law": {
+        "title": "Governing law",
+        "body": "This policy is governed by the laws of the Republic of Kazakhstan."
+      }
+    }
+  },
+  "terms": {
+    "meta_title": "Terms of Use",
+    "meta_description": "suslicketeam terms: fixed price and timeline, all code rights transfer to the client, governing law — Republic of Kazakhstan.",
+    "eyebrow": "Legal",
+    "title": "Terms of Use",
+    "intro": "These terms describe how we work on projects and the principles our cooperation is built on. The specific agreements for your project are recorded separately before we start.",
+    "updated": "Updated: June 2026",
+    "sections": {
+      "scope": {
+        "title": "What we do",
+        "body": "We provide custom development of websites, web and mobile apps, AI solutions and related services. The scope of each project is agreed before we begin."
+      },
+      "pricing": {
+        "title": "Price and timeline",
+        "body": "We fix the price and timeline before the project starts — with no hidden charges. If the task changes along the way, we discuss the impact on price and timeline in advance."
+      },
+      "rights": {
+        "title": "Rights to code and materials",
+        "body": "On completion, all rights to the code and materials transfer to you — with no lock-in to us. By default we leave a small, unobtrusive credit in the footer, but we remove it on request."
+      },
+      "content": {
+        "title": "Site content",
+        "body": "The information on this site is for reference only and is not a public offer. The final terms of a project are set out in a separate agreement."
+      },
+      "law": {
+        "title": "Governing law",
+        "body": "These terms are governed by the laws of the Republic of Kazakhstan."
+      },
+      "contact": {
+        "title": "Contact",
+        "body": "For cooperation questions, reach us on WhatsApp or Telegram — we reply within an hour during working hours."
+      }
     }
   },
   "errors": {
