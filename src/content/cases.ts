@@ -1,0 +1,97 @@
+/**
+ * Structural data for portfolio cases. Translatable copy (title, summary, task,
+ * solution, result) lives in the `cases` namespace in messages/{ru,kk,en}.json
+ * keyed by `slug` (e.g. `cases.xaid.title`). `metrics` are structural keys whose
+ * localized labels live under `cases.<slug>.metrics.<key>`.
+ *
+ * `url` is the live production link. `featured` flags the cases shown on the home
+ * page preview. `tags` are tech/stack labels rendered as-is (not translated).
+ */
+export type CaseSlug =
+  | "suslicke"
+  | "animeenigma"
+  | "xaid"
+  | "python-guide"
+  | "web-interview"
+  | "loyrush"
+  | "exchange-bridge"
+  | "ai-diagnostic";
+
+export interface CaseItem {
+  slug: CaseSlug;
+  /** Live production URL. */
+  url: string;
+  /** Tech/stack tags, rendered verbatim. */
+  tags: readonly string[];
+  featured: boolean;
+  /** Structural metric keys; labels live in messages under cases.<slug>.metrics. */
+  metrics: readonly string[];
+  year: number;
+}
+
+export const cases: readonly CaseItem[] = [
+  {
+    slug: "suslicke",
+    url: "https://suslicke.com",
+    tags: ["Next.js", "TypeScript", "Tailwind"],
+    metrics: ["performance", "seo"],
+    featured: false,
+    year: 2024,
+  },
+  {
+    slug: "animeenigma",
+    url: "https://animeenigma.ru",
+    tags: ["Next.js", "PostgreSQL", "Game"],
+    metrics: ["retention", "load"],
+    featured: false,
+    year: 2024,
+  },
+  {
+    slug: "xaid",
+    url: "https://xaid.ai",
+    tags: ["AI", "Next.js", "LLM", "API"],
+    metrics: ["automation", "ttm"],
+    featured: true,
+    year: 2025,
+  },
+  {
+    slug: "python-guide",
+    url: "https://python-guide.suslicke.com",
+    tags: ["Next.js", "MDX", "Education"],
+    metrics: ["traffic", "seo"],
+    featured: false,
+    year: 2024,
+  },
+  {
+    slug: "web-interview",
+    url: "https://web-interview.suslicke.com",
+    tags: ["React", "Education", "Quiz"],
+    metrics: ["engagement", "content"],
+    featured: false,
+    year: 2024,
+  },
+  {
+    slug: "loyrush",
+    url: "https://loyrush.com",
+    tags: ["SaaS", "Next.js", "Payments", "Dashboard"],
+    metrics: ["conversion", "retention"],
+    featured: true,
+    year: 2025,
+  },
+  {
+    slug: "exchange-bridge",
+    url: "https://exchange-bridge.com",
+    tags: ["Fintech", "API", "Web3"],
+    metrics: ["uptime", "volume"],
+    featured: true,
+    year: 2025,
+  },
+  {
+    slug: "ai-diagnostic",
+    url: "https://ai-diagnostic.ru",
+    tags: ["AI", "Healthcare", "Next.js"],
+    metrics: ["accuracy", "speed"],
+    featured: true,
+    year: 2025,
+  },
+] as const;

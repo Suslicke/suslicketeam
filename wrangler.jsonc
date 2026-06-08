@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "suslicketeam",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-03-25",
+  // `nodejs_compat` is required by OpenNext. `global_fetch_strictly_public`
+  // makes server-side `fetch()` of same-zone URLs behave like a public request
+  // (recommended by the OpenNext Cloudflare docs).
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  // Static assets (CSS, JS, images, prerendered HTML) are served from here.
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+
+  // ── Secrets & env vars (DO NOT commit secrets) ───────────────────────────────
+  // Public vars (NEXT_PUBLIC_*) are inlined at build time from .env / .env.local.
+  // Server-only secrets must be set in Cloudflare, NOT here:
+  //   wrangler secret put TELEGRAM_BOT_TOKEN
+  //   wrangler secret put TELEGRAM_CHAT_ID
+  //   wrangler secret put LEADS_SHEET_WEBHOOK_URL
+  // Or via the Cloudflare dashboard → Workers → Settings → Variables.
+  //
+  // ── ISR / on-demand revalidation (optional, currently unused) ────────────────
+  // The site is static (SSG) with no on-demand revalidation, so no KV cache is
+  // needed. If ISR is added later, create a KV namespace and bind it here:
+  //   "kv_namespaces": [{ "binding": "NEXT_INC_CACHE_KV", "id": "<id>" }]
+  // and configure the matching incrementalCache override in open-next.config.ts.
+}

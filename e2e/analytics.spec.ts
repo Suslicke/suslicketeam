@@ -1,0 +1,51 @@
+import { expect, test } from "@playwright/test";
+
+test.describe("analytics", () => {
+  test("renders the page and gracefully no-ops PostHog without a key", async ({
+    page,
+  }) => {
+    await page.goto("/ru");
+
+    // Provider must render its children even with no PostHog key configured.
+    await expect(
+      page.getByRole("link", { name: /suslicketeam/i }).first(),
+    ).toBeVisible();
+
+    // With no NEXT_PUBLIC_POSTHOG_KEY set, the SDK never initializes, so the
+    // global must be absent (no network, no cookies, no crash).
+    const posthogState = await page.evaluate(() => {
+      const ph = (window as unknown as { posthog?: { __loaded?: boolean } })
+        .posthog;
+      return { defined: typeof ph !== "undefined", loaded: ph?.__loaded };
+    });
+    expect(posthogState.defined).toBe(false);
+    expect(posthogState.loaded).toBeFalsy();
+
+    // No uncaught page errors during load.
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.reload();
+    expect(errors).toEqual([]);
+  });
+
+  test("shows the consent banner and dismisses it on accept", async ({
+    page,
+  }) => {
+    await page.goto("/ru");
+
+    const banner = page.getByTestId("consent-banner");
+    await expect(banner).toBeVisible();
+
+    await banner.getByRole("button", { name: "Принять" }).click();
+
+    // Banner hides and the decision is persisted, so it stays hidden on reload.
+    await expect(banner).toBeHidden();
+    const consent = await page.evaluate(() =>
+      window.localStorage.getItem("sl_consent"),
+    );
+    expect(consent).toBe("granted");
+
+    await page.reload();
+    await expect(page.getByTestId("consent-banner")).toBeHidden();
+  });
+});
