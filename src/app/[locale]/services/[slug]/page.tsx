@@ -36,7 +36,7 @@ const RELEVANT_CASES: Record<string, readonly CaseSlug[]> = {
     "nda-school",
     "scioffice",
   ],
-  ai: ["xaid", "ai-diagnostic"],
+  ai: ["xaid", "ai-diagnostic", "admp"],
   mobile: ["loyrush"],
   seo: [
     "suslicke",

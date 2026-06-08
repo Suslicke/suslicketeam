@@ -289,6 +289,19 @@
         "confidential": "Under NDA"
       },
       "technologies": "Backend, Analytics, Document workflow"
+    },
+    "admp": {
+      "title": "admp.pro",
+      "summary": "A Telegram bot for automating and running marketplace advertising on Ozon and Wildberries more efficiently.",
+      "task": "Simplify and speed up managing ad campaigns on Ozon and Wildberries by removing manual routine.",
+      "solution": "Built a Telegram bot that automates marketplace advertising: campaign management and quick actions right from the messenger.",
+      "result": "Less manual work and faster reaction to ad changes. Convenient control straight from Telegram.",
+      "approach": "The key was turning routine Ozon and Wildberries ad actions into simple bot commands. We designed the flows so an operator manages campaigns quickly without extra steps, while the bot handles the repetitive operations.",
+      "metrics": {
+        "automation": "Ad automation",
+        "marketplaces": "Ozon and Wildberries"
+      },
+      "technologies": "Telegram Bot, Automation"
     }
   },
   "faq": {

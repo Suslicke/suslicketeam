@@ -20,14 +20,14 @@ test.describe("inner pages", () => {
     ).toBeVisible();
   });
 
-  test("cases grid shows all 11 cases and a detail page renders a live link", async ({
+  test("cases grid shows all 12 cases and a detail page renders a live link", async ({
     page,
   }) => {
     await page.goto("/ru/cases");
 
-    // Eleven case cards, each linking to /ru/cases/<slug>.
+    // Twelve case cards, each linking to /ru/cases/<slug>.
     const caseLinks = page.locator('a[href^="/ru/cases/"]');
-    await expect(caseLinks).toHaveCount(11);
+    await expect(caseLinks).toHaveCount(12);
 
     // LoyRush detail page.
     await page.goto("/ru/cases/loyrush");

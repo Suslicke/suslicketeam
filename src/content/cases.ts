@@ -18,7 +18,8 @@ export type CaseSlug =
   | "ai-diagnostic"
   | "nda-furniture"
   | "scioffice"
-  | "nda-school";
+  | "nda-school"
+  | "admp";
 
 export interface CaseItem {
   slug: CaseSlug;
@@ -54,6 +55,7 @@ export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
   "nda-furniture": "Магазин мебели (NDA)",
   scioffice: "SciOffice",
   "nda-school": "Учебный портал (NDA)",
+  admp: "admp.pro",
 };
 
 export const cases: readonly CaseItem[] = [
@@ -136,7 +138,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["No-Code", "Low-Code", "Бизнес-системы", "CRM", "Лендинг"],
     metrics: ["role", "scope"],
     featured: false,
-    year: 2025,
+    year: 2023,
   },
   {
     slug: "nda-school",
@@ -146,5 +148,13 @@ export const cases: readonly CaseItem[] = [
     metrics: ["role", "confidential"],
     featured: false,
     year: 2025,
+  },
+  {
+    slug: "admp",
+    url: "https://admp.pro",
+    tags: ["Telegram", "Автоматизация", "Ozon", "Wildberries", "Реклама"],
+    metrics: ["automation", "marketplaces"],
+    featured: false,
+    year: 2024,
   },
 ] as const;
