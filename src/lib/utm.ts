@@ -26,7 +26,9 @@ export function parseUtm(search: string): UtmParams {
   for (const key of UTM_KEYS) {
     const value = params.get(key);
     if (value) {
-      result[key] = value;
+      // Cap length so a manipulated inbound URL can't bloat the prefilled
+      // messenger text past WhatsApp's ~4096-char limit (silent CTA failure).
+      result[key] = value.slice(0, 200);
     }
   }
 
@@ -64,11 +66,16 @@ export function getStoredUtm(): UtmParams {
   try {
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    if (parsed && typeof parsed === "object") {
-      return parsed as UtmParams;
+    const parsed: unknown = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return {};
+    // Re-validate key/value shapes — a tampered storage entry on the same
+    // origin must not produce an unsound UtmParams cast.
+    const safe: UtmParams = {};
+    for (const key of UTM_KEYS) {
+      const value = (parsed as Record<string, unknown>)[key];
+      if (typeof value === "string" && value) safe[key] = value;
     }
-    return {};
+    return safe;
   } catch {
     return {};
   }

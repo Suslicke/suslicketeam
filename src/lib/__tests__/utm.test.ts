@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "vitest";
-import { getStoredUtm, parseUtm, persistUtm, type UtmParams } from "../utm";
+import { getStoredUtm, parseUtm, persistUtm } from "../utm";
 
 describe("parseUtm", () => {
   test("extracts all known utm params", () => {
@@ -43,6 +43,11 @@ describe("parseUtm", () => {
     expect(parseUtm("?")).toEqual({});
     expect(parseUtm("?foo=bar")).toEqual({});
   });
+
+  test("caps value length at 200 chars", () => {
+    const long = "a".repeat(500);
+    expect(parseUtm(`?utm_campaign=${long}`).utm_campaign).toHaveLength(200);
+  });
 });
 
 describe("persistUtm / getStoredUtm", () => {
@@ -80,6 +85,14 @@ describe("persistUtm / getStoredUtm", () => {
     sessionStorage.setItem("sl_utm", "not-json{");
     expect(getStoredUtm()).toEqual({});
   });
+
+  test("getStoredUtm drops non-string and unknown keys from tampered storage", () => {
+    sessionStorage.setItem(
+      "sl_utm",
+      JSON.stringify({ utm_source: 42, utm_campaign: "jan", evil: "x" }),
+    );
+    expect(getStoredUtm()).toEqual({ utm_campaign: "jan" });
+  });
 });
 
 describe("SSR guards", () => {
@@ -93,12 +106,5 @@ describe("SSR guards", () => {
     } finally {
       globalThis.window = originalWindow;
     }
-  });
-});
-
-describe("UtmParams type", () => {
-  test("is a partial record of known keys", () => {
-    const p: UtmParams = { utm_source: "x" };
-    expect(p.utm_source).toBe("x");
   });
 });

@@ -43,6 +43,11 @@ describe("buildWhatsappUrl", () => {
     });
     expect(decodeURIComponent(url.split("?text=")[1])).toBe("custom");
   });
+
+  test("throws when number has no digits", () => {
+    expect(() => buildWhatsappUrl({ number: "N/A", text: "hi" })).toThrow();
+    expect(() => buildWhatsappUrl({ number: "", text: "hi" })).toThrow();
+  });
 });
 
 describe("buildTelegramUrl", () => {
@@ -62,5 +67,12 @@ describe("buildTelegramUrl", () => {
     expect(buildTelegramUrl({ username: "suslicketeam", text: "hi" })).toBe(
       "https://t.me/suslicketeam",
     );
+  });
+
+  test("sanitizes path-traversal / invalid characters", () => {
+    expect(buildTelegramUrl({ username: "suslicketeam/../evil" })).toBe(
+      "https://t.me/suslicketeamevil",
+    );
+    expect(() => buildTelegramUrl({ username: "@@@" })).toThrow();
   });
 });

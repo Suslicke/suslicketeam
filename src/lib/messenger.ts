@@ -53,6 +53,11 @@ export function buildWhatsappUrl(opts: {
   utm?: UtmParams;
 }): string {
   const digits = opts.number.replace(/\D/g, "");
+  if (!digits) {
+    throw new Error(
+      `buildWhatsappUrl: number resolved to empty string from "${opts.number}"`,
+    );
+  }
   const text = opts.text ?? defaultGreeting(opts.page, opts.utm);
   return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }
@@ -67,6 +72,13 @@ export function buildTelegramUrl(opts: {
   username: string;
   text?: string;
 }): string {
-  const username = opts.username.replace(/^@/, "");
+  // Telegram usernames are alphanumeric + underscore only; strip a leading `@`
+  // and any other characters so a dynamic source can't inject path traversal.
+  const username = opts.username.replace(/^@/, "").replace(/[^A-Za-z0-9_]/g, "");
+  if (!username) {
+    throw new Error(
+      `buildTelegramUrl: username resolved to empty from "${opts.username}"`,
+    );
+  }
   return `https://t.me/${username}`;
 }
