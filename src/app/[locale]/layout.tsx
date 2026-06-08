@@ -12,6 +12,7 @@ import { UtmCapture } from "@/components/analytics/utm-capture";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StickyMessenger } from "@/components/sticky-messenger";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/config";
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
                 <div className="flex-1">{children}</div>
                 <SiteFooter />
               </div>
+              <StickyMessenger />
               <ConsentBanner />
             </PostHogProvider>
           </ThemeProvider>
