@@ -150,9 +150,10 @@
     "suslicke": {
       "title": "suslicke.com",
       "summary": "A developer's personal portfolio with a creative terminal-style interface and command-driven navigation.",
-      "task": "Build a memorable portfolio that stands out from template solutions and loads fast.",
-      "solution": "We built the site on Next.js with a CLI-like interface: command navigation (about, skills, experience, projects, contact) and an interactive hackme challenge.",
-      "result": "A distinctive terminal UX that sticks in memory, with fast-loading pages.",
+      "task": "The client needed a portfolio that wouldn't get lost among template sites and would immediately convey the developer's level. We discussed the goal — to stand out while staying usable — the target audience, and which projects and skills mattered most to show first. We fixed the scope: the concept, the section structure, and a fast-loading requirement.",
+      "solution": "We designed navigation around a terminal-style command interface and agreed on the look before development began. We built the site on Next.js: command navigation (about, skills, experience, projects, contact) and an interactive hackme challenge. As we built, we showed progress and refined the interaction details.",
+      "result": "The outcome is a distinctive terminal UX that sticks in memory and sets the portfolio apart from typical solutions. Pages load fast, and the structure stays clear even for first-time visitors to a command interface.",
+      "approach": "The main challenge was balance: keep the striking terminal metaphor without scaring off a visitor expecting a familiar site. We added clear hints and fallback navigation so the command interface feels like a game rather than a barrier. We paid separate attention to performance so animations and interactivity wouldn't slow loading.",
       "metrics": {
         "ui": "Terminal interface",
         "performance": "High performance"
@@ -162,9 +163,10 @@
     "animeenigma": {
       "title": "AnimeEnigma",
       "summary": "An anime streaming platform for watching anime online with a large content library.",
-      "task": "Launch a streaming service that stays stable under load and serves a large library smoothly.",
-      "solution": "As part of a team, I helped build the platform on Next.js with PostgreSQL, focusing on the viewing interface and stability under load.",
-      "result": "Stable performance under load and a large library of available content.",
+      "task": "The client wanted to launch a streaming service with a large library that wouldn't fall over as the audience grew. Up front we mapped the usage scenarios, the expected load, and the requirements for a comfortable viewing experience. We fixed the area of responsibility and the priority — stability under load and a smooth player.",
+      "solution": "As part of a team, I helped build the platform on Next.js with PostgreSQL. I owned the viewing interface and behavior under load: we designed the catalog structure, thought through content delivery, and optimized bottlenecks. We regularly tested across devices and scenarios before shipping.",
+      "result": "The service runs stably under load and serves a large content library smoothly. Playback stays fluid and the catalog stays responsive even under active traffic.",
+      "approach": "The key decisions concerned catalog stability and playback smoothness as the user count grew. We worked through caching and careful data handling so heavy lists and title pages stayed fast. We tested behavior on slow connections and varied screens so the viewing experience stayed even.",
       "metrics": {
         "load": "Stable under load",
         "library": "Large library"
@@ -174,9 +176,10 @@
     "xaid": {
       "title": "xaid.ai",
       "summary": "An AI-powered HealthTech product that automatically generates ready-to-sign CT reports reviewed by a radiologist.",
-      "task": "Build a complex web portal and a powerful admin panel to manage reports, users and the clinical workflow.",
-      "solution": "As part of a team, I contributed to the product: a Next.js web portal with a powerful admin panel, DICOM/HL7 integration and an AI layer that generates reports.",
-      "result": "An international product with a powerful admin panel through which the team runs reports and the workflow.",
+      "task": "The client needed a complex web portal and a powerful admin panel to manage reports, users, and the whole clinical workflow. During requirements we mapped the user roles, the report's path from upload to signature, and the constraints around medical data. We fixed the scope of integrations and the team's working scenarios.",
+      "solution": "As part of a team, I contributed to the product: a Next.js web portal, a powerful admin panel, DICOM/HL7 integration, and an AI layer that generates reports. We designed the workflows and admin screens around real scenarios, aligned the interfaces, and assembled them iteratively. We checked data correctness and integration behavior at every step.",
+      "result": "The outcome is an international product with a powerful admin panel through which the team runs reports and the whole workflow. Reports are generated automatically and reach the radiologist ready for review and signature.",
+      "approach": "The most non-trivial parts were the DICOM/HL7 medical-standard integrations and shaping admin scenarios around sensitive data. We carefully designed the report path and access rights so the process stayed transparent and controllable. We embedded the AI layer so the final decision always rested with the doctor, and the interface helped rather than hindered.",
       "metrics": {
         "admin": "Powerful admin panel",
         "international": "International product"
@@ -186,9 +189,10 @@
     "python-guide": {
       "title": "Python Guide",
       "summary": "An educational resource for Python job-interview prep: questions and topics.",
-      "task": "Build a handy interview-prep reference that ranks well in search.",
-      "solution": "We built the site on Next.js and MDX with a thoughtful content structure around interview topics and technical SEO.",
-      "result": "Growing organic traffic and stable search rankings.",
+      "task": "The client needed a handy Python interview-prep reference that ranks well in search. We discussed the audience — candidates at different levels — and how topic navigation should be structured. We set the priority on content structure and technical SEO.",
+      "solution": "We designed the material structure around interview topics and agreed on the presentation before filling it in. We built the site on Next.js and MDX with thoughtful markup, clean URLs, and technical SEO. As content grew, we checked indexing and metadata correctness.",
+      "result": "The resource shows growing organic traffic and stable search rankings. The material is convenient to use while preparing, and the structure expands easily with new topics.",
+      "approach": "The key parts were organizing a large volume of learning material and the technical SEO that search visibility depends on. We thought through the topic structure and the links between topics so users could move through the reference easily. We tuned markup and metadata so pages indexed correctly and looked good in results.",
       "metrics": {
         "traffic": "Organic traffic",
         "seo": "Search rankings"
@@ -198,9 +202,10 @@
     "web-interview": {
       "title": "Web Interview",
       "summary": "web.drill — an interview-prep platform for web developers with a regularly growing question base.",
-      "task": "Create an interactive interview-prep platform that's easy to work through and to expand.",
-      "solution": "We built a React interface with a question system, progress tracking and easy navigation.",
-      "result": "High user engagement and a regularly growing question base.",
+      "task": "The client wanted an interactive interview-prep platform for web developers that's easy to work through and to expand. We mapped the run-through scenarios, the question format, and how to track progress. We fixed the requirement that the base be simple to extend.",
+      "solution": "We built a React interface with a question system, progress tracking, and easy navigation. We designed the structure so the question base would be easy to extend, and aligned the interface behavior before assembly. We checked the run-through experience across devices.",
+      "result": "The platform shows high engagement and maintains a regularly growing question base. Preparation feels comfortable, and adding new questions requires no rework.",
+      "approach": "The main thing was making the run-through engaging while keeping it simple to maintain. We designed the question and progress system so users see forward movement and the team can add new material easily. We separately worked on navigation so returning to topics stays convenient.",
       "metrics": {
         "engagement": "Engagement",
         "questions": "Growing question base"
@@ -210,9 +215,10 @@
     "loyrush": {
       "title": "LoyRush",
       "summary": "A loyalty and gamification SaaS: points, badges, leaderboards and challenges on a subscription model.",
-      "task": "Build a SaaS that retains clients through gamification and gives them clear analytics.",
-      "solution": "We built the frontend on Vue: loyalty mechanics (points, badges, leaderboards, challenges), a subscription model and a dashboard with analytics for clients.",
-      "result": "A working product with a subscription model and clear analytics for clients.",
+      "task": "The client needed a loyalty SaaS that retains clients through gamification and gives them clear analytics. Up front we mapped the engagement mechanics, the subscription model, and which metrics matter to clients. We fixed the dashboard scope and the set of game mechanics.",
+      "solution": "We built the frontend on Vue: loyalty mechanics — points, badges, leaderboards, challenges — a subscription model, and a dashboard with analytics. We designed the screens around real client scenarios and aligned the design before development. We assembled the interface iteratively, regularly showing progress.",
+      "result": "The outcome is a working product with a subscription model and clear analytics for clients. Gamification gives users tangible engagement and owners a clear picture of what's happening.",
+      "approach": "The most substantial part was shaping the game mechanics and the subscription dashboard to be both engaging and clear. We balanced points, badges, and challenges so engagement didn't turn into overload. We designed the dashboard around key metrics so clients see the payoff right away.",
       "metrics": {
         "subscription": "Subscription model",
         "analytics": "Analytics for clients"
@@ -222,9 +228,10 @@
     "exchange-bridge": {
       "title": "Exchange Bridge",
       "summary": "A fintech comparison service for international money transfers: compare options and save.",
-      "task": "Let users quickly compare ways to send money abroad and pick the cheapest one.",
-      "solution": "We built a comparison service across transfer options — P2P crypto, banks, Wise, Revolut — with real-time rates (150+ currency pairs, refreshed roughly every 30 seconds), hidden-fee detection, risk scoring and a live comparison dashboard.",
-      "result": "Transparent real-time comparison that helps people save on international transfers.",
+      "task": "The client wanted to let users quickly compare ways to send money abroad and pick the cheapest one. We mapped which transfer channels mattered, how to compute the real cost including hidden fees, and how to present the comparison clearly. We fixed the data scope and the requirements for rate freshness.",
+      "solution": "We built a comparison service across transfer options — P2P crypto, banks, Wise, Revolut — with real-time rates (150+ currency pairs, refreshed roughly every 30 seconds), hidden-fee detection, risk scoring, and a live comparison dashboard. We designed the comparison logic and interface so the best option reads at a glance. We checked the accuracy of calculations and the behavior on rate updates.",
+      "result": "The service delivers transparent real-time comparison and helps people save on international transfers. Users see the honest cost of each option with no hidden fees.",
+      "approach": "The most demanding parts were aggregating rates in real time and presenting the comparison clearly. We handled data refresh across many currency pairs carefully so the numbers stayed current and consistent. We built the UX around a single task — quickly seeing the best option, factoring in hidden fees and risk.",
       "metrics": {
         "realtime": "Real-time rates",
         "savings": "Savings on transfers"
@@ -234,9 +241,10 @@
     "ai-diagnostic": {
       "title": "AI Diagnostic",
       "summary": "An AI medical-imaging assistant for radiologists that helps detect pathologies on CT and MRI.",
-      "task": "Give radiologists a tool that fits into existing infrastructure without a new system.",
-      "solution": "As part of a team, I contributed to the assistant: PACS integration with no software install, pathology detection on CT/MRI, and a convenient interface for radiologists.",
-      "result": "Deployed in Russia and participating in the Moscow Department of Health's computer-vision experiment.",
+      "task": "The client needed a tool for radiologists that fits into existing infrastructure without rolling out a new system. Up front we mapped how the doctor's workflow is structured and how to connect to PACS with no software install. We set the priority on seamless integration and convenience for the radiologist.",
+      "solution": "As part of a team, I contributed to the assistant: PACS integration with no software install, pathology detection on CT/MRI, and a convenient interface for radiologists. We designed the interaction so the assistant complements the usual process rather than breaking it. We checked the integration and the way results are presented against real scenarios.",
+      "result": "The solution is deployed in Russia and takes part in the Moscow Department of Health's computer-vision experiment. The assistant fits into existing infrastructure and helps the doctor within their usual workflow.",
+      "approach": "The main task was seamless PACS integration with no software install and careful presentation of detection results. We worked out how the assistant fits into the radiologist's usual path so it saves time rather than adding steps. We framed the AI's results as a hint, leaving the final decision with the doctor.",
       "metrics": {
         "pacs": "PACS integration",
         "pathologies": "20+ pathologies"
@@ -246,9 +254,10 @@
     "nda-furniture": {
       "title": "Furniture shop (under NDA)",
       "summary": "An online store selling home furniture. Project details under NDA.",
-      "task": "Build a convenient online store for selling home furniture.",
-      "solution": "As lead developer I owned the whole store: catalog, product pages, cart and checkout.",
-      "result": "A working online store. Its name and details are under NDA.",
+      "task": "The client needed a convenient online store for selling home furniture. We discussed the general goals and the purchase scenarios and fixed the scope of work. Project details are under NDA.",
+      "solution": "As lead developer I owned the whole store: catalog, product pages, cart, and checkout. We ran the work through the standard online-store stages — from design to launch. The specific implementation details aren't disclosed under NDA.",
+      "result": "The outcome is a working online store. Its name and details are under NDA.",
+      "approach": "This is an online store with the standard e-commerce set: catalog, cart, checkout. The specific decisions and project details aren't disclosed under the non-disclosure agreement.",
       "metrics": {
         "role": "Lead developer",
         "confidential": "Under NDA"
@@ -361,7 +370,35 @@
     "tech_title": "Technologies",
     "more_title": "More cases",
     "cta_title": "Want one like this?",
-    "cta_subtitle": "Describe your project — we'll propose a solution, timeline and price, no fluff, no obligations."
+    "cta_subtitle": "Describe your project — we'll propose a solution, timeline and price, no fluff, no obligations.",
+    "approach_title": "Approach & decisions",
+    "process_title": "How we ran the project",
+    "process": {
+      "discovery": {
+        "title": "Discussion & requirements",
+        "description": "We get on a call with the client, map the goals, audience and constraints, and fix the scope of work."
+      },
+      "planning": {
+        "title": "Planning",
+        "description": "We work out the structure, user scenarios and architecture, and choose technologies that fit the task."
+      },
+      "design": {
+        "title": "Design & prototype",
+        "description": "We prepare mockups and agree on the look before development starts."
+      },
+      "build": {
+        "title": "Development",
+        "description": "We write code in iterations, show progress regularly and keep the client in the loop."
+      },
+      "launch": {
+        "title": "Testing & launch",
+        "description": "We test across devices and scenarios, then roll out to production."
+      },
+      "support": {
+        "title": "Support & growth",
+        "description": "We stay in touch, maintain the product and keep developing it further."
+      }
+    }
   },
   "aboutPage": {
     "meta_title": "About — the suslicketeam crew",

@@ -8,6 +8,7 @@ import { CaseCard } from "@/components/sections/case-card";
 import { JsonLd } from "@/components/json-ld";
 import { PageCta } from "@/components/sections/page-cta";
 import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { Button } from "@/components/ui/button";
 import { routing } from "@/i18n/routing";
 import { siteConfig, type Locale } from "@/lib/config";
@@ -84,6 +85,17 @@ export default async function CaseDetailPage({
     { key: "task", title: td("task_title"), body: tcase(`${slug}.task`) },
     { key: "solution", title: td("solution_title"), body: tcase(`${slug}.solution`) },
     { key: "result", title: td("result_title"), body: tcase(`${slug}.result`) },
+    { key: "approach", title: td("approach_title"), body: tcase(`${slug}.approach`) },
+  ] as const;
+
+  // Shared engagement stages, rendered on every case detail page.
+  const processSteps = [
+    "discovery",
+    "planning",
+    "design",
+    "build",
+    "launch",
+    "support",
   ] as const;
 
   return (
@@ -165,6 +177,38 @@ export default async function CaseDetailPage({
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* How we ran the project — shared process, on every case */}
+      <section className="border-t border-border/60 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4">
+          <h2 className="font-display text-2xl font-bold tracking-tight">
+            {td("process_title")}
+          </h2>
+          <Stagger as="ul" className="mt-10 grid gap-6 sm:grid-cols-2">
+            {processSteps.map((step, i) => (
+              <StaggerItem as="li" key={step}>
+                <div className="flex h-full flex-col gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-9 items-center justify-center rounded-lg bg-brand/10 font-display text-sm font-bold text-brand">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="h-px flex-1 bg-gradient-to-r from-border to-transparent"
+                    />
+                  </div>
+                  <h3 className="font-display text-lg font-semibold">
+                    {td(`process.${step}.title`)}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {td(`process.${step}.description`)}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
       </section>
 
