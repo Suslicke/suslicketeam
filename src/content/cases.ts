@@ -16,7 +16,9 @@ export type CaseSlug =
   | "loyrush"
   | "exchange-bridge"
   | "ai-diagnostic"
-  | "nda-furniture";
+  | "nda-furniture"
+  | "scioffice"
+  | "nda-school";
 
 export interface CaseItem {
   slug: CaseSlug;
@@ -50,6 +52,8 @@ export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
   "exchange-bridge": "Exchange Bridge",
   "ai-diagnostic": "AI Diagnostic",
   "nda-furniture": "Магазин мебели (NDA)",
+  scioffice: "SciOffice",
+  "nda-school": "Учебный портал (NDA)",
 };
 
 export const cases: readonly CaseItem[] = [
@@ -122,6 +126,23 @@ export const cases: readonly CaseItem[] = [
     url: "",
     nda: true,
     tags: ["E-commerce", "NDA"],
+    metrics: ["role", "confidential"],
+    featured: false,
+    year: 2025,
+  },
+  {
+    slug: "scioffice",
+    url: "https://scioffice.com",
+    tags: ["No-Code", "Low-Code", "Бизнес-системы", "CRM", "Лендинг"],
+    metrics: ["role", "scope"],
+    featured: false,
+    year: 2025,
+  },
+  {
+    slug: "nda-school",
+    url: "",
+    nda: true,
+    tags: ["EdTech", "Backend", "Аналитика", "NDA"],
     metrics: ["role", "confidential"],
     featured: false,
     year: 2025,

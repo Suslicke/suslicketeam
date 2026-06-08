@@ -11,7 +11,8 @@ import { Reveal } from "@/components/motion/reveal";
 import { iconMap } from "@/components/sections/icon-map";
 import { routing } from "@/i18n/routing";
 import { siteConfig, type Locale } from "@/lib/config";
-import { getCases, getServiceBySlug, getServices } from "@/lib/content";
+import { getCaseBySlug, getServiceBySlug, getServices } from "@/lib/content";
+import type { CaseSlug } from "@/content/cases";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbLd, serviceLd } from "@/lib/structured-data";
 
@@ -19,15 +20,35 @@ const BENEFIT_KEYS = ["one", "two", "three", "four"] as const;
 const PROCESS_STEPS = ["discovery", "design", "build", "launch"] as const;
 
 /**
- * Maps a service to the tags that signal a relevant case. Used as a simple
- * heuristic to surface the most relevant portfolio work on each detail page.
+ * Explicit, curated mapping of each service to the portfolio cases that best
+ * represent it. Slugs are resolved via `getCaseBySlug`; missing slugs are
+ * filtered out and the list is capped on render. May include NDA cases —
+ * CaseCard renders them without a live link.
  */
-const RELEVANT_TAGS: Record<string, readonly string[]> = {
-  landing: ["Next.js", "Tailwind", "TypeScript", "Terminal UI", "MDX", "Education"],
-  "web-apps": ["SaaS", "Дашборд", "Web-портал", "Админ-панель", "Vue", "PostgreSQL", "Стриминг"],
-  ai: ["AI", "DICOM/HL7", "PACS"],
-  mobile: ["React"],
-  seo: ["MDX", "Education", "Next.js", "Собеседования"],
+const RELEVANT_CASES: Record<string, readonly CaseSlug[]> = {
+  landing: ["nda-furniture", "scioffice", "suslicke", "python-guide", "web-interview"],
+  "web-apps": [
+    "xaid",
+    "loyrush",
+    "exchange-bridge",
+    "ai-diagnostic",
+    "animeenigma",
+    "nda-school",
+    "scioffice",
+  ],
+  ai: ["xaid", "ai-diagnostic"],
+  mobile: ["loyrush"],
+  seo: [
+    "suslicke",
+    "python-guide",
+    "web-interview",
+    "exchange-bridge",
+    "loyrush",
+    "xaid",
+    "animeenigma",
+    "ai-diagnostic",
+    "scioffice",
+  ],
 };
 
 export function generateStaticParams() {
@@ -75,11 +96,11 @@ export default async function ServiceDetailPage({
 
   const Icon = iconMap[service.icon] ?? ArrowRight;
 
-  // Relevant cases by tag overlap (capped at 2 for a focused section).
-  const relevantTags = RELEVANT_TAGS[slug] ?? [];
-  const relevant = getCases()
-    .filter((c) => c.tags.some((tag) => relevantTags.includes(tag)))
-    .slice(0, 2);
+  // Relevant cases from an explicit curated map (capped at 3 for a focused section).
+  const relevant = (RELEVANT_CASES[slug] ?? [])
+    .map((caseSlug) => getCaseBySlug(caseSlug))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c))
+    .slice(0, 3);
 
   const base = `${siteConfig.url}/${locale}`;
   const url = `${base}/services/${slug}`;
@@ -198,6 +219,8 @@ export default async function ServiceDetailPage({
                     tags={c.tags}
                     year={c.year}
                     url={c.url}
+                    nda={c.nda}
+                    ndaLabel={tc("nda")}
                     detailsLabel={tcp("details")}
                     liveLabel={tcp("live")}
                   />

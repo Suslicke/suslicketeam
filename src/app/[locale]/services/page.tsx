@@ -84,6 +84,21 @@ export default async function ServicesPage({
         </div>
       </section>
 
+      <section className="mt-16 sm:mt-20">
+        <div className="mx-auto max-w-6xl px-4">
+          <Reveal>
+            <div className="rounded-2xl border border-border/60 bg-card/40 p-8 text-center sm:p-10">
+              <h2 className="font-display text-2xl font-bold tracking-tight">
+                {t("any_project_title")}
+              </h2>
+              <p className="mx-auto mt-3 max-w-2xl text-pretty text-muted-foreground">
+                {t("any_project_text")}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <div className="mt-20 sm:mt-28">
         <PageCta title={t("cta_title")} subtitle={t("cta_subtitle")} />
       </div>

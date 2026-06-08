@@ -138,7 +138,7 @@
     "mobile": {
       "title": "Mobile apps",
       "tagline": "Apps for iOS and Android",
-      "description": "Cross-platform mobile apps with a native feel. One codebase, fast store launch and ongoing support."
+      "description": "Cross-platform mobile apps with a native feel. One codebase and ongoing support. We don't just build the app — we also help prepare the store page and publish it to the App Store and Google Play."
     },
     "seo": {
       "title": "SEO & growth",
@@ -217,7 +217,7 @@
       "summary": "A loyalty and gamification SaaS: points, badges, leaderboards and challenges on a subscription model.",
       "task": "The client needed a loyalty SaaS that retains clients through gamification and gives them clear analytics. Up front we mapped the engagement mechanics, the subscription model, and which metrics matter to clients. We fixed the dashboard scope and the set of game mechanics.",
       "solution": "We built the frontend on Vue: loyalty mechanics — points, badges, leaderboards, challenges — a subscription model, and a dashboard with analytics. We designed the screens around real client scenarios and aligned the design before development. We assembled the interface iteratively, regularly showing progress.",
-      "result": "The outcome is a working product with a subscription model and clear analytics for clients. Gamification gives users tangible engagement and owners a clear picture of what's happening.",
+      "result": "The outcome is a working product with a subscription model and clear analytics for clients. Gamification gives users tangible engagement and owners a clear picture of what's happening. The app is also published on the App Store and Google Play.",
       "approach": "The most substantial part was shaping the game mechanics and the subscription dashboard to be both engaging and clear. We balanced points, badges, and challenges so engagement didn't turn into overload. We designed the dashboard around key metrics so clients see the payoff right away.",
       "metrics": {
         "subscription": "Subscription model",
@@ -263,6 +263,32 @@
         "confidential": "Under NDA"
       },
       "technologies": "E-commerce"
+    },
+    "scioffice": {
+      "title": "SciOffice",
+      "summary": "A no-code/low-code builder for business systems: company, sales, and a marketplace of ready-made apps on a single platform.",
+      "task": "The team needed to bring the product to users from two sides at once: the internal system where the platform itself is assembled and runs, and a clear public landing page that explains the value of the builder and brings in leads. We worked through the audience — businesses, managers, startups, and integrators — the workflows inside the system, and how to present the product on the outside. We fixed the scope of responsibility and priorities.",
+      "solution": "As part of the team I worked on both the platform's internal system and the public landing page. On the system side — the working scenarios of the business-app builder (objects, fields and logic, roles and access); on the landing side — a structure built around a clear pitch and lead capture. We agreed on the interfaces before building and assembled them iteratively, keeping the team in the loop on progress.",
+      "result": "The outcome is a pairing of a working internal system and a public landing page that explains the builder and guides the user toward getting started. The product is presented clearly both outside and inside — from the first impression to real work in the system.",
+      "approach": "The most substantial part was holding two layers within one product: the flexibility of the builder's internal system and the clarity of the public landing page. Inside, we worked through scenarios with objects, fields, logic, and roles so the platform stayed understandable to a non-developer. Outside, we built the landing structure around the product's value so a visitor quickly grasps what it solves and for whom.",
+      "metrics": {
+        "role": "Developer on the team",
+        "scope": "Internal system + landing page"
+      },
+      "technologies": "No-Code, Low-Code, Business systems, Landing page"
+    },
+    "nda-school": {
+      "title": "Educational institution portal (under NDA)",
+      "summary": "A portal for an educational institution: class schedule and attendance analytics with a backend, charts, and counters. Name and details under NDA.",
+      "task": "The client needed a portal that brings the class schedule and attendance analytics together in one place and helps see the picture by groups and subjects. We worked through user roles, the schedule workflows, and which metrics matter to track. We fixed the scope of work and the role-based access requirements. Name and details are under NDA.",
+      "solution": "As a developer I owned the backend and the analytics part: class schedule, attendance tracking, charts and counters on dashboards. We added document workflow, role-based access, and background tasks for heavy operations — recomputing analytics, generating reports, and scheduled data rebuilds. Attendance counters and summaries were surfaced so the metrics update without manual work.",
+      "result": "The outcome is a portal where the schedule and attendance live together, and analytics is presented clearly — through charts, counters, and summaries. Heavy operations are moved to the background, so the interface stays responsive. Name and details are under NDA.",
+      "approach": "The most substantial parts were the analytics and the background processing: recomputing attendance, generating reports, and scheduled tasks were moved out of the user's request into a background job queue so the dashboards stay fast. Document workflow and role-based access were built around the institution's real scenarios. Charts and counters were designed so key metrics read at a glance. Details are under NDA.",
+      "metrics": {
+        "role": "Developer",
+        "confidential": "Under NDA"
+      },
+      "technologies": "Backend, Analytics, Document workflow"
     }
   },
   "faq": {
@@ -289,7 +315,7 @@
       },
       "remote": {
         "question": "Do you work remotely?",
-        "answer": "We work remotely with clients worldwide. We're based in Kazakhstan and deliver projects across the CIS and abroad — for example, Exchange Bridge and xaid.ai are international products. We communicate via messengers and online meetings — wherever is convenient for you."
+        "answer": "We work remotely with clients worldwide. We're based in Kazakhstan and deliver projects across the CIS and abroad — for example, Exchange Bridge and xaid.ai are international products. We communicate via messengers and online meetings — wherever is convenient for you. And if you're in Kazakhstan, especially in Almaty, we can meet in person to discuss the task and lock down the key points at the meeting — which builds trust and speeds up the start."
       }
     }
   },
@@ -300,6 +326,8 @@
     "title": "What we do",
     "subtitle": "Full cycle — from idea and design to launch and support. Pick a direction to learn more.",
     "card_cta": "Learn more",
+    "any_project_title": "Didn't find your task?",
+    "any_project_text": "We're ready to take on any technical project — we'll discuss it, propose a solution, and build it.",
     "cta_title": "Not sure what fits your case?",
     "cta_subtitle": "Describe your project in a couple of lines — we'll suggest the best approach, timeline and price."
   },
@@ -314,7 +342,7 @@
       "landing": "We build landing pages and corporate sites that don't just look good — they bring leads. We design structure for conversion, bake in technical SEO and ship instant load times on every device.",
       "web-apps": "We build web apps, account dashboards and SaaS products end to end. Reliable architecture, a clean UX and a scalable codebase that keeps up as your product grows.",
       "ai": "We bring AI in to solve concrete business problems: chatbots, assistants, routine automation and LLM integrations. We wrap complex technology in a simple, clear interface.",
-      "mobile": "We build cross-platform mobile apps with a native feel and a single codebase. Fast launch on the App Store and Google Play, a clean UX and post-release support.",
+      "mobile": "We build cross-platform mobile apps with a native feel and a single codebase. We don't just build the app — we also help prepare the store page and publish it to the App Store and Google Play, and after release we support and update it.",
       "seo": "We push sites to the top of search through technical SEO, speed optimization and content strategy. We lay the foundation for organic traffic that grows steadily over time."
     },
     "benefits": {
