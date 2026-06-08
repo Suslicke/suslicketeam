@@ -59,9 +59,14 @@ export function MessengerCTA({
   }
 
   function handleClick() {
+    // `transport_type: "beacon"` makes gtag send the hit via navigator.sendBeacon,
+    // which survives the tab being backgrounded/suspended (common on mobile when
+    // the messenger app takes focus) — a normal fetch can be dropped mid-flight.
+    // It's a no-op extra property for posthog.capture.
     trackEvent("lead_messenger_click", {
       channel,
       page: pathname,
+      transport_type: "beacon",
       ...utm,
     });
   }

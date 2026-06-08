@@ -67,8 +67,15 @@ export function ConsentBanner() {
     // PostHog opt-in / opt-out. Methods exist only when the SDK initialized.
     try {
       if (posthog.__loaded) {
-        if (granted) posthog.opt_in_capturing();
-        else posthog.opt_out_capturing();
+        if (granted) {
+          posthog.opt_in_capturing();
+          // The manual $pageview effect only fires on *subsequent* navigations,
+          // so capture the current (landing) page now that capturing is enabled
+          // — otherwise the entry pageview is lost when consent is granted.
+          posthog.capture("$pageview");
+        } else {
+          posthog.opt_out_capturing();
+        }
       }
     } catch {
       // SDK not loaded (no key) — graceful no-op.
@@ -82,6 +89,7 @@ export function ConsentBanner() {
       role="dialog"
       aria-modal="false"
       aria-label={t("title")}
+      data-testid="consent-banner"
       className="fixed inset-x-0 bottom-0 z-[60] border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">

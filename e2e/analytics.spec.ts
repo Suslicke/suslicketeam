@@ -33,7 +33,7 @@ test.describe("analytics", () => {
   }) => {
     await page.goto("/ru");
 
-    const banner = page.getByRole("dialog", { name: /cookie/i });
+    const banner = page.getByTestId("consent-banner");
     await expect(banner).toBeVisible();
 
     await banner.getByRole("button", { name: "Принять" }).click();
@@ -46,6 +46,6 @@ test.describe("analytics", () => {
     expect(consent).toBe("granted");
 
     await page.reload();
-    await expect(page.getByRole("dialog", { name: /cookie/i })).toBeHidden();
+    await expect(page.getByTestId("consent-banner")).toBeHidden();
   });
 });

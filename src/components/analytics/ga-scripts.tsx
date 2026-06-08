@@ -17,9 +17,17 @@ export function GaScripts() {
 
   return (
     <>
-      <Script
+      {/*
+       * Consent default MUST register before the gtag library loads, otherwise
+       * GA could fire a hit before "denied" is set. `next/script`'s
+       * `beforeInteractive` strategy is only honored from the *root* layout;
+       * here GaScripts renders from `app/[locale]/layout.tsx`, so Next would
+       * warn and downgrade it. Instead we emit a plain inline <script> (which
+       * the App Router serializes inline, ahead of the deferred gtag Script
+       * below) so the denied-by-default consent is guaranteed to run first.
+       */}
+      <script
         id="ga-consent-default"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];

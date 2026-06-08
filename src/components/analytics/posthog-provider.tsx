@@ -30,6 +30,10 @@ function ensurePosthog(): boolean {
       capture_pageview: false,
       capture_pageleave: true,
       person_profiles: "identified_only",
+      // GDPR: do not transmit any $pageview/event until the user accepts via the
+      // consent banner (which calls posthog.opt_in_capturing()). On decline the
+      // banner calls opt_out_capturing(), keeping the SDK silent.
+      opt_out_capturing_by_default: true,
     });
   }
   return true;
