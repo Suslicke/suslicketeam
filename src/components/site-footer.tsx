@@ -68,7 +68,6 @@ export function SiteFooter() {
           <p>
             © {year} {meta("site_name")}
           </p>
-          <p>ИП / реквизиты — placeholder</p>
         </div>
       </div>
     </footer>

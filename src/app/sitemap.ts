@@ -33,6 +33,7 @@ function languagesFor(path: string): Record<string, string> {
   for (const loc of siteConfig.locales) {
     languages[loc] = abs(loc, path);
   }
+  languages["x-default"] = abs(siteConfig.defaultLocale, path);
   return languages;
 }
 

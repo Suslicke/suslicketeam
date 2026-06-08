@@ -105,10 +105,19 @@ export function LeadForm() {
         return;
       }
 
-      trackEvent("lead_form_submit", {
-        projectType: values.projectType,
-        page: payload.page,
-      });
+      // The lead was accepted, so we always show the success UI. But the API
+      // returns `{ ok: true, delivered: false }` when no sink is configured;
+      // only count the conversion when the lead was actually delivered, so a
+      // misconfigured prod (missing secrets) doesn't over-count submissions.
+      const json = (await res
+        .json()
+        .catch(() => ({}))) as { delivered?: boolean };
+      if (json.delivered !== false) {
+        trackEvent("lead_form_submit", {
+          projectType: values.projectType,
+          page: payload.page,
+        });
+      }
       setStatus("success");
     } catch {
       // Network error — keep the entered values so the user can retry.
