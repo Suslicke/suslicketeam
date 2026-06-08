@@ -41,7 +41,7 @@ export async function Testimonials() {
           ))}
         </ul>
 
-        <p className="mt-6 text-center text-xs text-muted-foreground/70">
+        <p className="mt-6 text-center text-xs text-muted-foreground">
           {t("disclaimer")}
         </p>
       </div>

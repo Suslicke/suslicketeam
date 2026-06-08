@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
 import { iconMap } from "@/components/sections/icon-map";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 
 export interface ServiceCardProps {
@@ -30,7 +30,7 @@ export function ServiceCard({ slug, icon, title, tagline, cta }: ServiceCardProp
           <Icon className="size-5" />
         </div>
         <CardHeader className="gap-1.5 px-0">
-          <CardTitle className="font-display text-lg">{title}</CardTitle>
+          <h3 className="font-display text-lg leading-snug font-medium">{title}</h3>
           <CardDescription>{tagline}</CardDescription>
         </CardHeader>
         <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-brand">

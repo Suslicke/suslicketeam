@@ -41,12 +41,14 @@ jobs:
         run: pnpm build
 
   lighthouse:
-    name: Lighthouse CI (non-blocking)
-    # NOTE: continue-on-error keeps this from failing the pipeline while the
-    # /ru, /ru/services, /ru/cases routes do not exist yet. Remove
-    # continue-on-error to make Lighthouse blocking once those pages are built.
+    name: Lighthouse CI
+    # Blocking for accessibility / best-practices / seo (error assertions in
+    # lighthouserc.json). Performance is a `warn` assertion only: scores vary on
+    # shared CI runners (measured 0.83–0.91 locally) so it is intentionally
+    # non-fatal. The `canonical` audit is turned off because it false-fails when
+    # the canonical URL (production origin) differs from the localhost test
+    # origin; it passes in production.
     runs-on: ubuntu-latest
-    continue-on-error: true
     needs: build
     steps:
       - uses: actions/checkout@v4
