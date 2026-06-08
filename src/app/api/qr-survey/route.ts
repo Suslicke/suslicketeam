@@ -24,8 +24,9 @@ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const buckets = new Map<string, { count: number; resetAt: number }>();
 
 function getClientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) return forwarded.split(",")[0]!.trim();
+  // Trust only proxy-set headers (Cloudflare sets cf-connecting-ip on every
+  // request). X-Forwarded-For is client-controllable, so a spoofed value would
+  // let an attacker rotate the rate-limit key — ignore it here.
   return (
     request.headers.get("cf-connecting-ip") ??
     request.headers.get("x-real-ip") ??
@@ -47,6 +48,15 @@ function isRateLimited(ip: string): boolean {
 // --- Google Sheet sink ---------------------------------------------------
 const SINK_TIMEOUT_MS = 5000;
 
+// Neutralise spreadsheet formula injection: a value a Sheet would interpret as
+// a formula (leading = + - @ or a control char) is prefixed with an apostrophe
+// so it's stored as literal text. Applied to every free-text field before it
+// reaches the Google Sheet (answer is a fixed enum, receivedAt is server-set).
+function deformula(value: string | undefined): string | undefined {
+  if (value === undefined) return undefined;
+  return /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
+}
+
 async function sendToSheet(payload: SurveyInput): Promise<boolean> {
   const url = process.env.QR_SURVEY_WEBHOOK_URL;
   if (!url) return false;
@@ -57,8 +67,15 @@ async function sendToSheet(payload: SurveyInput): Promise<boolean> {
     const res = await fetch(url, {
       method: "POST",
       headers: { "content-type": "application/json" },
+      // `signal` so the timeout actually aborts a hanging webhook (otherwise the
+      // request could block for the full platform timeout).
+      signal: controller.signal,
       body: JSON.stringify({
-        ...payload,
+        answer: payload.answer,
+        detail: deformula(payload.detail),
+        source: deformula(payload.source),
+        campaign: deformula(payload.campaign),
+        page: deformula(payload.page),
         receivedAt: new Date().toISOString(),
       }),
     });
