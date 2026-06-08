@@ -49,8 +49,8 @@ export const cases: readonly CaseItem[] = [
   {
     slug: "xaid",
     url: "https://xaid.ai",
-    tags: ["AI", "Next.js", "LLM", "API"],
-    metrics: ["automation", "ttm"],
+    tags: ["HealthTech", "Web-портал", "Админ-панель", "Next.js", "AI/LLM"],
+    metrics: ["admin", "international"],
     featured: true,
     year: 2025,
   },

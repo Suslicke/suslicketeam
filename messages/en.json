@@ -169,15 +169,15 @@
     },
     "xaid": {
       "title": "xaid.ai",
-      "summary": "An AI platform that automates routine tasks via LLM integration.",
-      "task": "Ship an AI product on a tight timeline and wrap complex tech in a simple interface.",
-      "solution": "We built the product on Next.js with LLM integration, a clear UX and a scalable API.",
-      "result": "Launched on time, automated manual processes and simplified work for users.",
+      "summary": "A complex HealthTech web portal with a powerful admin panel and AI integration.",
+      "task": "Build a full-featured web portal with complex logic and convenient content and user management through an admin panel.",
+      "solution": "We built the portal on Next.js with a flexible admin panel, a considered UX and AI/LLM integration, designed to scale for an international audience.",
+      "result": "A standalone product the team runs through its admin panel, serving an international audience.",
       "metrics": {
-        "automation": "Routine automated",
-        "ttm": "On-time launch"
+        "admin": "Powerful admin panel",
+        "international": "International product"
       },
-      "technologies": "Next.js, LLM API, TypeScript"
+      "technologies": "Next.js, TypeScript, AI/LLM, admin panel"
     },
     "python-guide": {
       "title": "Python Guide",
