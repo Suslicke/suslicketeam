@@ -27,6 +27,13 @@ test.describe("home page", () => {
       page.locator('a[href="https://loyrush.com"]').first(),
     ).toBeVisible();
 
+    // Live-projects section: "open site" links point to real, verifiable
+    // project URLs the visitor can open and check.
+    await expect(page.getByText("Живые проекты, а не")).toBeVisible();
+    await expect(
+      page.locator('a[href="https://exchange-bridge.com"]').first(),
+    ).toBeVisible();
+
     // FAQ accordion expands on click.
     const firstQuestion = page
       .getByRole("button", { name: /Сколько стоит/i })

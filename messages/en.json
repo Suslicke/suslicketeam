@@ -93,11 +93,11 @@
         }
       }
     },
-    "testimonials": {
-      "eyebrow": "Testimonials",
-      "title": "What clients say",
-      "subtitle": "Examples of feedback about working with the team.",
-      "disclaimer": "Sample testimonials — to be replaced with real ones."
+    "liveProjects": {
+      "eyebrow": "Live projects",
+      "title": "Don't take our word for it — open any project",
+      "subtitle": "Live projects, not mockups in screenshots. Every site is running right now — open it and check for yourself.",
+      "open": "Open site"
     },
     "faq": {
       "eyebrow": "Q&A",
@@ -234,25 +234,6 @@
         "speed": "Fast response"
       },
       "technologies": "Next.js, AI model, TypeScript"
-    }
-  },
-  "testimonials": {
-    "items": {
-      "one": {
-        "quote": "They did everything fast and headache-free. The site loads instantly and leads came in from the first week.",
-        "author": "Startup founder",
-        "role": "Almaty"
-      },
-      "two": {
-        "quote": "Clear timelines, clean communication and a strong result. We got a product we're proud to show investors.",
-        "author": "Product manager",
-        "role": "SaaS project"
-      },
-      "three": {
-        "quote": "They shipped AI features we'd only dreamed of. The team understood the task better than we did.",
-        "author": "CEO",
-        "role": "Fintech service"
-      }
     }
   },
   "faq": {
