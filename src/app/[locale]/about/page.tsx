@@ -9,6 +9,7 @@ import {
   Workflow,
 } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Breadcrumbs } from "@/components/sections/breadcrumbs";
@@ -116,12 +117,15 @@ export default async function AboutPage({
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-4xl px-4">
           <Reveal className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
-            {/* TODO: real photo — gradient initials avatar placeholder for now. */}
-            <div
-              aria-hidden="true"
-              className="flex size-28 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-brand/40 font-display text-4xl font-bold text-brand-foreground ring-1 ring-foreground/10"
-            >
-              {t("avatar_initials")}
+            <div className="relative aspect-[4/5] w-32 shrink-0 overflow-hidden rounded-2xl ring-1 ring-foreground/10 sm:w-44">
+              <Image
+                src="/founder.jpg"
+                alt={t("photo_alt")}
+                fill
+                sizes="(min-width: 640px) 176px, 128px"
+                className="object-cover object-[center_22%]"
+                priority
+              />
             </div>
             <div className="flex flex-col gap-3">
               <h2 className="font-display text-2xl font-bold tracking-tight">

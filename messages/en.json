@@ -447,7 +447,7 @@
     "eyebrow": "About",
     "title": "A team you can trust with your product",
     "intro_title": "About me and the team",
-    "intro": "My name is Andrei Pustovoi — I'm the founder and tech lead of the studio. I've shipped dozens of interfaces and products, from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a team of designers and developers that helps deliver complex work fast and well.",
+    "intro": "My name is Andrei Pustovoi — I am the founder and tech lead of the studio. I have shipped dozens of interfaces and products, from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a small but proven team of developers that helps deliver complex work fast and well.",
     "avatar_initials": "AP",
     "stack_title": "Our stack",
     "stack_subtitle": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable.",
@@ -474,9 +474,10 @@
       }
     },
     "team_title": "Founder plus a team",
-    "team": "You talk to me directly — no middle managers, no broken telephone. At the same time, every project is backed by a proven crew: design, frontend, backend and AI integrations. That gives you the speed of a small studio with the reliability of a full team.",
+    "team": "You talk to me directly — no middle managers, no broken telephone. Behind every project is a small but sharp team of developers: frontend, backend and AI integrations. Small, proven and quality — which means speed and personal accountability for the result.",
     "cta_title": "Tell us about your project",
-    "cta_subtitle": "Message me directly — I reply within an hour and can point you to the best way to solve it."
+    "cta_subtitle": "Message me directly — I reply within an hour and can point you to the best way to solve it.",
+    "photo_alt": "Andrei Pustovoi — founder of suslicketeam"
   },
   "contactPage": {
     "meta_title": "Contact — get in touch",
