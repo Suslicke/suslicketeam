@@ -4,6 +4,8 @@ declare global {
     gtag?: (...a: any[]) => void;
     posthog?: {
       capture: (n: string, p?: Record<string, unknown>) => void;
+      opt_in_capturing?: () => void;
+      opt_out_capturing?: () => void;
     };
   }
 }

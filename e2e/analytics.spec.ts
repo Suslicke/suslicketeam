@@ -27,4 +27,25 @@ test.describe("analytics", () => {
     await page.reload();
     expect(errors).toEqual([]);
   });
+
+  test("shows the consent banner and dismisses it on accept", async ({
+    page,
+  }) => {
+    await page.goto("/ru");
+
+    const banner = page.getByRole("dialog", { name: /cookie/i });
+    await expect(banner).toBeVisible();
+
+    await banner.getByRole("button", { name: "Принять" }).click();
+
+    // Banner hides and the decision is persisted, so it stays hidden on reload.
+    await expect(banner).toBeHidden();
+    const consent = await page.evaluate(() =>
+      window.localStorage.getItem("sl_consent"),
+    );
+    expect(consent).toBe("granted");
+
+    await page.reload();
+    await expect(page.getByRole("dialog", { name: /cookie/i })).toBeHidden();
+  });
 });

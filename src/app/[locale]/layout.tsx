@@ -4,6 +4,9 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { CloudflareAnalytics } from "@/components/analytics/cloudflare-analytics";
+import { ConsentBanner } from "@/components/analytics/consent-banner";
+import { GaScripts } from "@/components/analytics/ga-scripts";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
@@ -82,6 +85,8 @@ export default async function LocaleLayout({
       className={`${inter.variable} ${spaceGrotesk.variable}`}
     >
       <body className="antialiased">
+        <GaScripts />
+        <CloudflareAnalytics />
         <JsonLd data={organizationLd()} />
         <JsonLd data={websiteLd()} />
         <JsonLd data={localBusinessLd()} />
@@ -93,6 +98,7 @@ export default async function LocaleLayout({
                 <div className="flex-1">{children}</div>
                 <SiteFooter />
               </div>
+              <ConsentBanner />
             </PostHogProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

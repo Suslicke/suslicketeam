@@ -12,5 +12,11 @@
     "default_title": "suslicketeam — web development and digital solutions",
     "default_description": "The suslicketeam crew builds websites, web apps and digital products end to end.",
     "og_tagline": "Web development and digital solutions, end to end"
+  },
+  "consent": {
+    "title": "We use cookies",
+    "text": "We use analytics cookies to understand how you use the site and make it better. You can accept or decline them.",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }
