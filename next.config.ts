@@ -4,7 +4,12 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // The OpenNext Cloudflare adapter does not run Next.js' built-in image
+  // optimizer (/_next/image returns 400 on Workers). Serve images as-is.
+  // Our images (founder photo, etc.) are already sized/compressed at source.
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default withNextIntl(nextConfig);

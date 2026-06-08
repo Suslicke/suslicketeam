@@ -48,6 +48,7 @@ const STACK_GROUPS = [
     items: [
       { icon: Smartphone, label: "Flutter" },
       { icon: Smartphone, label: "React Native" },
+      { icon: Smartphone, label: "Swift" },
     ],
   },
   {
