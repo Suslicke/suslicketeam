@@ -46,7 +46,8 @@ export function personLd() {
   return {
     "@context": SCHEMA_CONTEXT,
     "@type": "Person",
-    name: "suslicke",
+    name: "Andrei Pustovoi",
+    jobTitle: "Founder & Tech Lead",
     url: siteConfig.url,
     worksFor: {
       "@type": "Organization",

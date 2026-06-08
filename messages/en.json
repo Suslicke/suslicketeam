@@ -159,7 +159,7 @@
       "title": "AnimeEnigma",
       "summary": "An anime streaming platform for watching anime online with a large content library.",
       "task": "Launch a streaming service that stays stable under load and serves a large library smoothly.",
-      "solution": "We built the platform on Next.js with PostgreSQL: an anime catalog and online viewing, optimized database queries and a smooth UX.",
+      "solution": "As part of a team, I helped build the platform on Next.js with PostgreSQL, focusing on the viewing interface and stability under load.",
       "result": "Stable performance under load and a large library of available content.",
       "metrics": {
         "load": "Stable under load",
@@ -171,7 +171,7 @@
       "title": "xaid.ai",
       "summary": "An AI-powered HealthTech product that automatically generates ready-to-sign CT reports reviewed by a radiologist.",
       "task": "Build a complex web portal and a powerful admin panel to manage reports, users and the clinical workflow.",
-      "solution": "We took part in building the portal: the AI analyzes 100+ CT findings (head, chest, abdomen) and produces full structured reports reviewed by an in-house radiologist; integration via DICOM/HL7 standards, HIPAA and ISO 27001 compliance. Behind the public site sits an admin panel for managing reports, users and workflow.",
+      "solution": "As part of a team, I contributed to the product: a Next.js web portal with a powerful admin panel, DICOM/HL7 integration and an AI layer that generates reports.",
       "result": "An international product with a powerful admin panel through which the team runs reports and the workflow.",
       "metrics": {
         "admin": "Powerful admin panel",
@@ -231,7 +231,7 @@
       "title": "AI Diagnostic",
       "summary": "An AI medical-imaging assistant for radiologists that helps detect pathologies on CT and MRI.",
       "task": "Give radiologists a tool that fits into existing infrastructure without a new system.",
-      "solution": "We took part in building the service: PACS integration with no new software, detection of 20+ pathologies, work with equipment from any manufacturer, and automated lesion localization and volume measurement.",
+      "solution": "As part of a team, I contributed to the assistant: PACS integration with no software install, pathology detection on CT/MRI, and a convenient interface for radiologists.",
       "result": "Deployed in Russia and participating in the Moscow Department of Health's computer-vision experiment.",
       "metrics": {
         "pacs": "PACS integration",
@@ -353,8 +353,8 @@
     "eyebrow": "About",
     "title": "A team you can trust with your product",
     "intro_title": "About me and the team",
-    "intro": "I'm suslicke — founder and tech lead of the studio. Behind me are dozens of shipped interfaces and products: from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a crew of designers and developers who help us ship complex things fast and well.",
-    "avatar_initials": "S",
+    "intro": "My name is Andrei Pustovoi — I'm the founder and tech lead of the studio. I've shipped dozens of interfaces and products, from landing pages to SaaS and AI services. I personally lead every project and own the result, backed by a team of designers and developers that helps deliver complex work fast and well.",
+    "avatar_initials": "AP",
     "stack_title": "Our stack",
     "stack_subtitle": "A modern stack chosen for the task — we pick technology to fit the product, not the other way around, so it stays fast and scalable.",
     "stack_groups": {

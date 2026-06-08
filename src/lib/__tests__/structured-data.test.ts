@@ -37,10 +37,10 @@ describe("structured-data builders", () => {
     expect(ld.inLanguage).toEqual(["ru", "kk", "en"]);
   });
 
-  test("personLd founder is suslicke", () => {
+  test("personLd founder is Andrei Pustovoi", () => {
     const ld = personLd();
     expect(ld["@type"]).toBe("Person");
-    expect(ld.name).toBe("suslicke");
+    expect(ld.name).toBe("Andrei Pustovoi");
   });
 
   test("websiteLd has no SearchAction", () => {
