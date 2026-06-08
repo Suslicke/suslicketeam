@@ -145,99 +145,99 @@
   "cases": {
     "suslicke": {
       "title": "suslicke.com",
-      "summary": "A personal portfolio site with a premium look and flawless performance.",
-      "task": "Build a personal site that stands out from template portfolios and loads instantly.",
-      "solution": "We designed and built the site on Next.js with a dark premium aesthetic, optimizing images and fonts.",
-      "result": "The site loads almost instantly and scores high on Lighthouse.",
+      "summary": "A developer's personal portfolio with a creative terminal-style interface and command-driven navigation.",
+      "task": "Build a memorable portfolio that stands out from template solutions and loads fast.",
+      "solution": "We built the site on Next.js with a CLI-like interface: command navigation (about, skills, experience, projects, contact) and an interactive hackme challenge.",
+      "result": "A distinctive terminal UX that sticks in memory, with fast-loading pages.",
       "metrics": {
-        "performance": "High Lighthouse",
-        "seo": "Clean indexing"
+        "ui": "Terminal interface",
+        "performance": "High performance"
       },
       "technologies": "Next.js, TypeScript, Tailwind CSS"
     },
     "animeenigma": {
       "title": "AnimeEnigma",
-      "summary": "A guessing-game platform for anime fans with a large content base.",
-      "task": "Launch an interactive game with fast loading and strong retention.",
-      "solution": "We built the game engine, optimized database queries and crafted a smooth mobile UX.",
-      "result": "Stable performance under load and growing player engagement.",
+      "summary": "An anime streaming platform for watching anime online with a large content library.",
+      "task": "Launch a streaming service that stays stable under load and serves a large library smoothly.",
+      "solution": "We built the platform on Next.js with PostgreSQL: an anime catalog and online viewing, optimized database queries and a smooth UX.",
+      "result": "Stable performance under load and a large library of available content.",
       "metrics": {
-        "retention": "High retention",
-        "load": "Fast loading"
+        "load": "Stable under load",
+        "library": "Large library"
       },
-      "technologies": "Next.js, PostgreSQL, TypeScript"
+      "technologies": "Next.js, PostgreSQL"
     },
     "xaid": {
       "title": "xaid.ai",
-      "summary": "A complex HealthTech web portal with a powerful admin panel and AI integration.",
-      "task": "Build a full-featured web portal with complex logic and convenient content and user management through an admin panel.",
-      "solution": "We built the portal on Next.js with a flexible admin panel, a considered UX and AI/LLM integration, designed to scale for an international audience.",
-      "result": "A standalone product the team runs through its admin panel, serving an international audience.",
+      "summary": "An AI-powered HealthTech product that automatically generates ready-to-sign CT reports reviewed by a radiologist.",
+      "task": "Build a complex web portal and a powerful admin panel to manage reports, users and the clinical workflow.",
+      "solution": "We took part in building the portal: the AI analyzes 100+ CT findings (head, chest, abdomen) and produces full structured reports reviewed by an in-house radiologist; integration via DICOM/HL7 standards, HIPAA and ISO 27001 compliance. Behind the public site sits an admin panel for managing reports, users and workflow.",
+      "result": "An international product with a powerful admin panel through which the team runs reports and the workflow.",
       "metrics": {
         "admin": "Powerful admin panel",
         "international": "International product"
       },
-      "technologies": "Next.js, TypeScript, AI/LLM, admin panel"
+      "technologies": "Web portal, AI, Admin panel, DICOM/HL7"
     },
     "python-guide": {
       "title": "Python Guide",
-      "summary": "An educational Python portal with a large body of structured content.",
-      "task": "Build a handy reference that ranks well in search.",
-      "solution": "We built the site on Next.js + MDX with thoughtful content structure and technical SEO.",
-      "result": "Growing organic traffic and stable search positions.",
+      "summary": "An educational resource for Python job-interview prep: questions and topics.",
+      "task": "Build a handy interview-prep reference that ranks well in search.",
+      "solution": "We built the site on Next.js and MDX with a thoughtful content structure around interview topics and technical SEO.",
+      "result": "Growing organic traffic and stable search rankings.",
       "metrics": {
-        "traffic": "Traffic growth",
-        "seo": "Top rankings"
+        "traffic": "Organic traffic",
+        "seo": "Search rankings"
       },
-      "technologies": "Next.js, MDX, TypeScript"
+      "technologies": "Next.js, MDX"
     },
     "web-interview": {
       "title": "Web Interview",
-      "summary": "A trainer for preparing for web development interviews.",
-      "task": "Create an interactive platform with questions and quizzes for developers.",
+      "summary": "web.drill — an interview-prep platform for web developers with a regularly growing question base.",
+      "task": "Create an interactive interview-prep platform that's easy to work through and to expand.",
       "solution": "We built a React interface with a question system, progress tracking and easy navigation.",
-      "result": "High engagement and a regularly growing question base.",
+      "result": "High user engagement and a regularly growing question base.",
       "metrics": {
-        "engagement": "High engagement",
-        "content": "Large question base"
+        "engagement": "Engagement",
+        "questions": "Growing question base"
       },
-      "technologies": "React, TypeScript"
+      "technologies": "React"
     },
     "loyrush": {
       "title": "LoyRush",
-      "summary": "A loyalty SaaS platform with subscriptions, a dashboard and payments.",
-      "task": "Build a sales-ready SaaS with billing, analytics and a convenient panel.",
-      "solution": "We built a multi-tenant platform on Next.js with subscriptions, a dashboard and payment integration.",
-      "result": "Shipped a working product with a subscription model and clear analytics for clients.",
+      "summary": "A loyalty and gamification SaaS: points, badges, leaderboards and challenges on a subscription model.",
+      "task": "Build a SaaS that retains clients through gamification and gives them clear analytics.",
+      "solution": "We built the frontend on Vue: loyalty mechanics (points, badges, leaderboards, challenges), a subscription model and a dashboard with analytics for clients.",
+      "result": "A working product with a subscription model and clear analytics for clients.",
       "metrics": {
-        "conversion": "Conversion growth",
-        "retention": "Client retention"
+        "subscription": "Subscription model",
+        "analytics": "Analytics for clients"
       },
-      "technologies": "Next.js, Stripe, PostgreSQL, TypeScript"
+      "technologies": "Vue, SaaS"
     },
     "exchange-bridge": {
       "title": "Exchange Bridge",
-      "summary": "A fintech service for exchange and transfers focused on reliability.",
-      "task": "Build a stable fintech product with secure transactions and high availability.",
-      "solution": "We designed a fault-tolerant architecture with a reliable API and well-thought-out operation safeguards.",
-      "result": "Stable service operation and smooth transaction processing.",
+      "summary": "A fintech comparison service for international money transfers: compare options and save.",
+      "task": "Let users quickly compare ways to send money abroad and pick the cheapest one.",
+      "solution": "We built a comparison service across transfer options — P2P crypto, banks, Wise, Revolut — with real-time rates (150+ currency pairs, refreshed roughly every 30 seconds), hidden-fee detection, risk scoring and a live comparison dashboard.",
+      "result": "Transparent real-time comparison that helps people save on international transfers.",
       "metrics": {
-        "uptime": "High availability",
-        "volume": "Stable operations"
+        "realtime": "Real-time rates",
+        "savings": "Savings on transfers"
       },
-      "technologies": "Next.js, REST API, TypeScript"
+      "technologies": "Fintech, Money Transfer, Real-time, Dashboard"
     },
     "ai-diagnostic": {
       "title": "AI Diagnostic",
-      "summary": "An AI service for preliminary diagnostics in the health space.",
-      "task": "Wrap an AI model in a simple, fast interface for end users.",
-      "solution": "We built a web service on Next.js with AI-model integration and a fast, clear diagnostic flow.",
-      "result": "Fast results and a simple user path from request to answer.",
+      "summary": "An AI medical-imaging assistant for radiologists that helps detect pathologies on CT and MRI.",
+      "task": "Give radiologists a tool that fits into existing infrastructure without a new system.",
+      "solution": "We took part in building the service: PACS integration with no new software, detection of 20+ pathologies, work with equipment from any manufacturer, and automated lesion localization and volume measurement.",
+      "result": "Deployed in Russia and participating in the Moscow Department of Health's computer-vision experiment.",
       "metrics": {
-        "accuracy": "Accurate results",
-        "speed": "Fast response"
+        "pacs": "PACS integration",
+        "pathologies": "20+ pathologies"
       },
-      "technologies": "Next.js, AI model, TypeScript"
+      "technologies": "AI, PACS, Radiology"
     }
   },
   "faq": {
