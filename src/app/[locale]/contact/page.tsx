@@ -1,4 +1,4 @@
-import { Clock } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -96,6 +96,23 @@ export default async function ContactPage({
                 {t("hours_title")}
               </h2>
               <p className="text-sm text-muted-foreground">{t("hours")}</p>
+            </div>
+          </Reveal>
+
+          {/* Current location — territorially based in Almaty, with the date this
+              presence info was last confirmed. */}
+          <Reveal className="mt-4 flex items-start gap-3 rounded-xl border border-border/60 bg-card/40 p-5">
+            <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+              <MapPin className="size-5" />
+            </span>
+            <div className="flex flex-col gap-1">
+              <h2 className="font-display text-base font-semibold">
+                {t("location_title")}
+              </h2>
+              <p className="text-sm text-muted-foreground">{t("location")}</p>
+              <p className="mt-1 text-xs text-muted-foreground/70">
+                {t("location_updated")}
+              </p>
             </div>
           </Reveal>
         </div>

@@ -495,6 +495,9 @@
     "subtitle": "The fastest way is a message. We reply within an hour during working hours.",
     "hours_title": "Response time",
     "hours": "Mon–Sat, 09:00–21:00 (GMT+5). We usually reply within an hour; Sundays are a little slower.",
+    "location_title": "Where we are",
+    "location": "Currently based in Almaty, Kazakhstan (GMT+5). In-person meetings are possible in Almaty; we work remotely with clients across Kazakhstan and worldwide.",
+    "location_updated": "Updated June 2026",
     "form_placeholder_title": "A lead form is coming soon",
     "form_placeholder_text": "For now the fastest way to reach us is the messenger above. Soon you'll be able to send a request right here on the site."
   },
@@ -562,13 +565,13 @@
       },
       "law": {
         "title": "Governing law",
-        "body": "This policy is governed by the laws of the Republic of Kazakhstan."
+        "body": "The law applicable to this policy is set out in the separate agreement for your project. In all cases, we process analytics data only with your consent."
       }
     }
   },
   "terms": {
     "meta_title": "Terms of Use",
-    "meta_description": "suslicketeam terms: fixed price and timeline, all code rights transfer to the client, governing law — Republic of Kazakhstan.",
+    "meta_description": "suslicketeam terms: fixed price and timeline, all code rights transfer to the client; project-specific terms set in a separate agreement.",
     "eyebrow": "Legal",
     "title": "Terms of Use",
     "intro": "These terms describe how we work on projects and the principles our cooperation is built on. The specific agreements for your project are recorded separately before we start.",
@@ -592,7 +595,7 @@
       },
       "law": {
         "title": "Governing law",
-        "body": "These terms are governed by the laws of the Republic of Kazakhstan."
+        "body": "The applicable law and the way any disputes are resolved are set out in the separate agreement we sign before each project."
       },
       "contact": {
         "title": "Contact",
