@@ -8,3 +8,10 @@ const nextConfig: NextConfig = {
 };
 
 export default withNextIntl(nextConfig);
+
+// Initialize the OpenNext Cloudflare context for local `next dev` so that
+// Cloudflare bindings (env vars, ASSETS, etc.) are available during development.
+// This is a no-op outside of `next dev`.
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+initOpenNextCloudflareForDev();
