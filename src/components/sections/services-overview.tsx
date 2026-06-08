@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { ServiceCard } from "@/components/sections/service-card";
 import { getServices } from "@/lib/content";
@@ -23,9 +23,9 @@ export async function ServicesOverview() {
           subtitle={t("subtitle")}
         />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <Reveal as="li" key={service.slug} delay={i * 0.06}>
+        <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
+            <StaggerItem as="li" key={service.slug}>
               <ServiceCard
                 slug={service.slug}
                 icon={service.icon}
@@ -33,9 +33,9 @@ export async function ServicesOverview() {
                 tagline={ts(`${service.slug}.tagline`)}
                 cta={t("cta")}
               />
-            </Reveal>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </div>
     </section>
   );

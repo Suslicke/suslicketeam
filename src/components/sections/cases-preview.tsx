@@ -1,9 +1,10 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { CaseCard } from "@/components/sections/case-card";
 import { SectionHeading } from "@/components/sections/section-heading";
-import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { getFeaturedCases } from "@/lib/content";
 
@@ -25,56 +26,22 @@ export async function CasesPreview() {
           subtitle={t("subtitle")}
         />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2">
-          {featured.map((c, i) => (
-            <Reveal as="li" key={c.slug} delay={i * 0.06}>
-              <Card className="h-full gap-4 p-6 transition-all hover:-translate-y-1 hover:ring-brand/40">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-xl font-semibold">
-                    {tc(`${c.slug}.title`)}
-                  </h3>
-                  <span className="shrink-0 text-xs text-muted-foreground">
-                    {c.year}
-                  </span>
-                </div>
-
-                <p className="text-sm text-muted-foreground">
-                  {tc(`${c.slug}.result`)}
-                </p>
-
-                <ul className="flex flex-wrap gap-2">
-                  {c.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="rounded-full border border-border/70 px-2.5 py-0.5 text-xs text-muted-foreground"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-auto flex items-center gap-4 pt-2 text-sm font-medium">
-                  <Link
-                    href={`/cases/${c.slug}`}
-                    className="inline-flex items-center gap-1 text-brand hover:underline"
-                  >
-                    {t("details")}
-                    <ArrowRight className="size-4" />
-                  </Link>
-                  <a
-                    href={c.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
-                  >
-                    {t("live")}
-                    <ExternalLink className="size-3.5" />
-                  </a>
-                </div>
-              </Card>
-            </Reveal>
+        <Stagger className="mt-14 grid gap-5 sm:grid-cols-2">
+          {featured.map((c) => (
+            <StaggerItem as="li" key={c.slug}>
+              <CaseCard
+                slug={c.slug}
+                title={tc(`${c.slug}.title`)}
+                result={tc(`${c.slug}.result`)}
+                tags={c.tags}
+                year={c.year}
+                url={c.url}
+                detailsLabel={t("details")}
+                liveLabel={t("live")}
+              />
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
 
         <Reveal className="mt-12 flex justify-center">
           <Link

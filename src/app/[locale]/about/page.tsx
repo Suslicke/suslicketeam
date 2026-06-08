@@ -13,6 +13,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Breadcrumbs } from "@/components/sections/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
+import { CountUp } from "@/components/motion/count-up";
 import { PageCta } from "@/components/sections/page-cta";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/sections/section-heading";
@@ -142,9 +143,10 @@ export default async function AboutPage({
             {FACT_KEYS.map((key, i) => (
               <Reveal as="li" key={key} delay={i * 0.06}>
                 <div className="flex h-full flex-col gap-2 rounded-xl border border-border/60 bg-card/40 p-6">
-                  <span className="font-display text-3xl font-bold text-brand">
-                    {t(`facts.${key}.value`)}
-                  </span>
+                  <CountUp
+                    value={t(`facts.${key}.value`)}
+                    className="font-display text-3xl font-bold text-brand"
+                  />
                   <span className="text-sm text-muted-foreground">
                     {t(`facts.${key}.label`)}
                   </span>

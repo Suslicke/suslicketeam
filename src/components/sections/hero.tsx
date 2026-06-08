@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { AuroraMount } from "@/components/hero/aurora-mount";
 import { ConstellationMount } from "@/components/hero/constellation-mount";
 import { MessengerCTA } from "@/components/messenger-cta";
+import { CtaGlow } from "@/components/motion/cta-glow";
 
 /**
  * Home hero. Rendered as a Server Component so the headline + CTAs are present in
@@ -42,12 +43,14 @@ export async function Hero() {
         </p>
 
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <MessengerCTA
-            channel="whatsapp"
-            size="lg"
-            className="h-11 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
-            label={t("cta_primary")}
-          />
+          <CtaGlow>
+            <MessengerCTA
+              channel="whatsapp"
+              size="lg"
+              className="h-11 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
+              label={t("cta_primary")}
+            />
+          </CtaGlow>
           <MessengerCTA
             channel="telegram"
             variant="outline"

@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { Card } from "@/components/ui/card";
 import type { CaseSlug } from "@/content/cases";
@@ -41,9 +41,9 @@ export async function LiveProjects() {
           subtitle={t("subtitle")}
         />
 
-        <ul className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {projects.map((project, i) => (
-            <Reveal as="li" key={project.slug} delay={i * 0.04}>
+        <Stagger className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {projects.map((project) => (
+            <StaggerItem as="li" key={project.slug}>
               <Card className="h-full gap-3 p-5 transition-all hover:-translate-y-1 hover:ring-brand/40">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-display text-base font-semibold text-balance">
@@ -64,9 +64,9 @@ export async function LiveProjects() {
                   <ExternalLink className="size-3.5" aria-hidden="true" />
                 </a>
               </Card>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </div>
     </section>
   );
