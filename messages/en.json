@@ -16,9 +16,9 @@
   },
   "meta": {
     "site_name": "suslicketeam",
-    "default_title": "suslicketeam — web & app development in Kazakhstan",
-    "default_description": "The suslicketeam crew in Kazakhstan builds websites, web apps and digital products end to end. Based in Almaty, working remotely worldwide.",
-    "og_tagline": "Web development and digital solutions, end to end"
+    "default_title": "suslicketeam — web, mobile & AI development in Kazakhstan",
+    "default_description": "The suslicketeam studio in Kazakhstan builds websites, web & mobile apps, AI solutions and digital products end to end. Based in Almaty, working remotely worldwide.",
+    "og_tagline": "Development and digital solutions, end to end"
   },
   "consent": {
     "title": "We use cookies",
@@ -28,7 +28,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Web development studio · Kazakhstan & worldwide",
+      "eyebrow": "Development studio · Kazakhstan & worldwide",
       "headline": "Websites and web apps that bring you clients",
       "headline_alt": "We turn ideas into digital products that sell",
       "subhead": "We design, build and ship websites, web apps and AI solutions end to end — fast, transparent and focused on results.",
@@ -338,7 +338,7 @@
     }
   },
   "servicesPage": {
-    "meta_title": "Services — web development, web apps and AI in Kazakhstan",
+    "meta_title": "Services — web, mobile & AI development in Kazakhstan",
     "meta_description": "Full-cycle digital services in Kazakhstan: landing pages, web apps, AI solutions, mobile apps and SEO. From idea to launch, end to end.",
     "eyebrow": "Services",
     "title": "What we do",

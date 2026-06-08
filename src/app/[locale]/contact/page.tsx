@@ -74,14 +74,14 @@ export default async function ContactPage({
             <MessengerCTA
               channel="whatsapp"
               size="lg"
-              className="h-12 flex-1 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
+              className="h-14 w-full px-6 text-base font-medium sm:h-12 sm:w-auto sm:flex-1 bg-brand text-brand-foreground hover:bg-brand/90"
               label={tc("cta_whatsapp")}
             />
             <MessengerCTA
               channel="telegram"
               variant="outline"
               size="lg"
-              className="h-12 flex-1 px-6 text-base"
+              className="h-14 w-full px-6 text-base font-medium sm:h-12 sm:w-auto sm:flex-1"
               label={tc("cta_telegram")}
             />
           </Reveal>
