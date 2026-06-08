@@ -16,6 +16,15 @@ export function organizationLd() {
     legalName: "Individual Entrepreneur ANDREI PUSTOVOI",
     identifier: "305638389",
     foundingDate: "2023-08-01",
+    // Registered office of the legal entity (Georgia). The Almaty location lives
+    // on the LocalBusiness node — that is a personal presence / service area,
+    // not a registered place of business in Kazakhstan.
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Levan Mikeladze Street 19, Floor 15, Apartment 26",
+      addressLocality: "Tbilisi",
+      addressCountry: "GE",
+    },
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon.png`,
     sameAs: [

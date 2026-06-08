@@ -497,7 +497,7 @@
     "hours_title": "Response time",
     "hours": "Mon–Sat, 09:00–21:00 (GMT+5). We usually reply within an hour; Sundays are a little slower.",
     "location_title": "Where we are",
-    "location": "Currently based in Almaty, Kazakhstan (GMT+5). In-person meetings are possible in Almaty; we work remotely with clients across Kazakhstan and worldwide.",
+    "location": "We're personally located in Almaty, Kazakhstan (GMT+5) and can meet in person here. The studio is registered as an individual entrepreneur in Georgia, not in Kazakhstan; we work remotely with clients across Kazakhstan and worldwide.",
     "location_updated": "Updated June 2026",
     "form_placeholder_title": "A lead form is coming soon",
     "form_placeholder_text": "For now the fastest way to reach us is the messenger above. Soon you'll be able to send a request right here on the site."
@@ -546,7 +546,7 @@
     "sections": {
       "controller": {
         "title": "Who we are",
-        "body": "This site is operated by suslicketeam — registered as Individual Entrepreneur ANDREI PUSTOVOI (ID 305638389). We decide how and why the limited data described here is processed. You can reach us via the WhatsApp and Telegram contacts in the site header and footer."
+        "body": "This site is operated by suslicketeam — registered as Individual Entrepreneur ANDREI PUSTOVOI (ID 305638389) in Georgia. We decide how and why the limited data described here is processed. You can reach us via the WhatsApp and Telegram contacts in the site header and footer."
       },
       "data": {
         "title": "What data we collect",
@@ -554,7 +554,7 @@
       },
       "analytics": {
         "title": "Analytics and cookies",
-        "body": "Google Analytics 4 and PostHog load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies. We also use Cloudflare Web Analytics, which is cookieless and does not profile individual visitors. You can decline, and cookie-based analytics stays off."
+        "body": "Google Analytics 4 and PostHog load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies, and they run solely on your consent. We also use Cloudflare Web Analytics, which is cookieless, sets no cookies and does not profile individual visitors; it runs on our legitimate interest in site security and aggregate statistics. You can decline, and cookie-based analytics stays off."
       },
       "use": {
         "title": "Why we use this data (legal basis)",
@@ -566,7 +566,7 @@
       },
       "retention": {
         "title": "How long we keep data",
-        "body": "Anonymised analytics are kept only as long as needed for statistics and trend analysis, after which they are aggregated or deleted in line with the providers' retention settings. If you contact us via messengers, we keep that correspondence only as long as needed to answer you and for our records."
+        "body": "We keep anonymised analytics only as long as needed for statistics and trend analysis — typically up to 14 months — after which they are aggregated or deleted in line with the providers' retention settings. If you contact us via messengers, we keep that correspondence only as long as needed to answer you and for our records."
       },
       "transfers": {
         "title": "International data transfers",
@@ -578,7 +578,7 @@
       },
       "rights": {
         "title": "Your rights",
-        "body": "Depending on your location, you may have rights to access, correct, delete or restrict processing of data relating to you, and to withdraw consent. To exercise them, message us on WhatsApp or Telegram and we will handle the request. You can also change analytics consent at any time via the cookie banner."
+        "body": "Depending on your location, you may have rights to access, correct, delete or restrict processing of data relating to you, and to withdraw consent. To exercise them, message us on WhatsApp or Telegram and we will handle the request. You can also change analytics consent at any time via the cookie banner. If you are in the EEA or UK, you also have the right to lodge a complaint with your local data-protection authority."
       },
       "children": {
         "title": "Children",
@@ -610,9 +610,17 @@
         "title": "What we do",
         "body": "We provide custom development services — websites, web and mobile apps, AI solutions, automation and related work. The exact scope, deliverables, price and timeline of each project are agreed individually and recorded in a separate written agreement before we start."
       },
+      "acceptance": {
+        "title": "Acceptance of these terms",
+        "body": "By accessing or using this website, you confirm that you have read and agree to these Terms of Use, our Privacy Policy and our Refund Policy. If you do not agree, please do not use the site. These terms apply to your use of the website; a paid engagement is governed in addition by the separate agreement we sign for your project."
+      },
       "offer": {
         "title": "Not a public offer",
         "body": "The information on this website is for general reference only and is not a public offer or a binding proposal. A binding relationship arises only from a separate agreement signed for your specific project."
+      },
+      "audience": {
+        "title": "Who our services are for",
+        "body": "Our services are offered to businesses and professional clients, not to consumers. If you nevertheless engage us as a consumer, your mandatory consumer rights continue to apply and prevail over any conflicting term here."
       },
       "pricing": {
         "title": "Price and timeline",
@@ -624,7 +632,7 @@
       },
       "clientDuties": {
         "title": "Your responsibilities",
-        "body": "You agree to provide accurate information, the materials and access we need, and timely feedback. You confirm you hold the rights to any content you give us and that it does not break the law or infringe third-party rights. Delays in materials or feedback may affect the timeline."
+        "body": "You agree to provide accurate information, the materials and access we need, and timely feedback. You confirm you hold the rights to any content you give us and that it does not break the law or infringe third-party rights. You agree to indemnify us against third-party claims, losses and reasonable costs arising from materials or content you provide, or from your unlawful use of the deliverables. Delays in materials or feedback may affect the timeline."
       },
       "warranty": {
         "title": "Warranties and disclaimers",
@@ -638,9 +646,13 @@
         "title": "Third-party services",
         "body": "Projects and this website may rely on third-party services (such as hosting, analytics, payment or AI providers). Their own terms and availability apply, and we are not responsible for their acts, outages or changes beyond our reasonable control."
       },
+      "forceMajeure": {
+        "title": "Events beyond our control",
+        "body": "Neither party is liable for delay or failure to perform caused by events beyond its reasonable control — including outages, infrastructure or third-party provider failures, network issues, or other force-majeure events. Affected obligations are paused while the event continues."
+      },
       "law": {
         "title": "Governing law and disputes",
-        "body": "The law applicable to our cooperation and the way any disputes are resolved are set out in the separate agreement we sign before each project. We always aim to resolve any issue through direct, good-faith discussion first."
+        "body": "By using this website you agree to these terms (see “Acceptance of these terms”). For matters relating to use of this website itself — as opposed to a specific paid project — these policies are governed by the laws of Georgia, where the studio is registered, without prejudice to any mandatory laws of your country of residence. The law governing a specific project, and the way project disputes are resolved, is set out in that project's separate agreement. We always aim to resolve any issue first through direct, good-faith discussion."
       },
       "changes": {
         "title": "Changes to these terms",
@@ -662,7 +674,7 @@
       "reg_date": "1 August 2023",
       "address_label": "Legal address",
       "address": "Georgia, Tbilisi, Vake District, Levan Mikeladze Street 19, Floor 15, Apartment 26, Entrance \"P\"",
-      "note": "The entity is registered in Georgia; we work with clients in Kazakhstan and worldwide. Project-specific terms are recorded in a separate agreement."
+      "note": "The entity is registered as an individual entrepreneur in Georgia. We are personally located in Almaty, Kazakhstan (in-person meetings possible) — this is a personal presence, not a registered place of business — and we work with clients worldwide. Project-specific terms are recorded in a separate agreement."
     }
   },
   "errors": {

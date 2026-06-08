@@ -35,6 +35,9 @@ describe("structured-data builders", () => {
     expect(ld.legalName).toBe("Individual Entrepreneur ANDREI PUSTOVOI");
     expect(ld.identifier).toBe("305638389");
     expect(ld.foundingDate).toBe("2023-08-01");
+    // Legal entity is registered in Georgia (distinct from the Almaty LocalBusiness).
+    expect(ld.address.addressCountry).toBe("GE");
+    expect(ld.address.addressLocality).toBe("Tbilisi");
   });
 
   test("localBusinessLd serves Almaty + Kazakhstan in ru/kk/en", () => {
