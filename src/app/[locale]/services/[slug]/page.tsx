@@ -23,11 +23,11 @@ const PROCESS_STEPS = ["discovery", "design", "build", "launch"] as const;
  * heuristic to surface the most relevant portfolio work on each detail page.
  */
 const RELEVANT_TAGS: Record<string, readonly string[]> = {
-  landing: ["Next.js", "Tailwind", "MDX", "Education"],
-  "web-apps": ["SaaS", "Dashboard", "Payments", "PostgreSQL", "Web3", "API"],
-  ai: ["AI", "LLM"],
-  mobile: ["Game", "React"],
-  seo: ["MDX", "Education", "Next.js"],
+  landing: ["Next.js", "Tailwind", "TypeScript", "Terminal UI", "MDX", "Education"],
+  "web-apps": ["SaaS", "Дашборд", "Web-портал", "Админ-панель", "Vue", "PostgreSQL", "Стриминг"],
+  ai: ["AI", "DICOM/HL7", "PACS"],
+  mobile: ["React"],
+  seo: ["MDX", "Education", "Next.js", "Собеседования"],
 };
 
 export function generateStaticParams() {
