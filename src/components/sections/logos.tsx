@@ -1,16 +1,20 @@
 import { getTranslations } from "next-intl/server";
 
+import { Marquee } from "@/components/sections/marquee";
 import { Reveal } from "@/components/motion/reveal";
-import { getFeaturedCases } from "@/lib/content";
+import { CASE_DISPLAY_NAMES } from "@/content/cases";
+import { getCases } from "@/lib/content";
 
 /**
- * Trust strip — a tasteful, text-based wordmark row of the featured cases. Each
- * wordmark links out to the live project (new tab, `rel="noopener"`).
+ * Trust strip — a subtle, continuously-scrolling marquee of every live project
+ * wordmark. Distinct from the `live-projects` grid (which is the verifiable,
+ * linked card grid); this is a low-key brand-muted ribbon for at-a-glance proof
+ * of breadth. CSS-only scroll, pauses on hover, static under reduced motion.
  */
 export async function Logos() {
   const t = await getTranslations("home.logos");
-  const tc = await getTranslations("cases");
-  const featured = getFeaturedCases();
+  const projects = getCases();
+  const names = projects.map((c) => CASE_DISPLAY_NAMES[c.slug]);
 
   return (
     <section className="border-b border-border/60 py-12">
@@ -19,20 +23,7 @@ export async function Logos() {
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             {t("title")}
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-            {featured.map((c) => (
-              <li key={c.slug}>
-                <a
-                  href={c.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-display text-xl font-semibold text-muted-foreground/70 transition-colors hover:text-foreground"
-                >
-                  {tc(`${c.slug}.title`)}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <Marquee items={names} className="w-full" />
         </Reveal>
       </div>
     </section>

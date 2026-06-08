@@ -29,6 +29,22 @@ export interface CaseItem {
   year: number;
 }
 
+/**
+ * Human-facing display names per case slug (brand names, rendered verbatim — not
+ * translated). Used by the live-projects grid and the home marquee. The `slug`
+ * stays the routing key.
+ */
+export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
+  suslicke: "suslicke.com",
+  animeenigma: "AnimeEnigma",
+  xaid: "xaid.ai",
+  "python-guide": "Python Guide",
+  "web-interview": "Web Interview",
+  loyrush: "LoyRush",
+  "exchange-bridge": "Exchange Bridge",
+  "ai-diagnostic": "AI Diagnostic",
+};
+
 export const cases: readonly CaseItem[] = [
   {
     slug: "suslicke",

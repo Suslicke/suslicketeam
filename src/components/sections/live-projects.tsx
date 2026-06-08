@@ -4,23 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { Card } from "@/components/ui/card";
-import type { CaseSlug } from "@/content/cases";
+import { CASE_DISPLAY_NAMES } from "@/content/cases";
 import { getCases } from "@/lib/content";
-
-/**
- * Readable display names per case slug. The structural `slug` stays the routing
- * key; this is just the human-facing label shown in the verify-it-yourself grid.
- */
-const DISPLAY_NAMES: Record<CaseSlug, string> = {
-  suslicke: "suslicke.com",
-  animeenigma: "AnimeEnigma",
-  xaid: "xaid.ai",
-  "python-guide": "Python Guide",
-  "web-interview": "Web Interview",
-  loyrush: "LoyRush",
-  "exchange-bridge": "Exchange Bridge",
-  "ai-diagnostic": "AI Diagnostic",
-};
 
 /**
  * Honest social proof: a dense grid of every live project the visitor can open
@@ -47,7 +32,7 @@ export async function LiveProjects() {
               <Card className="h-full gap-3 p-5 transition-all hover:-translate-y-1 hover:ring-brand/40">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-display text-base font-semibold text-balance">
-                    {DISPLAY_NAMES[project.slug]}
+                    {CASE_DISPLAY_NAMES[project.slug]}
                   </h3>
                   <span className="shrink-0 text-xs text-muted-foreground">
                     {project.year}
