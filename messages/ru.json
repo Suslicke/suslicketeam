@@ -1,0 +1,15 @@
+{
+  "common": {
+    "services": "Услуги",
+    "cases": "Кейсы",
+    "about": "О нас",
+    "contact": "Контакты",
+    "cta_whatsapp": "Написать в WhatsApp",
+    "cta_telegram": "Написать в Telegram"
+  },
+  "meta": {
+    "site_name": "suslicketeam",
+    "default_title": "suslicketeam — веб-разработка и digital-решения",
+    "default_description": "Команда suslicketeam создаёт сайты, веб-приложения и digital-продукты под ключ."
+  }
+}

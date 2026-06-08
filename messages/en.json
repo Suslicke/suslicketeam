@@ -1,0 +1,15 @@
+{
+  "common": {
+    "services": "Services",
+    "cases": "Cases",
+    "about": "About",
+    "contact": "Contact",
+    "cta_whatsapp": "Message on WhatsApp",
+    "cta_telegram": "Message on Telegram"
+  },
+  "meta": {
+    "site_name": "suslicketeam",
+    "default_title": "suslicketeam — web development and digital solutions",
+    "default_description": "The suslicketeam crew builds websites, web apps and digital products end to end."
+  }
+}

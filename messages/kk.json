@@ -1,0 +1,15 @@
+{
+  "common": {
+    "services": "Қызметтер",
+    "cases": "Кейстер",
+    "about": "Біз туралы",
+    "contact": "Байланыс",
+    "cta_whatsapp": "WhatsApp-қа жазу",
+    "cta_telegram": "Telegram-ға жазу"
+  },
+  "meta": {
+    "site_name": "suslicketeam",
+    "default_title": "suslicketeam — веб-әзірлеу және digital-шешімдер",
+    "default_description": "suslicketeam командасы сайттарды, веб-қосымшаларды және digital-өнімдерді кілтін салып жасайды."
+  }
+}
