@@ -10,6 +10,7 @@
   "meta": {
     "site_name": "suslicketeam",
     "default_title": "suslicketeam — веб-әзірлеу және digital-шешімдер",
-    "default_description": "suslicketeam командасы сайттарды, веб-қосымшаларды және digital-өнімдерді кілтін салып жасайды."
+    "default_description": "suslicketeam командасы сайттарды, веб-қосымшаларды және digital-өнімдерді кілтін салып жасайды.",
+    "og_tagline": "Веб-әзірлеу және digital-шешімдер"
   }
 }

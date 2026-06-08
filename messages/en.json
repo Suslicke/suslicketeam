@@ -10,6 +10,7 @@
   "meta": {
     "site_name": "suslicketeam",
     "default_title": "suslicketeam — web development and digital solutions",
-    "default_description": "The suslicketeam crew builds websites, web apps and digital products end to end."
+    "default_description": "The suslicketeam crew builds websites, web apps and digital products end to end.",
+    "og_tagline": "Web development and digital solutions, end to end"
   }
 }

@@ -10,6 +10,7 @@
   "meta": {
     "site_name": "suslicketeam",
     "default_title": "suslicketeam — веб-разработка и digital-решения",
-    "default_description": "Команда suslicketeam создаёт сайты, веб-приложения и digital-продукты под ключ."
+    "default_description": "Команда suslicketeam создаёт сайты, веб-приложения и digital-продукты под ключ.",
+    "og_tagline": "Веб-разработка и digital-решения под ключ"
   }
 }
