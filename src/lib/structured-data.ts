@@ -111,6 +111,50 @@ export function serviceLd({ name, description, url }: ServiceLdArgs) {
   };
 }
 
+export interface CreativeWorkLdArgs {
+  /** Project name. */
+  name: string;
+  /** Short summary / abstract of the project. */
+  description: string;
+  /** Canonical URL of the case detail page. */
+  url: string;
+  /** Live production URL the project is about. */
+  about: string;
+  /** Tech/stack keywords. */
+  keywords: readonly string[];
+  /** Year the project shipped. */
+  year: number;
+}
+
+/**
+ * CreativeWork schema for a portfolio project. `url` is the case detail page;
+ * `sameAs` points at the live production site the work is about.
+ */
+export function creativeWorkLd({
+  name,
+  description,
+  url,
+  about,
+  keywords,
+  year,
+}: CreativeWorkLdArgs) {
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "CreativeWork",
+    name,
+    description,
+    url,
+    sameAs: about,
+    keywords: [...keywords].join(", "),
+    datePublished: String(year),
+    creator: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: siteConfig.url,
+    },
+  };
+}
+
 export interface FaqItem {
   question: string;
   answer: string;
