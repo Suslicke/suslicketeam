@@ -1,6 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const baseURL = "http://localhost:3000";
+// Allow targeting an already-running server (e.g. a fresh `pnpm start` on an
+// alternate port) by setting PLAYWRIGHT_BASE_URL. When set, Playwright skips
+// spawning its own dev server.
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000";
+const useExternalServer = !!process.env.PLAYWRIGHT_BASE_URL;
 
 export default defineConfig({
   testDir: "e2e",
@@ -18,10 +22,14 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
   ],
-  webServer: {
-    command: "pnpm dev",
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  ...(useExternalServer
+    ? {}
+    : {
+        webServer: {
+          command: "pnpm dev",
+          url: baseURL,
+          reuseExistingServer: !process.env.CI,
+          timeout: 120 * 1000,
+        },
+      }),
 });
