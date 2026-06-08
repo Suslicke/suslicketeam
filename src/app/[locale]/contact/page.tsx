@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Breadcrumbs } from "@/components/sections/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
+import { LeadForm } from "@/components/lead-form";
 import { MessengerCTA } from "@/components/messenger-cta";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/sections/section-heading";
@@ -99,16 +100,9 @@ export default async function ContactPage({
             </div>
           </Reveal>
 
-          {/* Phase 6: <LeadForm/> goes here */}
+          {/* Lead form (Phase 6) */}
           <Reveal className="mt-8">
-            <div className="flex flex-col items-center gap-2 rounded-xl border border-dashed border-border/70 bg-card/20 px-6 py-12 text-center">
-              <h2 className="font-display text-lg font-semibold">
-                {t("form_placeholder_title")}
-              </h2>
-              <p className="max-w-md text-pretty text-sm text-muted-foreground">
-                {t("form_placeholder_text")}
-              </p>
-            </div>
+            <LeadForm />
           </Reveal>
         </div>
       </section>

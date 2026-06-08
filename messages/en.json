@@ -402,5 +402,48 @@
     "hours": "Mon–Fri, 10:00–20:00 (GMT+5). We usually reply within an hour; weekends are a little slower.",
     "form_placeholder_title": "A lead form is coming soon",
     "form_placeholder_text": "For now the fastest way to reach us is the messenger above. Soon you'll be able to send a request right here on the site."
+  },
+  "leadForm": {
+    "heading": "Send a request",
+    "subheading": "Fill out the form — we will get back to you within an hour during working hours.",
+    "name_label": "Name",
+    "name_placeholder": "What should we call you",
+    "contact_label": "Contact",
+    "contact_placeholder": "Phone, WhatsApp or @username",
+    "projectType_label": "Project type",
+    "projectType_placeholder": "Choose a project type",
+    "message_label": "Message",
+    "message_placeholder": "Briefly describe your task (optional)",
+    "optional": "optional",
+    "submit": "Send request",
+    "submitting": "Sending…",
+    "success_title": "Request sent!",
+    "success_text": "Thank you! We will get in touch with you shortly.",
+    "error_title": "Could not send",
+    "error_text": "Something went wrong. Please try again or message us directly.",
+    "retry": "Try again",
+    "projectTypes": {
+      "landing": "Landing page",
+      "web-apps": "Web app",
+      "ai": "AI solution",
+      "mobile": "Mobile app",
+      "seo": "SEO",
+      "other": "Other"
+    },
+    "errors": {
+      "name": "Enter your name (at least 2 characters)",
+      "contact": "Provide a way to reach you",
+      "projectType": "Choose a project type",
+      "generic": "Please check this field"
+    }
+  },
+  "errors": {
+    "notFound_title": "Page not found",
+    "notFound_message": "The link may be outdated or the page may have moved.",
+    "home": "Go home",
+    "cta_hint": "Or message us directly:",
+    "error_title": "Something went wrong",
+    "error_message": "An error occurred. We have been notified — try reloading the page.",
+    "retry": "Try again"
   }
 }

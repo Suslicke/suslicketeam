@@ -1,11 +1,11 @@
 import { getTranslations } from "next-intl/server";
 
+import { LeadForm } from "@/components/lead-form";
 import { MessengerCTA } from "@/components/messenger-cta";
 import { Reveal } from "@/components/motion/reveal";
 
 /**
- * Final conversion block. Both messenger channels, plus a note that a lead form
- * is coming in Phase 6 (placeholder slot left for it).
+ * Final conversion block. Both messenger channels plus the lead form (Phase 6).
  */
 export async function CtaSection() {
   const t = await getTranslations("home.final_cta");
@@ -42,11 +42,13 @@ export async function CtaSection() {
             />
           </div>
 
-          {/* Phase 6: lead form */}
-
           <p className="max-w-md text-sm text-muted-foreground/80">
             {t("note")}
           </p>
+        </Reveal>
+
+        <Reveal className="mt-12 w-full max-w-xl text-left">
+          <LeadForm />
         </Reveal>
       </div>
     </section>
