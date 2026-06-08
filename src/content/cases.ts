@@ -36,7 +36,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["Next.js", "TypeScript", "Tailwind", "Terminal UI"],
     metrics: ["ui", "performance"],
     featured: false,
-    year: 2024,
+    year: 2025,
   },
   {
     slug: "animeenigma",
@@ -44,7 +44,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["Next.js", "PostgreSQL", "Стриминг", "Аниме"],
     metrics: ["load", "library"],
     featured: false,
-    year: 2024,
+    year: 2026,
   },
   {
     slug: "xaid",
@@ -52,7 +52,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["HealthTech", "AI", "Web-портал", "Админ-панель", "DICOM/HL7"],
     metrics: ["admin", "international"],
     featured: true,
-    year: 2025,
+    year: 2026,
   },
   {
     slug: "python-guide",
@@ -60,7 +60,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["Next.js", "MDX", "Education", "Собеседования"],
     metrics: ["traffic", "seo"],
     featured: false,
-    year: 2024,
+    year: 2025,
   },
   {
     slug: "web-interview",
@@ -68,7 +68,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["React", "Education", "Собеседования"],
     metrics: ["engagement", "questions"],
     featured: false,
-    year: 2024,
+    year: 2025,
   },
   {
     slug: "loyrush",
@@ -76,7 +76,7 @@ export const cases: readonly CaseItem[] = [
     tags: ["SaaS", "Vue", "Лояльность", "Геймификация", "Дашборд"],
     metrics: ["subscription", "analytics"],
     featured: true,
-    year: 2025,
+    year: 2026,
   },
   {
     slug: "exchange-bridge",
