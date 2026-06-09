@@ -171,8 +171,15 @@ export async function POST(request: Request) {
 }
 
 // TEMPORARY diagnostic — reports which env-read method sees the secrets (names
-// and booleans only, never values). Remove after debugging.
-export async function GET() {
+// and booleans only, never values). Token-gated (the env secret it'd normally
+// use is the thing under test, so this uses a throwaway query token) and
+// DELETED immediately after debugging.
+const DIAG_TOKEN = "d7f3a91c6b2e4805";
+
+export async function GET(request: Request) {
+  if (new URL(request.url).searchParams.get("d") !== DIAG_TOKEN) {
+    return new NextResponse(null, { status: 404 });
+  }
   const out: Record<string, unknown> = {};
   try {
     const env = getCloudflareContext().env as Record<string, unknown>;
