@@ -19,6 +19,13 @@ const LEGAL_ITEMS = [
   { href: "/refund", key: "refund" },
 ] as const;
 
+// External social profiles — kept in sync with the Organization `sameAs`
+// (src/lib/structured-data.ts). Brand labels rendered verbatim (not translated).
+const SOCIAL_ITEMS = [
+  { href: "https://www.instagram.com/suslicketeam", label: "Instagram" },
+  { href: "https://www.linkedin.com/in/suslicke", label: "LinkedIn" },
+] as const;
+
 export function SiteFooter() {
   const t = useTranslations("common");
   const meta = useTranslations("meta");
@@ -62,6 +69,19 @@ export function SiteFooter() {
             className="h-auto p-0 text-sm font-normal text-muted-foreground transition-colors hover:text-foreground hover:no-underline"
             label={t("cta_telegram")}
           />
+          {/* External social profiles (brand labels, rendered verbatim). Kept in
+              sync with the Organization `sameAs` in src/lib/structured-data.ts. */}
+          {SOCIAL_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
 
         <div className="flex flex-col gap-3">
