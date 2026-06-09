@@ -9,6 +9,7 @@ import { ConsentBanner } from "@/components/analytics/consent-banner";
 import { GaScripts } from "@/components/analytics/ga-scripts";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { UtmCapture } from "@/components/analytics/utm-capture";
+import { YandexMetrika } from "@/components/analytics/yandex-metrika";
 import { JsonLd } from "@/components/json-ld";
 import { QrWelcome } from "@/components/qr-welcome";
 import { SiteFooter } from "@/components/site-footer";
@@ -90,6 +91,7 @@ export default async function LocaleLayout({
       <body className="antialiased">
         <GaScripts />
         <CloudflareAnalytics />
+        <YandexMetrika />
         <JsonLd data={organizationLd()} />
         <JsonLd data={websiteLd()} />
         <JsonLd data={localBusinessLd()} />

@@ -80,6 +80,17 @@ export function ConsentBanner() {
     } catch {
       // SDK not loaded (no key) — graceful no-op.
     }
+
+    // Broadcast the decision so consent-deferred trackers (Yandex Metrika has no
+    // native consent mode, so it only loads its tag now) can initialise without
+    // a page reload. Stored under the same `sl_consent` key they read on mount.
+    try {
+      window.dispatchEvent(
+        new CustomEvent("sl:consent", { detail: decision }),
+      );
+    } catch {
+      // CustomEvent unsupported — the next page load picks up stored consent.
+    }
   }
 
   if (!visible) return null;

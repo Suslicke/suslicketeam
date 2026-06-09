@@ -554,7 +554,7 @@
       },
       "analytics": {
         "title": "Analytics and cookies",
-        "body": "Google Analytics 4 and PostHog load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies, and they run solely on your consent. We also use Cloudflare Web Analytics, which is cookieless, sets no cookies and does not profile individual visitors; it runs on our legitimate interest in site security and aggregate statistics. You can decline, and cookie-based analytics stays off."
+        "body": "Google Analytics 4, PostHog and Yandex Metrica (including session recording via Webvisor) load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies, and they run solely on your consent. We also use Cloudflare Web Analytics, which is cookieless, sets no cookies and does not profile individual visitors; it runs on our legitimate interest in site security and aggregate statistics. You can decline, and cookie-based analytics stays off."
       },
       "use": {
         "title": "Why we use this data (legal basis)",
@@ -562,7 +562,7 @@
       },
       "sharing": {
         "title": "Service providers we use",
-        "body": "We rely on a few trusted processors that handle data on our behalf: Google (Analytics 4), PostHog (product analytics, EU hosting) and Cloudflare (hosting and privacy-friendly web analytics). They process data only to provide their service to us, under their own privacy terms. We do not share your data with anyone for their own marketing."
+        "body": "We rely on a few trusted processors that handle data on our behalf: Google (Analytics 4), PostHog (product analytics, EU hosting), Yandex (Metrica — web analytics and Webvisor session recording) and Cloudflare (hosting and privacy-friendly web analytics). They process data only to provide their service to us, under their own privacy terms. We do not share your data with anyone for their own marketing."
       },
       "retention": {
         "title": "How long we keep data",
