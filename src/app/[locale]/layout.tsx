@@ -8,6 +8,7 @@ import { CloudflareAnalytics } from "@/components/analytics/cloudflare-analytics
 import { ConsentBanner } from "@/components/analytics/consent-banner";
 import { GaScripts } from "@/components/analytics/ga-scripts";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
+import { SentryLoader } from "@/components/analytics/sentry-loader";
 import { UtmCapture } from "@/components/analytics/utm-capture";
 import { YandexMetrika } from "@/components/analytics/yandex-metrika";
 import { JsonLd } from "@/components/json-ld";
@@ -92,6 +93,7 @@ export default async function LocaleLayout({
         <GaScripts />
         <CloudflareAnalytics />
         <YandexMetrika />
+        <SentryLoader />
         <JsonLd data={organizationLd()} />
         <JsonLd data={websiteLd()} />
         <JsonLd data={localBusinessLd()} />
