@@ -44,6 +44,10 @@ yarn-error.log*
 .env*
 !.env.example
 
+# secrets (API keys, tokens) — never commit
+.twenty_key
+*.key
+
 # vercel
 .vercel
 
