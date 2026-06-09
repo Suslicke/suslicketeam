@@ -157,15 +157,29 @@ export async function POST(request: Request) {
     console.warn("[qr-survey] no webhook configured, dropping response", {
       answer: parsed.data.answer,
     });
-    return NextResponse.json({ ok: true, delivered: false }, { status: 200 });
+    // `reason` is a coarse diagnostic (no values leaked) so a same-origin call
+    // can tell "secret missing" from "webhook failed". Safe to keep.
+    return NextResponse.json(
+      { ok: true, delivered: false, reason: "no_env" },
+      { status: 200 },
+    );
   }
 
   let delivered = false;
+  let reason: string | undefined;
   try {
     delivered = await sendToSheet(parsed.data);
+    if (!delivered) reason = "sink_rejected";
   } catch (err) {
+    reason =
+      err instanceof Error && err.name === "AbortError"
+        ? "sink_timeout"
+        : "sink_error";
     console.warn("[qr-survey] sheet sink failed", err);
   }
 
-  return NextResponse.json({ ok: true, delivered }, { status: 200 });
+  return NextResponse.json(
+    { ok: true, delivered, ...(reason ? { reason } : {}) },
+    { status: 200 },
+  );
 }
