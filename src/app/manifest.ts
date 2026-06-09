@@ -12,11 +12,19 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#0a0a0a",
     theme_color: "#6d3fd6",
     icons: [
-      // TODO: add real PWA icons (192x192, 512x512, maskable PNGs) once assets exist.
       {
         src: "/favicon.ico",
         sizes: "any",
         type: "image/x-icon",
+      },
+      // 512×512 PNG (public/icon.png, served at /icon.png) — strengthens the
+      // favicon/PWA icon signal browsers and Google read. "any" purpose: the logo
+      // is a round transparent mask, not padded for maskable safe-zone cropping.
+      {
+        src: "/icon.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
       },
     ],
   };
