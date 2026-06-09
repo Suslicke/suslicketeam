@@ -169,3 +169,24 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ ok: true, delivered }, { status: 200 });
 }
+
+// TEMPORARY diagnostic — reports which env-read method sees the secrets (names
+// and booleans only, never values). Remove after debugging.
+export async function GET() {
+  const out: Record<string, unknown> = {};
+  try {
+    const env = getCloudflareContext().env as Record<string, unknown>;
+    out.cf_ctx = true;
+    out.cf_url = typeof env.QR_SURVEY_WEBHOOK_URL === "string" && (env.QR_SURVEY_WEBHOOK_URL as string).length > 0;
+    out.cf_token = typeof env.QR_SURVEY_TOKEN === "string" && (env.QR_SURVEY_TOKEN as string).length > 0;
+    out.env_keys = Object.keys(env).filter(
+      (k) => k.startsWith("QR_SURVEY") || k.startsWith("NEXT_PUBLIC"),
+    );
+  } catch (e) {
+    out.cf_ctx = false;
+    out.cf_err = e instanceof Error ? e.message : String(e);
+  }
+  out.pe_url = Boolean(process.env.QR_SURVEY_WEBHOOK_URL);
+  out.pe_token = Boolean(process.env.QR_SURVEY_TOKEN);
+  return NextResponse.json(out);
+}
