@@ -14,7 +14,13 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  // Preserve dashboard-set Variables & Secrets across deploys. Without this,
+  // `wrangler deploy` (run by `opennextjs-cloudflare deploy`) DELETES any
+  // runtime vars/secrets not declared here — which silently wiped the
+  // QR_SURVEY_* secrets on every push. Runtime secrets are read in code via
+  // `getCloudflareContext().env` (NOT process.env) — see src/app/api/qr-survey.
+  "keep_vars": true
 
   // ── Secrets & env vars (DO NOT commit secrets) ───────────────────────────────
   // Public vars (NEXT_PUBLIC_*) are inlined at build time from .env / .env.local.
