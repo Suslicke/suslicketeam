@@ -40,6 +40,26 @@ For an English-speaking audience, point at `/en` instead of `/`.
 | Email signature | `https://suslicketeam.com/?utm_source=email&utm_medium=signature&utm_campaign=signature` |
 | Google Ads | `https://suslicketeam.com/?utm_source=google&utm_medium=cpc&utm_campaign=<campaign>` |
 
+## Outreach (outbound DM / WhatsApp)
+
+Links for **you reaching out first** (see `outreach-playbook.md`). Use
+`utm_medium=outreach` so GA4/PostHog separate proactive outreach from organic social.
+The site captures first-touch UTM and prefills it into the messenger CTA, closing the
+loop on which method actually converts.
+
+| Method | Link |
+|--------|------|
+| Cold SMB (no site) | `https://suslicketeam.com/?utm_source=whatsapp&utm_medium=outreach&utm_campaign=cold_smb` |
+| Instagram DM | `https://suslicketeam.com/?utm_source=instagram&utm_medium=outreach&utm_campaign=dm` |
+| LinkedIn DM (EN) | `https://suslicketeam.com/en?utm_source=linkedin&utm_medium=outreach&utm_campaign=dm` |
+| Referral / intro | `https://suslicketeam.com/?utm_source=referral&utm_medium=outreach&utm_campaign=intro` |
+| Networking / event | `https://suslicketeam.com/?utm_source=event&utm_medium=outreach&utm_campaign=networking` |
+| Reactivation (old lead) | `https://suslicketeam.com/?utm_source=whatsapp&utm_medium=outreach&utm_campaign=reactivation` |
+| Free-audit angle | `https://suslicketeam.com/?utm_source=whatsapp&utm_medium=outreach&utm_campaign=audit` |
+
+To prove your own craft instead of client cases, link the home page itself (it *is*
+the portfolio) or a specific case, e.g. `suslicketeam.com/ru/cases/loyrush`.
+
 ## Verify it works
 Open any link → on the site the UTM is stored (first-touch). Click the WhatsApp or
 Telegram CTA → the prefilled message includes `источник/канал/кампания`. In GA4
