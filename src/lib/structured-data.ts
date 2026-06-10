@@ -28,7 +28,7 @@ export function organizationLd() {
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon.png`,
     sameAs: [
-      "https://www.instagram.com/suslicketeam",
+      "https://www.instagram.com/suslicke",
       "https://www.linkedin.com/in/suslicke",
       `https://t.me/${siteConfig.telegram}`,
       `https://wa.me/${siteConfig.whatsapp}`,

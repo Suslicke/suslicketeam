@@ -22,7 +22,7 @@ const LEGAL_ITEMS = [
 // External social profiles — kept in sync with the Organization `sameAs`
 // (src/lib/structured-data.ts). Brand labels rendered verbatim (not translated).
 const SOCIAL_ITEMS = [
-  { href: "https://www.instagram.com/suslicketeam", label: "Instagram" },
+  { href: "https://www.instagram.com/suslicke", label: "Instagram" },
   { href: "https://www.linkedin.com/in/suslicke", label: "LinkedIn" },
 ] as const;
 
