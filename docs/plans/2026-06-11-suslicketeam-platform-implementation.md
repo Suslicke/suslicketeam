@@ -78,7 +78,11 @@ testpaths = ["tests"]
 line-length = 100
 target-version = "py312"
 
-[tool.setuptools]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
 packages = ["core", "api", "bot", "worker"]
 ```
 
