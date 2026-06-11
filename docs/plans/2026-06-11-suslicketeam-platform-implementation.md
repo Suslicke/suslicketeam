@@ -719,20 +719,28 @@ Manual checkpoint on the box:
 
 ## Phase 8 — Monitoring (netcup-observ)
 
-### Task 31: Observability stack on observ
+> **Rewritten after discovery (2026-06): the stack already exists — integrate, don't rebuild.** The original Tasks 31/32 assumed authoring a new Grafana/Prometheus/Loki deployment. In reality the observ box (`159.195.27.33`) already runs a central stack in `/opt/observability/`: Prometheus v3.7.3 (`--web.enable-remote-write-receiver`, 30d retention, :9090), Grafana :3000 (dashboards file-provisioned from `/opt/observability/grafana/dashboards/`), Loki :3100, Tempo, Alertmanager (the owner's Telegram routing). The established per-project pattern (see `/opt/loyrush/infra/observability/prometheus-agent/agent.yml` on the CRM box): each project runs a Prometheus **agent** container on its own box with `external_labels: {cluster: '<project>', source: 'main-server'}` remote_writing to the central Prometheus — which has **no scrape configs for remote services**. So: no SSH tunnels, no new stack, no Telegram contact-point config (Alertmanager already routes).
 
-**Files (on observ box, kept in repo under `deploy/observ/`):**
-- Create: `deploy/observ/docker-compose.yml` (Grafana, Prometheus, Loki, Alloy), `deploy/observ/prometheus.yml`
+### Task 31: Prometheus agent in the platform compose — DONE (authored in-repo)
 
-Prometheus scrape targets: platform api (17000/metrics) + worker (17001) + node_exporter on both boxes — over the boxes' private interface if available, else an SSH tunnel systemd unit (copy the `overpass-tunnel.service` pattern in reverse). Alloy tails Docker logs on the CRM box → Loki (or run Alloy on the CRM box shipping to observ — pick whichever the boxes' network allows; document the choice).
+**Files:**
+- Modified: `deploy/docker-compose.prod.yml` — `prometheus-agent` service: `prom/prometheus:v3.7.3` with `--agent` + `--storage.agent.path=/prometheus`, config bind-mounted read-only, WAL on the `prom_agent_wal` named volume, `restart: always`, no host ports (it scrapes `api:8000` and `worker:17001` by compose service name — both bind 0.0.0.0 in-container).
+- Created: `deploy/prometheus-agent.yml` — external labels `cluster=platform`, `environment=production`, `source=main-server`; remote_write → `http://159.195.27.33:9090/api/v1/write` with the loyrush queue/metadata config (`max_samples_per_send: 5000`, `batch_send_deadline: 5s`, `max_shards: 10`, metadata every 1m); scrape jobs `platform-api` (api:8000, `service=platform-api tier=backend`, 10s) and `platform-worker` (worker:17001, `service=platform-worker tier=backend`, 10s). **No node-exporter** — the loyrush agent already ships box-level metrics for this host; don't duplicate.
 
-Commit: `feat(observ): grafana+prometheus+loki stack`
+Install: nothing beyond the Task 29 bring-up — the agent comes up with `docker compose up -d`. Verify with `up{cluster="platform"}` in Grafana Explore.
 
-### Task 32: Dashboard + alerts
+Commit: `feat(observ): prometheus agent + platform dashboard + alerts`
 
-Grafana provisioning files in `deploy/observ/grafana/`: one "Platform" dashboard (API RPS/latency/5xx, arq queue depth, task success/fail, LLM tokens by provider, captures/harvests per day, box RAM/disk) + alert rules → Telegram contact point (bot token, owner chat id): API down 2m, worker silent 10m, 5xx > 5%/10m, disk > 85%, RAM > 90%.
+### Task 32: Dashboard + alerts on the central stack — DONE (authored in-repo; install is part of the Task 29 bring-up)
 
-Commit: `feat(observ): platform dashboard + telegram alerts`
+**Files:**
+- Created: `deploy/observ/grafana-dashboard-platform.json` — "Platform — lead-bot backend" (uid `platform-leadbot`, datasource template variable): API RPS by handler, p95 latency (`http_request_duration_seconds_bucket`), 5xx rate + error-ratio stat, API/worker up stats, tasks per hour by task/status (`platform_tasks_total`, statuses `done|failed|orphan`), failed/orphan 24h stat, LLM tokens per day by provider/direction (`platform_llm_tokens_total`) + 24h total, process RSS/CPU. 12 panels in 3 rows.
+- Created: `deploy/observ/prometheus-platform-alerts.yml` — `PlatformApiDown` (up==0 2m, critical), `PlatformWorkerDown` (5m, critical), `PlatformHighErrorRate` (5xx ratio > 5% for 10m, warning), `PlatformTaskFailures` (failed|orphan > 3 / 30m, warning), `PlatformLlmTokenBurn` (> 2M tokens / 6h, warning — threshold is a guess; tune after real data). All labeled `cluster: platform` + `severity`. `promtool check rules` green.
+- Created: `deploy/observ/README.md` — observ-side install runbook: copy the dashboard JSON into `/opt/observability/grafana/dashboards/` (file provider auto-loads), copy the alerts YML into `/opt/observability/prometheus/` + add the compose volume mount + a `rule_files` entry, then `curl -X POST localhost:9090/-/reload` (lifecycle API is on). Alert delivery rides the existing Alertmanager → Telegram; add a `cluster=platform` route/receiver only if routing is label-keyed.
+
+Logs: deliberate follow-up, not built — the platform logs JSON to stdout (Docker `json-file` captures it; `docker compose logs` works). Shipping to the existing Loki via the CRM box's `loyrush-alloy` or a promtail/Alloy sidecar in the platform compose is documented in `deploy/observ/README.md` for when log search in Grafana is actually needed.
+
+Commit: `feat(observ): prometheus agent + platform dashboard + alerts` (single commit with Task 31)
 
 ---
 
