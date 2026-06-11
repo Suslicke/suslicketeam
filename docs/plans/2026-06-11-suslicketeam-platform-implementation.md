@@ -551,6 +551,8 @@ Test tasks directly as async functions with fakes (arq context dict).
 
 **Note (from Task 8 review):** the worker entrypoint — and ONLY the worker, not the API — calls `core.integrations.metrics.init(path, tz)` once at startup (file-based 2GIS/Overpass call counters; two processes init'ing the same path would lose each other's counts).
 
+**Digest idempotency (from Task 10 review):** `digest_tick` must enqueue `digest_send` with a deterministic job id for the matched slot — `_job_id=f"digest_send:{local_date}T{hh_mm}"` — making double-send structurally impossible (arq dedups by job id; ensure `keep_result` > 60s). Evaluate `due_now` against the tick's minute truncated to :00 seconds, not raw now(). Convert/API note: `convert_lead` now raises typed `LeadNotFound`/`AlreadyConverted`/`NotConvertible` — map them at the edges.
+
 Commit: `feat(worker): arq tasks with operations tracking + digest cron`
 
 ### Task 18: Worker metrics endpoint
