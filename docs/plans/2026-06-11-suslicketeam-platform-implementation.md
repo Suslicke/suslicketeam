@@ -653,6 +653,15 @@ Commit: `feat(admin-ui): settings, members, capture/harvest actions`
 
 Reads lead-bot's `data/config.json` + usage files (check real shapes on the box: `ssh netcup "cat /opt/lead-bot/data/config.json"`), writes `settings`, `members`, `llm_usage` rows. Idempotent (UPSERT). Run later on the box inside the api container: `docker compose exec api python scripts/import_legacy.py /import/config.json`.
 
+**Key remap (lead-bot config.json → platform settings rows; NOT a 1:1 copy):**
+| lead-bot (flat)                        | platform `settings` row                      |
+|----------------------------------------|----------------------------------------------|
+| `kpi_goal`, `kpi_metric`               | `kpi` → `{"metric": ..., "goal": ...}`       |
+| `digest_times: [...]`                  | `digest_schedule` → `{"times": [...]}`       |
+| `llm_max_requests`, `llm_max_tokens`   | `llm_caps` → `{"max_requests": ..., "max_tokens": ...}` |
+| `deal_currency: "KZT"`                 | `deal_currency` → `{"code": "KZT"}`          |
+| `members: [ids]`                       | `members` TABLE rows (role=member), not a setting |
+
 Commit: `feat(scripts): one-shot legacy config/usage import`
 
 ### Task 27: Production compose + nginx
