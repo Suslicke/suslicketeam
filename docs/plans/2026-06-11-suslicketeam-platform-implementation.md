@@ -412,6 +412,8 @@ async def save_draft(draft: Draft, *, twenty, actor: str) -> SaveResult
 
 Test with mocked integrations (respx for HTTP or fake objects): dedup-found→update path, dedup-miss→create path, 2GIS link path skips LLM. Telegram-specific bits (FSM, confirm keyboards) stay out — they call these functions in Phase 5.
 
+**IMPORTANT (from Task 8 review):** `Extractor.extract()` is synchronous httpx (60s × 2 attempts) — lead-bot wraps it in `asyncio.to_thread` at the handler layer. The capture service MUST preserve that (`await asyncio.to_thread(extractor.extract, ...)`) or the arq worker / API event loop stalls for minutes per extraction. Same for Pillow card rendering later.
+
 Commit: `feat(core): capture service — extract + dedup-aware save`
 
 ### Task 10: Convert, KPI, digest services
@@ -544,6 +546,8 @@ class WorkerSettings:
 Task pattern (test it once, reuse): wrap body in `ops.mark_running` → … → `ops.finish(result)` / `ops.fail(str(e))`; capture/harvest tasks notify the Telegram actor via Bot API when done (actor `tg:*`), web actors just see the operation status. `digest_tick` cron: `if due_now(schedule, now): enqueue digest_send` — runtime-configurable digests without restarts.
 
 Test tasks directly as async functions with fakes (arq context dict).
+
+**Note (from Task 8 review):** the worker entrypoint — and ONLY the worker, not the API — calls `core.integrations.metrics.init(path, tz)` once at startup (file-based 2GIS/Overpass call counters; two processes init'ing the same path would lose each other's counts).
 
 Commit: `feat(worker): arq tasks with operations tracking + digest cron`
 
