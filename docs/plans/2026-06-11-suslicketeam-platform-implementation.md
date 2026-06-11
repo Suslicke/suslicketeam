@@ -253,14 +253,25 @@ async def test_member_roles(session):
 `core/db/base.py`:
 
 ```python
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy import JSON
-from sqlalchemy.dialects.postgresql import JSONB
+from datetime import datetime
 
-JSONVariant = JSON().with_variant(JSONB(), "postgresql")
+from sqlalchemy import JSON, DateTime, MetaData
+from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.orm import DeclarativeBase
+
+JSONVariant = JSON(none_as_null=True).with_variant(JSONB(none_as_null=True), "postgresql")
+
+NAMING_CONVENTION = {
+    "ix": "ix_%(column_0_label)s",
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s",
+}
 
 class Base(DeclarativeBase):
-    type_annotation_map = {dict: JSONVariant}
+    metadata = MetaData(naming_convention=NAMING_CONVENTION)
+    type_annotation_map = {dict: JSONVariant, datetime: DateTime(timezone=True)}
 ```
 
 `core/db/models.py` — all five tables from the design doc:
@@ -297,7 +308,7 @@ class Member(Base):
 class LlmUsage(Base):
     __tablename__ = "llm_usage"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(BigInteger, index=True)
+    user_id: Mapped[int] = mapped_column(BigInteger)  # leading column of uq_usage
     date: Mapped[str] = mapped_column(String(10), index=True)  # YYYY-MM-DD (Asia/Almaty day)
     provider: Mapped[str] = mapped_column(String(32))
     model: Mapped[str] = mapped_column(String(128))
@@ -310,20 +321,21 @@ class LlmUsage(Base):
 class Operation(Base):
     __tablename__ = "operations"
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    type: Mapped[str] = mapped_column(String(32), index=True)   # capture|harvest|convert|digest
+    type: Mapped[str] = mapped_column(String(32))               # capture|harvest|convert|digest
     actor: Mapped[str] = mapped_column(String(64))              # "tg:123" | "web:123"
-    status: Mapped[str] = mapped_column(String(16), default="pending", index=True)
+    status: Mapped[str] = mapped_column(String(16), default="pending")
     payload: Mapped[dict] = mapped_column(default=dict)
     result: Mapped[dict | None]
     error: Mapped[str | None] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(default=utcnow, index=True)
     finished_at: Mapped[datetime | None]
+    __table_args__ = (Index("ix_operations_feed", "type", "status", "created_at"),)
 
 
 class HarvestRun(Base):
     __tablename__ = "harvest_runs"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    operation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("operations.id"))
+    operation_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("operations.id"), index=True)
     niche: Mapped[str] = mapped_column(String(64))
     city: Mapped[str] = mapped_column(String(64))
     found: Mapped[int] = mapped_column(default=0)
@@ -331,7 +343,7 @@ class HarvestRun(Base):
     skipped: Mapped[int] = mapped_column(default=0)
 ```
 
-`core/db/engine.py` — `create_async_engine(settings.database_url)`, module-level `async_sessionmaker`, `get_session()` async context helper.
+`core/db/engine.py` — `create_async_engine(settings.database_url, pool_pre_ping=True)`, module-level `async_sessionmaker`, `get_session()` async context helper.
 
 **Step 4:** Tests pass. **Step 5:** Commit: `feat(db): SQLAlchemy models — settings, members, llm_usage, operations, harvest_runs`
 
