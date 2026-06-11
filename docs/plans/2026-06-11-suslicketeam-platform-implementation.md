@@ -545,6 +545,8 @@ class WorkerSettings:
     on_startup / on_shutdown  # db engine, aiogram Bot for replies, sentry
 ```
 
+**Enqueue contract (from Task 15, see `api/routes/actions.py`):** task names are `capture_extract` / `harvest_run` / `digest_send`; each job receives exactly one positional arg — the Operation id as `str` — and reads its input payload from the operations row (single source of truth; nothing duplicated into job args). Tasks must tolerate a not-yet-visible operation row (the API enqueues before its transaction commits) — implement as bounded retry (~0.5s/1s/2s, ≤5s total) then **graceful drop with a warning log** if the row never appears (enqueue-succeeded-but-commit-failed orphan; the client already saw a 500). Enqueue idempotency: routes may pass `_job_id=str(op.id)` later — tasks must be safe under arq job-id dedup..
+
 Task pattern (test it once, reuse): wrap body in `ops.mark_running` → … → `ops.finish(result)` / `ops.fail(str(e))`; capture/harvest tasks notify the Telegram actor via Bot API when done (actor `tg:*`), web actors just see the operation status. `digest_tick` cron: `if due_now(schedule, now): enqueue digest_send` — runtime-configurable digests without restarts.
 
 Test tasks directly as async functions with fakes (arq context dict).
