@@ -167,19 +167,19 @@ class Settings(BaseSettings):
     database_url: str = "postgresql+asyncpg://platform:platform@127.0.0.1:17432/platform"
     redis_url: str = "redis://127.0.0.1:17379/0"
 
-    bot_token: str = ""
+    telegram_bot_token: str = ""             # lead-bot env name — prod .env migrates by copy
     telegram_webhook_secret: str = ""        # random path + header secret
     public_base_url: str = "https://lead.suslicketeam.com"
     admin_session_secret: str = ""           # JWT signing key
     allowed_telegram_ids: str = ""           # bootstrap admins, comma-separated
 
-    twenty_base_url: str = "http://127.0.0.1:4000"
+    twenty_api_url: str = "http://127.0.0.1:4000"   # lead-bot env name
     twenty_api_key: str = ""
 
     llm_provider: str = "cloudflare"
     llm_api_key: str = ""
-    cf_account_id: str = ""
-    cf_api_token: str = ""
+    cloudflare_account_id: str = ""          # lead-bot env name
+    cloudflare_api_token: str = ""           # lead-bot env name
     model: str = ""
 
     twogis_api_key: str = ""
@@ -196,7 +196,7 @@ def get_settings() -> Settings:
     return Settings()
 ```
 
-(Mirror the exact LLM/2GIS/OSM env names used by lead-bot's `app/config.py` — check it and align so prod `.env` migrates by copy.)
+(Env names are already aligned with lead-bot's `app/config.py` and the committed `.env.example` — pydantic-settings maps field `telegram_bot_token` → env `TELEGRAM_BOT_TOKEN` automatically. Cross-check `.env.example` for any var added there in Task 2 that the Settings class must read, e.g. `TWENTY_PUBLIC_URL`, `AIG_GATEWAY_ID`, `CF_AIG_TOKEN`, `ANTHROPIC_API_KEY`, `OLLAMA_BASE_URL`.)
 
 **Step 4:** Tests pass. **Step 5:** Commit: `feat(core): typed settings via pydantic-settings`
 
