@@ -436,6 +436,8 @@ Commit each: `feat(core): convert/kpi/digest services`
 
 From `handlers/harvest.py`: `run_harvest(niche, city, *, twenty, osm, ops, progress_cb) -> HarvestResult` — pulls by `NICHE_TAG_MAP`, dedups by `osmId`, creates Leads (`Source=OSM`), reports found/created/skipped through `progress_cb` (worker will push these into `operations.result` so the UI sees live counts).
 
+**Dedup horizon (from Task 9 review):** TwentyClient.all_leads() defaults to limit=200 — harvest-scale dedup MUST paginate all_leads (or raise the limit and log loudly when len==limit), else re-harvests duplicate leads once the CRM exceeds 200.
+
 Commit: `feat(core): harvest service`
 
 ---
