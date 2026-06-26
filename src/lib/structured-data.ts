@@ -58,6 +58,66 @@ export function localBusinessLd() {
   };
 }
 
+export interface DentistLdArgs {
+  name: string;
+  url: string;
+  /** Display phone, e.g. "+7 705 413 6955". */
+  telephone: string;
+  /** Street/area address line. */
+  streetAddress: string;
+  addressLocality: string;
+  /** Human hours line, e.g. "Ежедневно 10:00–23:00". */
+  openingHours?: string;
+  rating?: number;
+  reviewsCount?: number;
+  image?: string;
+  sameAs?: string[];
+}
+
+/**
+ * Dentist (LocalBusiness) schema for a demo client site at /sites/<slug>.
+ * Describes the prospect clinic, not the studio. Lives in page source so a
+ * generated site is genuinely SEO-complete even though the demo is noindex.
+ */
+export function dentistLd({
+  name,
+  url,
+  telephone,
+  streetAddress,
+  addressLocality,
+  openingHours,
+  rating,
+  reviewsCount,
+  image,
+  sameAs,
+}: DentistLdArgs) {
+  return {
+    "@context": SCHEMA_CONTEXT,
+    "@type": "Dentist",
+    name,
+    url,
+    telephone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress,
+      addressLocality,
+      addressCountry: "KZ",
+    },
+    ...(image ? { image } : {}),
+    ...(openingHours ? { openingHours } : {}),
+    ...(rating && reviewsCount
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: rating,
+            reviewCount: reviewsCount,
+          },
+        }
+      : {}),
+    ...(sameAs && sameAs.length ? { sameAs } : {}),
+  };
+}
+
 /** Person schema for the founder. */
 export function personLd() {
   return {

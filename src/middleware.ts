@@ -36,7 +36,9 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   // Match all pathnames except for
-  // - … if they start with `/api`, `/_next` or `/_vercel`
+  // - … if they start with `/api`, `/sites`, `/_next` or `/_vercel`
   // - … the ones containing a dot (e.g. `favicon.ico`)
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  // `/sites/*` are standalone, locale-less demo client landings (own root
+  // layout) — exclude them so next-intl doesn't 307 them to `/en/sites/*`.
+  matcher: "/((?!api|sites|_next|_vercel|.*\\..*).*)",
 };
