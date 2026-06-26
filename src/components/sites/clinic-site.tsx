@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 
+import { CountUp } from "@/components/motion/count-up";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { buildWhatsappUrl } from "@/lib/messenger";
 import {
   SITE_LANGS,
@@ -11,14 +14,18 @@ import {
   type SiteLang,
 } from "@/content/sites";
 
+/** Static SVG grain — the "expensive paper" texture over the whole page. */
+const GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
 /** UI chrome strings (everything not in the clinic data). RU authoritative. */
 const UI: Record<string, Localized> = {
   book: { ru: "Записаться", kk: "Жазылу", en: "Book now" },
   call: { ru: "Позвонить", kk: "Қоңырау шалу", en: "Call" },
   draft: {
-    ru: "Демонстрационный набросок сайта · сделано в",
-    kk: "Сайттың демо-нобайы · жасаған",
-    en: "Demo site draft · made by",
+    ru: "Демонстрационная версия сайта · подготовлено командой",
+    kk: "Сайттың демонстрациялық нұсқасы · дайындаған команда —",
+    en: "Demo version of this site · prepared by",
   },
   whatsapp: {
     ru: "Написать в WhatsApp",
@@ -64,7 +71,7 @@ const UI: Record<string, Localized> = {
 /** Decorative section numeral + label with a gold hairline rule. */
 function SectionHead({ num, label }: { num: string; label: string }) {
   return (
-    <div className="flex items-center gap-4">
+    <Reveal className="flex items-center gap-4">
       <span className="font-display text-2xl text-[var(--gold)] tabular-nums">
         {num}
       </span>
@@ -72,7 +79,7 @@ function SectionHead({ num, label }: { num: string; label: string }) {
       <span className="text-xs font-medium uppercase tracking-[0.25em] text-[var(--muted)]">
         {label}
       </span>
-    </div>
+    </Reveal>
   );
 }
 
@@ -88,34 +95,29 @@ export function ClinicSite({ site }: { site: Site }) {
 
   const rootStyle = {
     "--accent": site.accent,
-    "--gold": "#c2a36b",
-    "--ink": "#17211e",
-    "--muted": "#5f6b65",
-    "--canvas": "#f7f5f0",
+    "--gold": "#C8A24A",
+    "--ink": "#14110E",
+    "--muted": "#5c6157",
+    "--canvas": "#F6F1E7",
+    "--surface": "#FFFDF8",
     "--font-display": "var(--font-playfair), Georgia, serif",
     "--font-sans": "var(--font-manrope), ui-sans-serif, system-ui, sans-serif",
   } as CSSProperties;
 
-  // Primary action button (accent fill).
-  const PrimaryCTA = ({ className = "" }: { className?: string }) => (
-    <a
-      href={waHref}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${className}`}
-    >
-      <WhatsAppGlyph className="size-4" />
-      {t(UI.whatsapp)}
-    </a>
-  );
-
   return (
     <main
       style={rootStyle}
-      className="min-h-screen bg-[var(--canvas)] font-sans text-[var(--ink)] selection:bg-[var(--accent)]/20"
+      className="relative min-h-screen bg-[var(--canvas)] font-sans text-[var(--ink)] selection:bg-[var(--accent)]/15"
     >
-      {/* ── Demo-draft credit bar (honest framing for the prospect) ─ */}
-      <div className="bg-[var(--ink)] px-5 py-2 text-center text-xs text-white/80">
+      {/* Page-wide grain overlay (static, non-interactive, subtle). */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-50 opacity-[0.4] mix-blend-soft-light"
+        style={{ backgroundImage: GRAIN, backgroundSize: "120px" }}
+      />
+
+      {/* ── Demo-version credit bar (honest framing for the prospect) ─ */}
+      <div className="relative z-20 bg-[var(--ink)] px-5 py-2 text-center text-xs text-white/80">
         {t(UI.draft)}{" "}
         <a
           href="https://suslicketeam.com"
@@ -128,7 +130,7 @@ export function ClinicSite({ site }: { site: Site }) {
       </div>
 
       {/* ── Top bar ─────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-30 border-b border-black/5 bg-[var(--canvas)]/85 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-black/5 bg-[var(--canvas)]/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <span className="font-display text-xl font-semibold tracking-tight">
             {site.name}
@@ -164,8 +166,39 @@ export function ClinicSite({ site }: { site: Site }) {
       </header>
 
       {/* ── Hero ────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-5xl px-5 pb-16 pt-16 sm:pt-24">
-        <div className="duration-700 animate-in fade-in slide-in-from-bottom-4">
+      <section className="relative isolate mx-auto max-w-5xl overflow-hidden px-5 pb-16 pt-16 sm:pt-24">
+        {/* Aurora mesh — emerald + gold blurred blobs, drift on motion-safe. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <span
+            className="absolute -left-[12%] -top-[25%] h-[60vh] w-[60vh] rounded-full opacity-50 blur-[100px] motion-safe:animate-[aurora-drift_22s_ease-in-out_infinite]"
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in oklab, var(--accent) 60%, transparent), transparent 70%)",
+            }}
+          />
+          <span
+            className="absolute -right-[8%] top-[8%] h-[48vh] w-[48vh] rounded-full opacity-40 blur-[110px] [animation-delay:-7s] motion-safe:animate-[aurora-drift_28s_ease-in-out_infinite]"
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in oklab, var(--gold) 55%, transparent), transparent 70%)",
+            }}
+          />
+          <span
+            className="absolute left-[28%] top-[45%] h-[42vh] w-[42vh] rounded-full opacity-30 blur-[120px] [animation-delay:-14s] motion-safe:animate-[aurora-drift_34s_ease-in-out_infinite]"
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in oklab, var(--accent) 45%, transparent), transparent 70%)",
+            }}
+          />
+        </div>
+
+        {/* Hero text is the LCP — render it server-visible. The entrance is a
+            CSS-only fade-up (no JS, runs at first paint) and is motion-safe
+            gated, so under reduced-motion it's simply visible, never hidden. */}
+        <div className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:duration-700">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-[var(--accent)]">
             {t(site.kind)} · {t(site.city)}
           </p>
@@ -176,10 +209,29 @@ export function ClinicSite({ site }: { site: Site }) {
             {t(site.subhead)}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
-            <PrimaryCTA />
+            {/* Primary CTA with a soft breathing gold/emerald halo. */}
+            <span className="relative inline-flex isolate">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-2 -z-10 rounded-full blur-lg motion-safe:animate-[cta-glow_4.5s_ease-in-out_infinite]"
+                style={{
+                  background:
+                    "color-mix(in oklab, var(--accent) 45%, transparent)",
+                }}
+              />
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-125 active:scale-95"
+              >
+                <WhatsAppGlyph className="size-4" />
+                {t(UI.whatsapp)}
+              </a>
+            </span>
             <a
               href={telHref}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--ink)]/15 px-7 py-3.5 text-sm font-semibold transition hover:border-[var(--ink)]/40"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--ink)]/15 px-7 py-3.5 text-sm font-semibold transition hover:border-[var(--accent)] hover:text-[var(--accent)] active:scale-95"
             >
               <PhoneGlyph className="size-4" />
               {t(UI.call)}
@@ -197,11 +249,14 @@ export function ClinicSite({ site }: { site: Site }) {
           )}
         </div>
 
-        {/* Stat row — editorial, hairline-divided. `hours` is "<day>, <time>". */}
-        <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-black/5 bg-black/5 sm:grid-cols-4">
+        {/* Stat row — editorial, hairline-divided, count-up on scroll. */}
+        <Stagger
+          as="div"
+          className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-[var(--gold)]/30 bg-[var(--gold)]/20 sm:grid-cols-4"
+        >
           {site.rating != null && (
             <Stat
-              value={`${site.rating} ★`}
+              value={<CountUp value={`${site.rating} ★`} />}
               label={`${site.reviewsCount ?? ""}+ ${t(UI.reviews)}`}
             />
           )}
@@ -211,110 +266,143 @@ export function ClinicSite({ site }: { site: Site }) {
             const [day, time] = t(site.hours).split(/,\s*/);
             return <Stat value={time ?? day} label={time ? day : t(UI.hoursLabel)} />;
           })()}
-        </dl>
+        </Stagger>
       </section>
 
       {/* ── Services ────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-5xl px-5 py-16">
+      <section className="relative z-10 mx-auto max-w-5xl px-5 py-16">
         <SectionHead num="01" label={t(UI.services)} />
-        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-black/5 bg-black/5 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          as="div"
+          className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-black/5 bg-black/5 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {site.services.map((s) => (
-            <div
+            <StaggerItem
               key={s.name.ru}
-              className="group bg-white p-7 transition hover:bg-[color-mix(in_oklab,var(--accent)_5%,white)]"
+              as="div"
+              className="group bg-[var(--surface)] p-7 transition duration-300 hover:bg-[color-mix(in_oklab,var(--accent)_5%,var(--surface))]"
             >
-              <h3 className="font-display text-2xl">{t(s.name)}</h3>
+              <h3 className="font-display text-2xl transition-colors group-hover:text-[var(--accent)]">
+                {t(s.name)}
+              </h3>
+              <span className="mt-3 block h-px w-8 origin-left bg-[var(--gold)] transition-transform duration-300 group-hover:scale-x-[2.5]" />
               <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
                 {t(s.desc)}
               </p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </section>
 
       {/* ── Results gallery ─────────────────────────────────────── */}
       {site.photos.length > 0 && (
-        <section className="mx-auto max-w-5xl px-5 py-16">
+        <section className="relative z-10 mx-auto max-w-5xl px-5 py-16">
           <SectionHead num="02" label={t(UI.works)} />
-          <p className="mt-6 max-w-md font-display text-3xl leading-snug">
-            {t(UI.worksSub)}
-          </p>
-          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Reveal>
+            <p className="mt-6 max-w-md font-display text-3xl leading-snug">
+              {t(UI.worksSub)}
+            </p>
+          </Reveal>
+          <Stagger
+            as="div"
+            className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4"
+          >
             {site.photos.map((src, i) => (
-              <div
+              <StaggerItem
                 key={src}
-                className="relative aspect-[4/5] overflow-hidden rounded-xl border border-black/5 bg-black/5"
+                as="div"
+                className="group relative aspect-[4/5] overflow-hidden rounded-xl border border-black/5 bg-black/5"
               >
                 <Image
                   src={src}
                   alt={`${site.name} — ${t(UI.works)} ${i + 1}`}
                   fill
                   sizes="(min-width: 640px) 25vw, 50vw"
-                  className="object-cover object-top transition duration-500 hover:scale-105"
+                  className="object-cover object-top transition duration-700 group-hover:scale-105"
                 />
-              </div>
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--ink)]/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </section>
       )}
 
       {/* ── Find us ─────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-5xl px-5 py-16">
+      <section className="relative z-10 mx-auto max-w-5xl px-5 py-16">
         <SectionHead num="03" label={t(UI.findUs)} />
-        <div className="mt-10 grid gap-8 sm:grid-cols-3">
+        <Stagger as="div" className="mt-10 grid gap-8 sm:grid-cols-3">
           <Detail label={t(UI.addressLabel)} value={t(site.address)} />
           <Detail label={t(UI.hoursLabel)} value={t(site.hours)} />
-          <Detail label={t(UI.phoneLabel)} value={site.phone} href={`tel:${site.phone.replace(/[^\d+]/g, "")}`} />
-        </div>
-        <div className="mt-8 flex flex-wrap gap-3">
-          {site.twogis && (
-            <a
-              href={site.twogis}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              {t(UI.twogis)} →
-            </a>
-          )}
-          {site.instagram && (
-            <a
-              href={site.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
-            >
-              Instagram →
-            </a>
-          )}
-        </div>
+          <Detail
+            label={t(UI.phoneLabel)}
+            value={site.phone}
+            href={telHref}
+          />
+        </Stagger>
+        <Reveal>
+          <div className="mt-8 flex flex-wrap gap-5">
+            {site.twogis && (
+              <a
+                href={site.twogis}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+              >
+                {t(UI.twogis)} →
+              </a>
+            )}
+            {site.instagram && (
+              <a
+                href={site.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+              >
+                Instagram →
+              </a>
+            )}
+          </div>
+        </Reveal>
       </section>
 
       {/* ── Final CTA band ──────────────────────────────────────── */}
-      <section className="px-5 py-16">
-        <div className="mx-auto max-w-5xl rounded-3xl bg-[var(--accent)] px-8 py-16 text-center text-white sm:py-20">
-          <h2 className="mx-auto max-w-2xl font-display text-4xl leading-tight sm:text-5xl">
-            {t(UI.ctaTitle)}
-          </h2>
-          <p className="mx-auto mt-5 max-w-md text-white/85">{t(UI.ctaSub)}</p>
-          <a
-            href={waHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:bg-white/90"
-          >
-            <WhatsAppGlyph className="size-4" />
-            {t(UI.whatsapp)}
-          </a>
-        </div>
+      <section className="relative z-10 px-5 py-16">
+        <Reveal className="mx-auto max-w-5xl">
+          <div className="relative isolate overflow-hidden rounded-3xl bg-[var(--accent)] px-8 py-16 text-center text-white sm:py-20">
+            {/* faint gold aurora inside the band */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -right-[10%] -top-[40%] h-[50vh] w-[50vh] rounded-full opacity-25 blur-[90px] motion-safe:animate-[aurora-drift_30s_ease-in-out_infinite]"
+              style={{
+                background:
+                  "radial-gradient(circle, color-mix(in oklab, var(--gold) 70%, transparent), transparent 70%)",
+              }}
+            />
+            <h2 className="mx-auto max-w-2xl font-display text-4xl leading-tight sm:text-5xl">
+              {t(UI.ctaTitle)}
+            </h2>
+            <p className="mx-auto mt-5 max-w-md text-white/85">{t(UI.ctaSub)}</p>
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--gold)] px-8 py-4 text-sm font-semibold text-[var(--ink)] shadow-sm transition hover:brightness-105 active:scale-95"
+            >
+              <WhatsAppGlyph className="size-4" />
+              {t(UI.whatsapp)}
+            </a>
+          </div>
+        </Reveal>
       </section>
 
       {/* ── Footer ──────────────────────────────────────────────── */}
-      <footer className="border-t border-black/5">
+      <footer className="relative z-10 border-t border-[var(--gold)]/20">
         <div className="mx-auto flex max-w-5xl flex-col gap-4 px-5 py-10 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-base text-[var(--ink)]">{site.name}</p>
-            <p className="mt-1">{t(site.address)} · {site.phone}</p>
+            <p className="mt-1">
+              {t(site.address)} · {site.phone}
+            </p>
           </div>
           <p>
             {t(UI.madeBy)}{" "}
@@ -356,12 +444,15 @@ export function ClinicSite({ site }: { site: Site }) {
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({ value, label }: { value: ReactNode; label: string }) {
   return (
-    <div className="bg-white px-5 py-6 text-center">
+    <StaggerItem
+      as="div"
+      className="bg-[var(--surface)] px-5 py-6 text-center"
+    >
       <dt className="font-display text-2xl text-[var(--ink)]">{value}</dt>
       <dd className="mt-1 text-xs leading-tight text-[var(--muted)]">{label}</dd>
-    </div>
+    </StaggerItem>
   );
 }
 
@@ -375,7 +466,7 @@ function Detail({
   href?: string;
 }) {
   return (
-    <div>
+    <StaggerItem as="div">
       <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
         {label}
       </p>
@@ -386,7 +477,7 @@ function Detail({
       ) : (
         <p className="mt-2 text-lg">{value}</p>
       )}
-    </div>
+    </StaggerItem>
   );
 }
 

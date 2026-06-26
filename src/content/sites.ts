@@ -81,7 +81,7 @@ export const sites: readonly Site[] = [
       "Терапия, имплантология, виниры, балалар стоматологиясы және хирургия. Алдын ала жазылу бойынша, алғашқы консультация — тегін.",
       "Therapy, implants, veneers, pediatric dentistry and surgery. By appointment, first consultation is free.",
     ),
-    accent: "#0e7c6b",
+    accent: "#0C3C2D",
     city: L("Алматы", "Алматы", "Almaty"),
     address: L(
       "ЖК Айнабулак, мкр. Айнабулак-2, 85Б",
