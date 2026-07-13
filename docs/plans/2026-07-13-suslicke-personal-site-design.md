@@ -7,7 +7,8 @@
 свой бекенд под рукой). (3) **отдельный новый Telegram-бот** —
 suslicketeam-platform не трогаем (разные проекты не ломают друг друга).
 (4) бекенд назван **suslicke-hub** (не «-platform» — на сервере уже есть
-`/opt/platform`, два platform = путаница), **Postgres вместо SQLite**,
+бекенд студии — `/opt/suslicketeam-platform`, «suslicke-platform» рядом —
+путаница), **Postgres вместо SQLite**,
 скоуп hub расширен: QR + **счётчик визитов** + **изменяемые настройки
 сайта** + админ-UI; порты — блок **18xxx** (см. Деплой).
 
