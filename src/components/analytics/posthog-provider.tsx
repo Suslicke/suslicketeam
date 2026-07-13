@@ -38,6 +38,10 @@ function ensurePosthog(): boolean {
       // banner calls opt_out_capturing(), keeping the SDK silent.
       opt_out_capturing_by_default: true,
     });
+    // The PostHog project is shared with suslicke.com (free plan, one
+    // project): stamp every event with a super property so the two sites
+    // stay separable in insights/filters.
+    posthog.register({ site: "suslicketeam.com" });
   }
   return true;
 }
