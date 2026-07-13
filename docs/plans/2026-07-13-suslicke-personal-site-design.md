@@ -1,12 +1,15 @@
-# suslicke.com — персональный сайт-визитка (дизайн)
+# suslicke.com — персональный сайт + suslicke-hub (дизайн)
 
 Дата: 2026-07-13. Статус: дизайн утверждён, реализация не начата.
 Живёт пока в репо студии; при создании репо сайта — переносится туда.
-Ревизия 2: хостинг **netcup VPS вместо Cloudflare** (решение пользователя:
-без Cloudflare-ограничений, свой бекенд под рукой).
-Ревизия 3: **отдельный новый Telegram-бот + свой мини-бекенд `qr-hub` в репо
-сайта** — suslicketeam-platform не трогаем вообще (решение пользователя:
-разные проекты не должны ломать друг друга).
+
+Ревизии: (2) хостинг **netcup VPS вместо Cloudflare** (без CF-ограничений,
+свой бекенд под рукой). (3) **отдельный новый Telegram-бот** —
+suslicketeam-platform не трогаем (разные проекты не ломают друг друга).
+(4) бекенд назван **suslicke-hub** (не «-platform» — на сервере уже есть
+`/opt/platform`, два platform = путаница), **Postgres вместо SQLite**,
+скоуп hub расширен: QR + **счётчик визитов** + **изменяемые настройки
+сайта** + админ-UI; порты — блок **18xxx** (см. Деплой).
 
 ## Цель
 
@@ -22,29 +25,26 @@ terminal-UI на suslicke.com.
 
 ## Зафиксированные решения
 
-- **Отдельный новый репозиторий.** Next.js 15 App Router + TypeScript +
-  Tailwind v4 + next-intl (**RU + EN**, без KK) + motion v12.
-- **Хостинг — netcup VPS** (ssh `netcup`, там же Twenty CRM и
-  suslicketeam-platform): Next.js `output: "standalone"` в Docker,
-  `/opt/suslicke` (compose, `restart: always`), nginx-vhost
-  `suslicke.com` (conf.d, как crm/platform), порт только на `127.0.0.1`.
-  **SSL: wildcard-серт покрывает только `*.suslicketeam.com`** — для
-  suslicke.com нужен свой certbot-серт (webroot/nginx-плагин, автопродление).
-  CI: GitHub Actions push-to-main → build image → ssh-деплой (паттерн
-  platform). DNS suslicke.com → A-запись на netcup IP.
-- **Вся динамика /qr и ивент-режима — собственный мини-бекенд `qr-hub` в том
-  же репо и compose**: FastAPI + aiogram в одном процессе (бот на **polling** —
-  без webhook и публичного эндпоинта), **SQLite** на volume (одна строка
-  конфига + логи — Postgres-контейнер оверкилл). **Отдельный новый бот**
-  (создать в BotFather, напр. `@suslicke_qr_bot`); allowlist = chat_id Андрея.
-  **suslicketeam-platform не трогаем** — проекты полностью независимы.
-  Изменения применяются мгновенно (своя база).
+- **Один новый репозиторий, два приложения**: `web` (Next.js 15 App Router +
+  TypeScript + Tailwind v4 + next-intl **RU+EN**, без KK + motion v12) и
+  **`hub`** (suslicke-hub: FastAPI + aiogram + **Postgres 16** — пользователь
+  привык к Postgres; конвенция сервера — свой контейнер БД на проект).
+- **Хостинг — netcup VPS** (ssh `netcup`): docker compose в `/opt/suslicke`,
+  nginx-vhost `suslicke.com`, **свой certbot-серт** (wildcard покрывает только
+  `*.suslicketeam.com`). CI: GitHub Actions push-to-main → ssh-деплой.
+  DNS suslicke.com → A-запись на netcup IP.
+- **Отдельный новый бот** (создать в BotFather, напр. `@suslicke_qr_bot`),
+  aiogram **polling** — без webhook и публичного порта; allowlist = chat_id
+  Андрея. **suslicketeam-platform и лид-бот не затрагиваются.**
+- **suslicke-hub — не только QR**: динамический /qr + ивент-режим +
+  **first-party счётчик посещений** (cookieless) +
+  **site_settings** (изменяемые без деплоя настройки сайта) + мини админ-UI.
 - **Персоны** — 4 статических роута: `/{locale}/{biz|dev|hr|hi}`.
   Короткие слаги: для SEO разница с `/for/business` пренебрежима (цель —
   брендовые запросы по имени), зато короткий слаг диктуется вслух на ивенте.
 - **3D** — React Three Fiber, морф «QR → суслик» (фаза 1 — только QR).
-- **Аналитика** — PostHog EU consent-gated (как на студии) + лог сканов /qr
-  в Postgres platform.
+- **Аналитика** — PostHog EU consent-gated (воронки/replay) + собственный
+  счётчик hub (все визиты, без cookie).
 
 ## Структура страниц
 
@@ -52,18 +52,19 @@ terminal-UI на suslicke.com.
 |---|---|
 | `/{locale}` | Hero (имя + строка + фото), чипы «Кто вы?», нейтральный вид без выбора, sticky-CTA |
 | `/{locale}/biz` | Кейсы с бизнес-результатами (телерадиология 10+ клиник, ADMP PRO WB/Ozon, SciOffice), блок «есть студия» → мост на suslicketeam.com, CTA WhatsApp студии |
-| `/{locale}/dev` | Стек по слоям, таймлайн опыта с техдеталями (DICOM/PACS, Kafka, Celery), GitHub, секция **«Как устроен этот сайт»** (R3F, nginx→FastAPI, свой VPS — сайт как открытый кейс), CTA Telegram |
-| `/{locale}/hr` | Резюме-вид: роли/годы/команды, LinkedIn, «Скачать CV (PDF)» — статический файл в `/public` + print-friendly `/cv`, CTA email/LinkedIn |
+| `/{locale}/dev` | Стек по слоям, таймлайн опыта (DICOM/PACS, Kafka, Celery), GitHub, секция **«Как устроен этот сайт»** (R3F, nginx→FastAPI, свой VPS — сайт как открытый кейс), CTA Telegram |
+| `/{locale}/hr` | Резюме-вид: роли/годы/команды, LinkedIn, «Скачать CV (PDF)» — статический файл + print-friendly `/cv`, CTA email/LinkedIn |
 | `/{locale}/hi` | Неформально: фото, интересы, Алматы, Instagram + Telegram, CTA «просто напиши привет» |
-| `/qr` | **nginx → qr-hub**: FastAPI читает конфиг из SQLite, 307 на `/?utm_…`, логирует скан |
+| `/qr` | **nginx → hub**: 307 на `/?utm_…` из Postgres-конфига, лог скана |
 | `/vcard.vcf` | Route handler сайта, vCard 3.0 (точка в пути минует i18n-matcher) |
-| `/api/event-status` | **nginx → qr-hub**: публичный `{active,name}`, nginx proxy_cache 30s |
-| `/api/event-survey` | **nginx → qr-hub**: POST ответов попапа → сообщение боту |
-| `/admin` | Страница сайта: формы поверх API qr-hub (Bearer-токен, noindex) |
-| `/privacy` | Короткая политика (PostHog + consent) |
+| `/api/event-status` | **nginx → hub**: публичный `{active,name}`, nginx proxy_cache 30s |
+| `/api/event-survey` | **nginx → hub**: POST ответов попапа → сообщение боту |
+| `/api/hit` | **nginx → hub**: beacon визитов (см. Счётчик) |
+| `/hub/*` | **nginx → hub**: админ-UI (логин, noindex) — статистика + настройки |
+| `/privacy` | Короткая политика (PostHog + собственный счётчик) |
 
-Управление: **команды нового бота** (основной путь, с телефона на ивенте) +
-`/admin` на сайте (те же API qr-hub руками — «оба сразу», как решено ранее).
+Управление: **команды бота** (основной путь, с телефона на ивенте) +
+админ-UI `/hub` (то же руками, плюс графики — «оба сразу», как решено ранее).
 
 ## UX персон
 
@@ -87,21 +88,19 @@ terminal-UI на suslicke.com.
 Петля узнавания: частицы слетаются → собираются в **настоящий сканируемый QR**
 (матрица `suslicke.com/qr`, EC level H, запечена в JSON на билде, ~600 вокселей
 одним InstancedMesh) → рассыпаются → пересобираются в **силуэт суслика
-столбиком** (точки, сэмплированные из SVG-силуэта; морф — lerp позиций в
-шейдере, запасной план — crossfade двух облаков). Суслик следит за
-пальцем/gyro, «кивает» при выборе персоны, акцентный цвет вокселей = цвет
-персоны. В ивент-режиме — мини-ленточка участника.
+столбиком** (точки из SVG-силуэта; морф — lerp позиций в шейдере, запасной
+план — crossfade двух облаков). Суслик следит за пальцем/gyro, «кивает» при
+выборе персоны, акцент вокселей = цвет персоны. В ивент-режиме — мини-ленточка.
 
 Техника (версии проверены на 2026-07): `three@0.185.x` +
 `@react-three/fiber@9.6.x` (peer react >=19 <19.3 — пиновать react) +
-`@react-three/drei@10.7.x`. Паттерн монтирования — три файла: серверный Hero
+`@react-three/drei@10.7.x`. Монтирование — три файла: серверный Hero
 (LCP-текст) → тонкий `"use client"` wrapper c `dynamic(import, {ssr:false})`
 (**ssr:false разрешён только в client component**) → сцена. Референс:
 `src/components/hero/aurora-mount.tsx` студии. Чанк ~200 КБ gzip грузится
 после idle (`requestIdleCallback`), **до** загрузки проверяется
 `prefers-reduced-motion` — если reduce, чанк не качается вовсе, статичный
-SVG-постер. three держать client-only (SSR-цена и гидрация, лимитов бандла на
-своём сервере нет, но правило остаётся ради LCP). `dpr={[1,1.75]}`,
+SVG-постер. three client-only (ради LCP). `dpr={[1,1.75]}`,
 `antialias:false`, `PerformanceMonitor onDecline → dpr 1`, пауза оффскрин
 через IntersectionObserver, fallback на отсутствие WebGL. Без
 Environment-пресетов (качают HDRI с CDN), без GLTF — геометрия процедурная.
@@ -110,53 +109,71 @@ Environment-пресетов (качают HDRI с CDN), без GLTF — гео�
 акценты персон: biz янтарь, dev терминальный зелёный, hr синий, hi коралл.
 Сознательно не emerald/gold студии. Light по умолчанию — сканируют днём на улице.
 
-## qr-hub — мини-бекенд (в репо сайта)
+## suslicke-hub — бекенд (в репо сайта)
 
-Один Python-сервис: FastAPI + aiogram (**polling**, стартует asyncio-таском в
-lifespan — ни webhook, ни второго контейнера). SQLite на volume:
+Один Python-сервис: FastAPI + aiogram polling (asyncio-таск в lifespan) +
+SQLAlchemy/asyncpg → **Postgres 16** (свой контейнер, volume, как у platform).
+
+Таблицы:
 
 ```
 qr_config:      id=1 (одна строка), target, utm_source, utm_medium, utm_campaign,
                 event_active, event_name, event_slug, event_default_persona,
                 event_started_at, updated_at, updated_by
-qr_scans:       id, ts, campaign, event_slug, country?, ua_hash   -- лог каждого хита
+qr_scans:       id, ts, campaign, event_slug, country?, ua_hash
 survey_answers: id, ts, event_slug, answer, free_text, persona, utm
+page_views:     id, ts, path, locale, persona?, referrer_host, utm_source?,
+                country?, visitor_hash (sha256(ip+ua+день) — уникальные за день
+                без cookie), is_bot
+site_settings:  key, value(jsonb), updated_at  -- изменяемое без деплоя
 ```
 
 Эндпоинты (nginx проксирует с suslicke.com, same-origin — без CORS):
 
-- `GET /qr` — читает конфиг, пишет скан, 307 на `https://suslicke.com/?utm_…`
-  (+ `?as=` дефолтной персоны при ивенте). next-intl дальше локализует,
-  сохраняя query. **Захардкоженный дефолт в хендлере + nginx-фолбэк**
+- `GET /qr` — конфиг из Postgres (кэш в памяти ~5с), запись в `qr_scans`,
+  307 на `https://suslicke.com/?utm_…` (+ `?as=` дефолтной персоны при
+  ивенте). **Захардкоженный дефолт в хендлере + nginx-фолбэк**
   (`error_page 502 = @qr_fallback` → `return 307 /?utm_source=shirt&…`) —
-  QR на футболке не умеет падать даже при мёртвом бекенде.
-- `GET /api/event-status` — публичный, только `{active, name}`, nginx
-  proxy_cache 30s.
-- `POST /api/event-survey` — sanitize + rate-limit, пишет в SQLite и шлёт
-  **мгновенное сообщение Андрею через бота** («🔥 Скан на {event}: персона
-  dev, „тут на ивенте“»).
-- `GET/PATCH /api/qr-config` — Bearer `ADMIN_API_TOKEN` (для /admin-страницы
-  сайта). Валидация target — allowlist (`/…`, suslicke.com, suslicketeam.com)
-  — анти-open-redirect.
+  QR на футболке не умеет падать даже при мёртвом hub.
+- `GET /api/event-status` — публичный, только `{active, name}`, proxy_cache 30s.
+- `POST /api/event-survey` — sanitize + rate-limit, запись + **мгновенное
+  сообщение Андрею через бота**.
+- `POST /api/hit` — счётчик визитов (см. ниже).
+- `GET /api/settings` — публичные site_settings (кэш 60с) — сайт читает
+  изменяемые без деплоя вещи (статус «open to projects», текст плашки и т.п.).
+- `GET/PATCH /api/qr-config`, `PATCH /api/settings/{key}` — только из
+  админ-UI (сессия после логина). Валидация target — allowlist (`/…`,
+  suslicke.com, suslicketeam.com) — анти-open-redirect.
+- `/hub/*` — **админ-UI**: логин (пароль в env, session cookie), дашборд —
+  визиты за день/неделю (по страницам/персонам/utm), сканы /qr, ответы
+  опросов, формы qr_config и site_settings. FastAPI + Jinja + htmx —
+  без второго фронтенд-стека. `noindex`, rate-limit логина.
 
-Команды бота (**отдельный новый бот**, allowlist = chat_id Андрея):
+Команды бота (allowlist = chat_id Андрея):
 
-- `/qr set campaign kazdevfest` — правит utm_campaign
-- `/qr status` — текущий конфиг + готовый итоговый URL (кликабельный)
+- `/qr set campaign kazdevfest`, `/qr status` (+ кликабельный итоговый URL)
 - `/event start KazDevFest` — **атомарно**: event_active + event_slug +
-  utm_campaign=slug (баннер и метки не рассинхронизируются)
-- `/event stop` — выключает ивент, возвращает дефолтный campaign
-- `/today` — сканы/ответы за день
+  utm_campaign=slug; `/event stop` — выключить и вернуть дефолтный campaign
+- `/today` — визиты, сканы, ответы опросов за день
+- `/set <key> <value>` — быстрые site_settings с телефона
 
-Изменения применяются **мгновенно** (своя база) — бот подтверждает «уже
-работает». PostHog на целевой странице — второй слой аналитики; расхождение
-со сканами = «сканы vs дошедшие».
+Изменения применяются **мгновенно** (своя база) — бот подтверждает «уже работает».
+
+## Счётчик визитов (first-party, cookieless)
+
+Клиентский beacon в layout сайта: `navigator.sendBeacon('/api/hit', {path,
+locale, persona, referrer, utm_source})` на каждую навигацию. Hub добавляет
+country (из заголовка/GeoIP опционально), `visitor_hash = sha256(ip + ua +
+дата)` — оценка уникальных за день **без cookie и без consent** (хэш
+суточный, персональные данные не хранятся — короткий абзац в /privacy).
+Фильтр ботов по UA. Смотреть: `/today` в боте + дашборд `/hub`.
+PostHog (consent-gated) остаётся вторым слоем — воронки persona→CTA, replay;
+расхождение hub-счётчика и PostHog = метрика «все visitors vs согласившиеся».
 
 ## Ивент-режим на сайте
 
 - Страницы сайта остаются статическими. Клиентский `<EventBanner/>` в layout
-  fetch'ит `suslicke.com/api/event-status` (nginx → qr-hub, отдаёт **только**
-  `{active,name}`, nginx proxy_cache 30s — qr-hub не долбится на каждый визит).
+  fetch'ит `/api/event-status` (nginx → hub, proxy_cache 30s).
 - Баннер: пульсирующая точка + «Я сейчас на {ивент} — подойди поздороваться»
   + **inline-кнопка Telegram** (человек в 20 метрах — самый короткий CTA).
 - Попап-опрос (паттерн QrWelcome студии: radix Dialog, закрытие только ✕/Skip,
@@ -164,8 +181,8 @@ survey_answers: id, ts, event_slug, answer, free_text, persona, utm
   футболка на улице / от знакомого / другое + обязательный free-text.
   Once-per-**event** через `localStorage sl_ev_<slug>`. Показывать только
   first-touch `utm_source=shirt|qr`.
-- Ответ → POST `/api/event-survey` (nginx → qr-hub, same-origin — без CORS)
-  → запись в SQLite + **мгновенное сообщение в Telegram через нового бота**.
+- Ответ → POST `/api/event-survey` → Postgres + **мгновенное сообщение в
+  Telegram через нового бота**.
 
 ## vCard
 
@@ -193,53 +210,64 @@ Telegram/Instagram блокируют скачивание .vcf — детект
 - `buildMetadata` студии переиспользуется (siteConfig: url suslicke.com,
   locales ru/en, hreflang + x-default). Контент персон должен реально
   отличаться (кейсы vs стек vs резюме vs интересы) — иначе doorway/duplicate.
-- **OG — build-time** (скрипт satori + resvg в devDeps генерит 9 PNG:
-  4 персоны × 2 локали + дефолт в `/public/og/`). Runtime next/og на своём
-  сервере технически можно, но не нужно: Telegram кэширует OG навсегда
-  (@WebpageBot для сброса) — динамика не доедет. Дизайн: лицо + имя + строка
-  персоны. Проверить превью **до** печати QR.
-- `next/image`-оптимизатор на self-hosted работает штатно — используем
-  (в отличие от Workers, где был `images.unoptimized`).
+- **OG — build-time** (satori + resvg в devDeps, 9 PNG: 4 персоны × 2 локали
+  + дефолт в `/public/og/`). Telegram кэширует OG навсегда (@WebpageBot для
+  сброса) — проверить превью **до** печати QR. Дизайн: лицо + имя + строка
+  персоны.
+- `next/image`-оптимизатор на self-hosted работает штатно — используем.
+- `/hub` и `/api` — noindex/disallow в robots.
 
-## Аналитика
+## Деплой (netcup) — порты
 
-- PostHog EU, consent-gated как на студии (`opt_out_capturing_by_default`,
-  `person_profiles`), consent-баннер снизу; ивент-попап закрывается только
-  ✕/Skip — не конфликтуют. События: `persona_selected`, `persona_switch`,
-  `tg_click`/`wa_click` (channel+persona+UTM), `vcard_download`,
-  `qr_survey_response`. UTM first-touch — паттерн utm-capture студии.
-- Сырые сканы /qr — `qr_scans` в SQLite qr-hub (+ `/today` бота).
+Снято с сервера 2026-07-13: заняты блоки 17xxx (platform), 81xx (loyrush),
+4000 (twenty), 543xx (supabase), 3001 (uptime-kuma), 5001 (dockge), 5432/5435
+(postgres), почтовые. **suslicke берёт свободный блок 18xxx**, всё строго
+`127.0.0.1` (наружу — только через nginx):
 
-## Деплой (netcup)
+| Сервис | Порт |
+|---|---|
+| `suslicke-web` (Next.js standalone) | `127.0.0.1:18000` |
+| `suslicke-hub` (FastAPI + бот) | `127.0.0.1:18001` |
+| `suslicke-postgres` (postgres:16) | `127.0.0.1:18432` |
 
-- Один репо, compose в `/opt/suslicke` с **двумя сервисами**: `web`
-  (node:22-alpine, `next build`, `output: standalone`) и `qr-hub`
-  (python:3.12-slim, FastAPI + aiogram polling, volume для SQLite).
-  Оба порта только на `127.0.0.1`, `restart: always`.
-- nginx: `/etc/nginx/conf.d/suslicke.com.conf` — страницы → `web`;
-  `/qr`, `/api/event-status`, `/api/event-survey`, `/api/qr-config` → `qr-hub`;
-  `@qr_fallback` на 502. HTTP→HTTPS, HSTS.
-- Certbot для suslicke.com (+ www) — wildcard студии этот домен НЕ покрывает.
-- CI: GitHub Actions на push в main → build → ssh netcup → pull/restart
-  (паттерн platform). Секреты: `BOT_TOKEN` (новый бот из BotFather),
-  `ADMIN_CHAT_ID`, `ADMIN_API_TOKEN` — в `.env` на сервере (chmod 600);
+- Compose в `/opt/suslicke`, три сервиса, `restart: always`, healthchecks;
+  volume для Postgres; pg_dump-бэкап кроном (как у platform).
+- nginx `/etc/nginx/conf.d/suslicke.com.conf`: `/` → 18000; `/qr`,
+  `/api/event-status`, `/api/event-survey`, `/api/hit`, `/api/settings`,
+  `/api/qr-config`, `/hub/` → 18001; `@qr_fallback` на 502; HTTP→HTTPS, HSTS.
+- Certbot для suslicke.com + www.
+- CI: GitHub Actions push-to-main → build → ssh netcup → pull/restart.
+  Секреты hub (`BOT_TOKEN`, `ADMIN_CHAT_ID`, `HUB_ADMIN_PASSWORD`,
+  `POSTGRES_PASSWORD`) — в `/opt/suslicke/.env` (chmod 600, как у Twenty);
   PostHog key (build-time NEXT_PUBLIC) — в GitHub Actions secrets.
+- Мониторинг: добавить `https://suslicke.com/qr` (ожидаемый 307) и
+  `/api/event-status` в **уже работающий uptime-kuma (:3001)**.
 - **suslicketeam-platform и лид-бот не затрагиваются вообще.**
+
+## Аналитика (сводка)
+
+- Hub-счётчик: все визиты, cookieless, `/today` + дашборд `/hub`.
+- PostHog EU consent-gated (как на студии): `persona_selected`,
+  `persona_switch`, `tg_click`/`wa_click` (channel+persona+UTM),
+  `vcard_download`, `qr_survey_response`; UTM first-touch — паттерн
+  utm-capture студии.
+- Сканы /qr — `qr_scans` (боту в `/today`).
 
 ## Фазы
 
-**Фаза 1 (MVP, можно печатать футболку):** каркас (i18n, seo, layout, палитра)
-→ hero + sticky-CTA + чипы → 4 персона-страницы с контентом → /vcard.vcf →
-qr-hub (редирект + бот `/qr`/`/event`/`/today` + survey) → Docker+nginx+
-certbot+CI → ивент-режим на сайте (баннер + попап) → PostHog → OG build-time
-→ GSC. 3D-фаза 1: воксельный QR (сборка из частиц, интерактив) **без** суслика.
+**Фаза 1 (MVP, можно печатать футболку):** каркас web (i18n, seo, layout,
+палитра) → hero + sticky-CTA + чипы → 4 персона-страницы с контентом →
+/vcard.vcf → hub: Postgres + /qr + бот (`/qr`, `/event`, `/today`) + survey +
+hit-счётчик → Docker+nginx+certbot+CI+uptime-kuma → ивент-режим на сайте
+(баннер + попап) → PostHog → OG build-time → GSC. 3D-фаза 1: воксельный QR
+(сборка из частиц, интерактив) **без** суслика.
 
 **Фаза 2:** морф QR → суслик (SVG-силуэт → точки), реакции на персону,
-ленточка в ивент-режиме; /admin-страница поверх API qr-hub (до неё всё
-управляется ботом).
+ленточка в ивент-режиме; админ-UI `/hub` (дашборд + формы; до него всё
+управляется ботом); `/set` в боте.
 
 **Фаза 3 (по желанию):** runtime CV PDF из persona-content.ts, Sentry,
-динамический дефолт-персона по типу ивента.
+динамический дефолт-персона по типу ивента, GeoIP для стран в счётчике.
 
 ## Риски
 
@@ -249,9 +277,8 @@ certbot+CI → ивент-режим на сайте (баннер + попап)
    crossfade.
 3. Силуэт суслика — нужен приличный SVG; плохой талисман хуже отсутствия.
 4. **VPS — единая точка отказа** (там же CRM, platform, почта): упал сервер
-   посреди ивента — QR мёртв. Принято осознанно (решение против Cloudflare).
-   Митигация: nginx `@qr_fallback` (редирект живёт, пока жив nginx),
-   healthcheck-мониторинг (UptimeRobot/бот), бэкапы как у platform.
+   посреди ивента — QR мёртв. Принято осознанно. Митигация: nginx
+   `@qr_fallback` (редирект живёт, пока жив nginx), uptime-kuma, pg-бэкапы.
 5. Двойной бренд: личный сайт продаёт **знакомство**, студия — **проект**;
    biz-персона явно мостит на suslicketeam.com, кейсы не копировать —
    ссылаться.
@@ -260,3 +287,6 @@ certbot+CI → ивент-режим на сайте (баннер + попап)
 7. Сканируемость 3D-QR с экрана (блики/углы) — EC level H, пауза сборки при
    наведении; если не взлетит — сцена остаётся красивой, ссылка не теряется.
 8. HR-персона: в резюме Berlin, на сайте Алматы — согласовать легенду до CV.
+9. Админ-UI `/hub` — поверхность атаки: логин с rate-limit, session cookie
+   `Secure/HttpOnly/SameSite=Strict`, noindex; ничего публичного из
+   qr_config наружу кроме `{active,name}`.
