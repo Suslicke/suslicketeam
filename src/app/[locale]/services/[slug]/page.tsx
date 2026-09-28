@@ -28,6 +28,7 @@ const PROCESS_STEPS = ["discovery", "design", "build", "launch"] as const;
 const RELEVANT_CASES: Record<string, readonly CaseSlug[]> = {
   landing: ["nda-furniture", "scioffice", "suslicke", "python-guide", "web-interview"],
   "web-apps": [
+    "cave-boulder",
     "xaid",
     "loyrush",
     "exchange-bridge",
@@ -36,8 +37,8 @@ const RELEVANT_CASES: Record<string, readonly CaseSlug[]> = {
     "nda-school",
     "scioffice",
   ],
-  ai: ["xaid", "ai-diagnostic", "admp"],
-  mobile: ["loyrush"],
+  ai: ["cave-boulder", "xaid", "ai-diagnostic", "admp"],
+  mobile: ["cave-boulder", "loyrush"],
   seo: [
     "suslicke",
     "python-guide",

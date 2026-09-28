@@ -152,6 +152,19 @@
     }
   },
   "cases": {
+    "cave-boulder": {
+      "title": "Cave Boulder",
+      "summary": "A digital ecosystem for a climbing gym in Almaty: website, mobile app, member web portal, staff admin, competition app and digital sign-up form — on one backend integrated with Altegio CRM.",
+      "task": "The bouldering gym ran on a Tilda website and Altegio CRM: schedule, memberships and bookings lived inside the CRM, while paper waivers, front-desk check-ins and competition scoring were handled by hand. The goal was to give guests and members convenient digital entry points and give staff tools for daily work — without rewriting the CRM or breaking the club's familiar process. Three languages (RU/KK/EN) and a multi-club architecture were built in from day one.",
+      "solution": "We built a set of services on self-hosted Supabase (Postgres, Auth, Storage, ~30 edge functions) with shared typed contracts. The main website caveboulder.kz with a live schedule and gym occupancy, memberships, news and the bank's requirements for online payments. A React Native/Expo mobile app: phone sign-in, membership and remaining visits, schedule, booking via the Altegio widget, a rotating QR code for check-in, push reminders and dedicated screens for coaches. The member web portal app.caveboulder.kz with self check-in via the QR code at reception. A staff admin: today's classes and attendance, member search, news with translations and push notifications, analytics on occupancy, attendance and revenue. A digital sign-up form with signature and PDF on the front-desk tablet that creates the client in Altegio automatically. The Cave Fall Fest competition app: entry by participant number, route ticking and a live leaderboard. Plus a computer-vision pilot that analyzes climbing technique from a phone video.",
+      "result": "The club now has a single digital layer around its existing CRM: guests see the schedule and book from the website, members fill in the form, check in and track their membership from their phone, coaches mark attendance, admins see analytics and publish news, and competitions are scored automatically. Everything works in three languages and runs on the club's own server in Kazakhstan.",
+      "approach": "The core principle was to build around Altegio rather than replace it. Schedule and membership management stayed in the CRM, while our services read it via the API and write back: the sign-up form creates the client card, check-in deducts the visit. Everything involving money was designed separately: booking never charges, a repeat check-in never deducts twice, and if the CRM is down the visit is logged for reconciliation so the guest still gets in. Every interface was built straight in code and aligned with the club on a live version.",
+      "metrics": {
+        "ecosystem": "8 services on one backend",
+        "integration": "Altegio CRM integration"
+      },
+      "technologies": "React Native, Expo, Next.js, TypeScript, Supabase, Deno, PostgreSQL, Altegio API, Python, Computer Vision"
+    },
     "suslicke": {
       "title": "suslicke.com",
       "summary": "A developer's personal portfolio with a creative terminal-style interface and command-driven navigation.",

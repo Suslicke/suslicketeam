@@ -8,6 +8,7 @@
  * page preview. `tags` are tech/stack labels rendered as-is (not translated).
  */
 export type CaseSlug =
+  | "cave-boulder"
   | "suslicke"
   | "animeenigma"
   | "xaid"
@@ -44,6 +45,7 @@ export interface CaseItem {
  * stays the routing key.
  */
 export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
+  "cave-boulder": "Cave Boulder",
   suslicke: "suslicke.com",
   animeenigma: "AnimeEnigma",
   xaid: "xaid.ai",
@@ -59,6 +61,14 @@ export const CASE_DISPLAY_NAMES: Record<CaseSlug, string> = {
 };
 
 export const cases: readonly CaseItem[] = [
+  {
+    slug: "cave-boulder",
+    url: "https://caveboulder.kz",
+    tags: ["React Native", "Expo", "Next.js", "Supabase", "Altegio CRM", "Computer Vision"],
+    metrics: ["ecosystem", "integration"],
+    featured: true,
+    year: 2026,
+  },
   {
     slug: "suslicke",
     url: "https://suslicke.com",
@@ -112,7 +122,7 @@ export const cases: readonly CaseItem[] = [
     url: "https://exchange-bridge.com",
     tags: ["Fintech", "Money Transfer", "Real-time", "Дашборд"],
     metrics: ["realtime", "savings"],
-    featured: true,
+    featured: false,
     year: 2025,
   },
   {

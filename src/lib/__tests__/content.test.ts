@@ -29,8 +29,8 @@ describe("services content", () => {
 });
 
 describe("cases content", () => {
-  test("returns all 12 cases", () => {
-    expect(getCases()).toHaveLength(12);
+  test("returns all 13 cases", () => {
+    expect(getCases()).toHaveLength(13);
   });
 
   test("the NDA case is confidential with no public url", () => {
@@ -41,7 +41,7 @@ describe("cases content", () => {
 
   test("getPublicCases excludes the NDA cases", () => {
     const publicCases = getPublicCases();
-    expect(publicCases).toHaveLength(10);
+    expect(publicCases).toHaveLength(11);
     expect(publicCases.some((c) => c.slug === "nda-furniture")).toBe(false);
     expect(publicCases.some((c) => c.slug === "nda-school")).toBe(false);
     expect(publicCases.every((c) => c.url)).toBe(true);
@@ -51,7 +51,7 @@ describe("cases content", () => {
     const featured = getFeaturedCases().map((c) => c.slug).sort();
     expect(featured).toEqual([
       "ai-diagnostic",
-      "exchange-bridge",
+      "cave-boulder",
       "loyrush",
       "xaid",
     ]);
