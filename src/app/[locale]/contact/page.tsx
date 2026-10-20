@@ -1,4 +1,4 @@
-import { Clock, MapPin } from "lucide-react";
+import { Clock, Mail, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -86,8 +86,28 @@ export default async function ContactPage({
             />
           </Reveal>
 
-          {/* Working hours / response time */}
+          {/* Email — branded support mailbox (also the support address shown
+              to payment providers). */}
           <Reveal className="mt-8 flex items-start gap-3 rounded-xl border border-border/60 bg-card/40 p-5">
+            <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
+              <Mail className="size-5" />
+            </span>
+            <div className="flex flex-col gap-1">
+              <h2 className="font-display text-base font-semibold">
+                {t("email_title")}
+              </h2>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="text-sm font-medium underline-offset-4 hover:underline"
+              >
+                {siteConfig.email}
+              </a>
+              <p className="text-sm text-muted-foreground">{t("email_text")}</p>
+            </div>
+          </Reveal>
+
+          {/* Working hours / response time */}
+          <Reveal className="mt-4 flex items-start gap-3 rounded-xl border border-border/60 bg-card/40 p-5">
             <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand">
               <Clock className="size-5" />
             </span>

@@ -27,6 +27,7 @@ export function organizationLd() {
     },
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon.png`,
+    email: siteConfig.email,
     sameAs: [
       "https://www.instagram.com/suslicke",
       "https://www.linkedin.com/in/suslicke",
@@ -55,6 +56,7 @@ export function localBusinessLd() {
     },
     inLanguage: [...LANGUAGES],
     telephone: `+${siteConfig.whatsapp}`,
+    email: siteConfig.email,
   };
 }
 

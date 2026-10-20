@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { MessengerCTA } from "@/components/messenger-cta";
 import { Link } from "@/i18n/routing";
+import { siteConfig } from "@/lib/config";
 
 const NAV_ITEMS = [
   { href: "/services", key: "services" },
@@ -70,6 +71,12 @@ export function SiteFooter() {
             className="h-auto p-0 text-sm font-normal text-muted-foreground transition-colors hover:text-foreground hover:no-underline"
             label={t("cta_telegram")}
           />
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {siteConfig.email}
+          </a>
           {/* External social profiles (brand labels, rendered verbatim). Kept in
               sync with the Organization `sameAs` in src/lib/structured-data.ts. */}
           {SOCIAL_ITEMS.map((item) => (
