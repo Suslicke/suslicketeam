@@ -1,6 +1,7 @@
 {
   "common": {
     "services": "Services",
+    "pricing": "Pricing",
     "cases": "Cases",
     "about": "About",
     "contact": "Contact",
@@ -361,6 +362,80 @@
     "any_project_text": "We're ready to take on any technical project — we'll discuss it, propose a solution, and build it.",
     "cta_title": "Not sure what fits your case?",
     "cta_subtitle": "Describe your project in a couple of lines — we'll suggest the best approach, timeline and price."
+  },
+  "pricing": {
+    "meta_title": "Pricing — website, app & bot development in Almaty",
+    "meta_description": "Starting prices for websites, web apps, WhatsApp/Telegram bots, mobile apps and support. Fixed price and timeline agreed before we start.",
+    "eyebrow": "Pricing",
+    "title": "Starting prices",
+    "subtitle": "Honest starting points so you can plan a budget. The exact price and timeline are fixed in writing after a short brief — no hidden add-ons.",
+    "from": "from",
+    "per_month": "/ month",
+    "usd_note": "Prices are in tenge; USD figures are approximate. International clients pay by card in USD or EUR.",
+    "tier_cta": "Discuss my project",
+    "tiers": {
+      "website": {
+        "title": "Website",
+        "tagline": "Landing page or corporate site with an admin panel and SEO basics.",
+        "features": [
+          "Prototyped in code, aligned on the live version",
+          "Admin panel for texts, prices and photos",
+          "SEO basics, analytics, fast loading",
+          "Launch on your domain, hosting set up"
+        ]
+      },
+      "app": {
+        "title": "Web app & bots",
+        "tagline": "Online booking, CRM panels, WhatsApp / Telegram bots, integrations.",
+        "features": [
+          "Booking, orders, client accounts",
+          "WhatsApp / Telegram bot: 24/7 replies and reminders",
+          "Integrations: payments, 2GIS, Altegio, Google Sheets",
+          "Admin panel with roles and statistics"
+        ]
+      },
+      "system": {
+        "title": "Mobile app & full systems",
+        "tagline": "iOS / Android apps, full CRM, AI automation of routine work.",
+        "features": [
+          "Flutter / React Native / Swift app in the stores",
+          "Full CRM: clients, records, reports",
+          "AI agents and LLM automation (n8n pipelines)",
+          "Built for growth: API, roles, backups"
+        ]
+      },
+      "support": {
+        "title": "Support",
+        "tagline": "Hosting, monitoring, backups and edits on request.",
+        "features": [
+          "Hosting, SSL, domain, daily backups",
+          "Monitoring and security updates",
+          "Edits on request: texts, prices, photos, schedule",
+          "Support in working hours + monthly report"
+        ]
+      }
+    },
+    "terms": {
+      "title": "How pricing works",
+      "fixed": {
+        "title": "Fixed before we start",
+        "body": "After a short brief we lock the price and timeline in writing. Scope changes are agreed in advance — never a surprise invoice."
+      },
+      "prepay": {
+        "title": "50% / 50%",
+        "body": "Half upfront to start, half on delivery. Support is billed monthly, half-yearly or yearly (yearly is the best deal)."
+      },
+      "ownership": {
+        "title": "The code is yours",
+        "body": "On completion we transfer the repository, accounts and deployment to you. No lock-in."
+      },
+      "range": {
+        "title": "Starting prices",
+        "body": "Figures above are starting points — the exact number depends on scope. Send a couple of lines about your task and we'll quote within a day."
+      }
+    },
+    "cta_title": "Want an exact quote?",
+    "cta_subtitle": "Describe your project in a couple of lines — we'll reply with a price and timeline within a day."
   },
   "serviceDetail": {
     "breadcrumb_label": "Services",

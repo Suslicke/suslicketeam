@@ -8,6 +8,7 @@ import { Link } from "@/i18n/routing";
 
 const NAV_ITEMS = [
   { href: "/services", key: "services" },
+  { href: "/pricing", key: "pricing" },
   { href: "/cases", key: "cases" },
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },

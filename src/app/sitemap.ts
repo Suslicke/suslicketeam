@@ -10,6 +10,7 @@ import { getCases, getServices } from "@/lib/content";
 const STATIC_ROUTES = [
   "",
   "/services",
+  "/pricing",
   "/cases",
   "/about",
   "/contact",
@@ -43,7 +44,7 @@ function languagesFor(path: string): Record<string, string> {
 function priorityFor(path: string): number {
   if (path === "") return 1;
   if (path === "/privacy" || path === "/terms" || path === "/refund") return 0.3;
-  if (path === "/services" || path === "/cases" || path === "/contact") return 0.8;
+  if (path === "/services" || path === "/pricing" || path === "/cases" || path === "/contact") return 0.8;
   return 0.6;
 }
 
