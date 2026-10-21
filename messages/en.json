@@ -376,10 +376,10 @@
     "tiers": {
       "website": {
         "title": "Website",
-        "tagline": "Landing page or corporate site with an admin panel and SEO basics.",
+        "tagline": "A one-page landing site with SEO basics. A corporate site with an admin panel costs more.",
         "features": [
           "Prototyped in code, aligned on the live version",
-          "Admin panel for texts, prices and photos",
+          "Admin panel for texts, prices and photos — on request",
           "SEO basics, analytics, fast loading",
           "Launch on your domain, hosting set up"
         ]
