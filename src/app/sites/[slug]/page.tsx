@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/json-ld";
 import { ClinicSite } from "@/components/sites/clinic-site";
+import { SmileSite } from "@/components/sites/smile-site";
 import { siteConfig } from "@/lib/config";
 import { dentistLd } from "@/lib/structured-data";
 import { getSite, sites } from "@/content/sites";
@@ -66,7 +67,7 @@ export default async function SitePage({
           sameAs: [site.instagram, site.twogis].filter(Boolean) as string[],
         })}
       />
-      <ClinicSite site={site} />
+      {site.template === "smile" || site.template === "beauty" ? <SmileSite site={site} /> : <ClinicSite site={site} />}
     </>
   );
 }
