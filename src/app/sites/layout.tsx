@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Manrope, Playfair_Display } from "next/font/google";
 
+import { RybbitAnalytics } from "@/components/analytics/rybbit-analytics";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import "../globals.css";
@@ -35,6 +36,7 @@ export default function SitesLayout({ children }: { children: ReactNode }) {
       className={`${manrope.variable} ${playfair.variable}`}
     >
       <body className="antialiased">
+        <RybbitAnalytics />
         <ThemeProvider forcedTheme="light">{children}</ThemeProvider>
       </body>
     </html>

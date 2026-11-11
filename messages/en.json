@@ -644,7 +644,7 @@
       },
       "analytics": {
         "title": "Analytics and cookies",
-        "body": "Google Analytics 4, PostHog and Yandex Metrica (including session recording via Webvisor) load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies, and they run solely on your consent. We also use Cloudflare Web Analytics, which is cookieless, sets no cookies and does not profile individual visitors; it runs on our legitimate interest in site security and aggregate statistics. You can decline, and cookie-based analytics stays off."
+        "body": "Google Analytics 4, PostHog and Yandex Metrica (including session recording via Webvisor) load only after you accept analytics in the cookie banner; before that they are not loaded and set no cookies, and they run solely on your consent. We also use Cloudflare Web Analytics and Rybbit (open-source analytics hosted on our own server), which are cookieless, set no cookies and do not profile individual visitors; they run on our legitimate interest in site security and aggregate statistics. You can decline, and cookie-based analytics stays off."
       },
       "use": {
         "title": "Why we use this data (legal basis)",
