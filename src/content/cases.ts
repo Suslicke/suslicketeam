@@ -24,7 +24,7 @@ export type CaseSlug =
 
 export interface CaseItem {
   slug: CaseSlug;
-  /** Live production URL. */
+  /** Live production URL; "" for NDA cases and projects that are no longer online. */
   url: string;
   /** Tech/stack tags, rendered verbatim. */
   tags: readonly string[];
@@ -70,14 +70,6 @@ export const cases: readonly CaseItem[] = [
     year: 2026,
   },
   {
-    slug: "suslicke",
-    url: "https://suslicke.com",
-    tags: ["Next.js", "TypeScript", "Tailwind", "Terminal UI"],
-    metrics: ["ui", "performance"],
-    featured: false,
-    year: 2025,
-  },
-  {
     slug: "animeenigma",
     url: "https://animeenigma.ru",
     tags: ["Next.js", "PostgreSQL", "Стриминг", "Аниме"],
@@ -118,8 +110,19 @@ export const cases: readonly CaseItem[] = [
     year: 2026,
   },
   {
+    // Rebuilt from scratch in 2026 (was a terminal-UI portfolio). Sits after
+    // loyrush so the year bump keeps its place in the year-sorted list.
+    slug: "suslicke",
+    url: "https://suslicke.com",
+    tags: ["Next.js", "React Three Fiber", "WebGL", "FastAPI", "Telegram Bot"],
+    metrics: ["personas", "telegram"],
+    featured: false,
+    year: 2026,
+  },
+  {
     slug: "exchange-bridge",
-    url: "https://exchange-bridge.com",
+    // Site is offline — no live link (and not NDA, so no badge either).
+    url: "",
     tags: ["Fintech", "Money Transfer", "Real-time", "Дашборд"],
     metrics: ["realtime", "savings"],
     featured: false,

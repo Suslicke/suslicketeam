@@ -39,11 +39,13 @@ describe("cases content", () => {
     expect(nda?.url).toBe("");
   });
 
-  test("getPublicCases excludes the NDA cases", () => {
+  test("getPublicCases excludes NDA and offline cases", () => {
     const publicCases = getPublicCases();
-    expect(publicCases).toHaveLength(11);
+    expect(publicCases).toHaveLength(10);
     expect(publicCases.some((c) => c.slug === "nda-furniture")).toBe(false);
     expect(publicCases.some((c) => c.slug === "nda-school")).toBe(false);
+    // Offline project: no live link, but not NDA either.
+    expect(publicCases.some((c) => c.slug === "exchange-bridge")).toBe(false);
     expect(publicCases.every((c) => c.url)).toBe(true);
   });
 

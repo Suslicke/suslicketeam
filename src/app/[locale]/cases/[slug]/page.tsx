@@ -135,13 +135,16 @@ export default async function CaseDetailPage({
               ))}
             </ul>
 
-            <div>
-              {isConfidential ? (
+            {/* NDA → badge; live → button; offline project (no url) → nothing. */}
+            {item.nda ? (
+              <div>
                 <span className="inline-flex items-center gap-2 rounded-lg border border-border/60 bg-card/40 px-4 py-2 text-sm text-muted-foreground">
                   <Lock className="size-4" />
                   {tc("nda")}
                 </span>
-              ) : (
+              </div>
+            ) : item.url ? (
+              <div>
                 <Button
                   asChild
                   className="h-11 bg-brand px-6 text-base text-brand-foreground hover:bg-brand/90"
@@ -156,8 +159,8 @@ export default async function CaseDetailPage({
                     <ExternalLink className="size-4" />
                   </a>
                 </Button>
-              )}
-            </div>
+              </div>
+            ) : null}
           </Reveal>
         </div>
       </section>

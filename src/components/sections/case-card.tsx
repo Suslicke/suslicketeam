@@ -36,7 +36,6 @@ export function CaseCard({
   nda,
   ndaLabel,
 }: CaseCardProps) {
-  const isConfidential = nda || !url;
   return (
     <Card className="h-full gap-4 p-6 transition-all hover:-translate-y-1 hover:ring-brand/40">
       <CursorGlow className="flex flex-col gap-4">
@@ -66,12 +65,12 @@ export function CaseCard({
             {detailsLabel}
             <ArrowRight className="size-4" />
           </Link>
-          {isConfidential ? (
+          {nda ? (
             <span className="inline-flex items-center gap-1 text-muted-foreground">
               <Lock className="size-3.5" />
               {ndaLabel}
             </span>
-          ) : (
+          ) : url ? (
             <a
               href={url}
               target="_blank"
@@ -81,7 +80,7 @@ export function CaseCard({
               {liveLabel}
               <ExternalLink className="size-3.5" />
             </a>
-          )}
+          ) : null}
         </div>
       </CursorGlow>
     </Card>

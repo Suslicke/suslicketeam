@@ -168,16 +168,16 @@
     },
     "suslicke": {
       "title": "suslicke.com",
-      "summary": "A developer's personal portfolio with a creative terminal-style interface and command-driven navigation.",
-      "task": "The client needed a portfolio that wouldn't get lost among template sites and would immediately convey the developer's level. We discussed the goal — to stand out while staying usable — the target audience, and which projects and skills mattered most to show first. We fixed the scope: the concept, the section structure, and a fast-loading requirement.",
-      "solution": "We designed navigation around a terminal-style command interface and built a working prototype straight in code, refining the look on a live version. We built the site on Next.js: command navigation (about, skills, experience, projects, contact) and an interactive hackme challenge. As we built, we showed progress and refined the interaction details.",
-      "result": "The outcome is a distinctive terminal UX that sticks in memory and sets the portfolio apart from typical solutions. Pages load fast, and the structure stays clear even for first-time visitors to a command interface.",
-      "approach": "The main challenge was balance: keep the striking terminal metaphor without scaring off a visitor expecting a familiar site. We added clear hints and fallback navigation so the command interface feels like a game rather than a barrier. We paid separate attention to performance so animations and interactivity wouldn't slow loading.",
+      "summary": "The studio founder's personal site: four versions for different audiences, a WebGL ground squirrel made of particles in the hero, and a custom backend run from Telegram.",
+      "task": "The old terminal-style portfolio no longer fit the job: very different people land on the site — clients, recruiters, developers, and people who simply scanned the QR code on a T-shirt. It had to become a business card that shows each of them what they care about within seconds and leads to a conversation. A separate requirement was changing campaigns and settings without a deploy.",
+      "solution": "The site opens with the question \"Who are you?\" and leads to one of four pages: for business, for developers, for recruiters, and for those who just dropped by to say hi. Each has its own content and contact channel: cases and WhatsApp for business, the stack and a breakdown of how the site works for developers, a résumé with numbers for HR. The hero is a ground squirrel built from thousands of WebGL particles: a single draw call, a custom shader, no prebuilt 3D models; it morphs into the selected persona's glyph and scatters away from the cursor. The frontend is Next.js 15 in Russian and English; the backend is FastAPI with a Telegram bot and PostgreSQL on our own server.",
+      "result": "The outcome is a living business card instead of a typical portfolio: one address that speaks differently to a client, a recruiter and a fellow developer. The QR code on the T-shirt leads to the site, and its campaigns and settings change with a message to a Telegram bot, with no deploy.",
+      "approach": "The main challenge was keeping an expressive 3D scene lightweight: every particle is drawn in a single draw call with a custom shader and no prebuilt 3D models, and the scene responds to both a cursor and a finger. The second was QR reliability: a printed code can't be changed, so the redirect lives in a separate service, with a fallback route in nginx in case it is unavailable. Cookie-based analytics turn on only after the visitor consents.",
       "metrics": {
-        "ui": "Terminal interface",
-        "performance": "High performance"
+        "personas": "4 audience versions",
+        "telegram": "Run from Telegram"
       },
-      "technologies": "Next.js, TypeScript, Tailwind CSS"
+      "technologies": "Next.js 15, React Three Fiber, WebGL, FastAPI, aiogram, PostgreSQL"
     },
     "animeenigma": {
       "title": "AnimeEnigma",
